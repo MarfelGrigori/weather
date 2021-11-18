@@ -11,6 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
+    companion object {
+        private const val KEY = "a5000964c71443402a055b2152004987"
+    }
     private val loadWeatherUseCase = LoadWeatherUseCase()
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val _weatherToday = MutableLiveData<WeatherToday>()

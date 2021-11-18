@@ -18,11 +18,18 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
+    companion object {
+        private const val KEY = "a5000964c71443402a055b2152004987"
+    }
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        viewModel.loadAll(
+            viewModel.location.value?.first.toString(),
+            viewModel.location.value?.second.toString(),
+            KEY
+        )
 
 
         viewModel.errorBus.observe(this) {
