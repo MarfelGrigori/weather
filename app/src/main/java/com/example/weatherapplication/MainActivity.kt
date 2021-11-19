@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -38,20 +39,26 @@ class MainActivity : AppCompatActivity() {
         val main = findViewById<TextView>(R.id.main)
         val temperature = findViewById<TextView>(R.id.temperature)
         val text = findViewById<TextView>(R.id.text)
+        val image = findViewById<ImageView>(R.id.image)
         viewModel.weatherToday.observe(this){
             text.text = it.toString()
             city.text = ("${it.city}, ${it.country}")
             main.text = it.main
-            temperature.text = it.temp.toString()
+            temperature.text = ("${it.temp}°C")
+            when(it.main){
+                ("Clouds")-> {image.setImageResource(R.drawable.cloud)}
+                ("Rain")-> {image.setImageResource(R.drawable.union)}
+
+            }
         }
         viewModel.location.observe(this) {
             if(viewModel.weatherToday.value==null||viewModel.weatherTo5Days.value==null)
                 viewModel.loadAll(it.first.toString(), it.second.toString(), KEY)
         }
 
-//        viewModel.errorBus.observe(this) {
-//            MaterialAlertDialogBuilder(this).setTitle("Error").setMessage(it).show()
-//        }
+        viewModel.errorBus.observe(this) {
+            MaterialAlertDialogBuilder(this).setTitle("Error").setMessage(it).show()
+        }
 
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
 
