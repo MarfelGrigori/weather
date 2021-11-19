@@ -11,9 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
-    companion object {
-        private const val KEY = "a5000964c71443402a055b2152004987"
-    }
+
     private val loadWeatherUseCase = LoadWeatherUseCase()
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val _weatherToday = MutableLiveData<WeatherToday>()
@@ -32,14 +30,14 @@ class MainViewModel : ViewModel() {
     }
 
     fun setLocation(latNew: Double, lonNew: Double) {
-        val lat = _location.value?.first ?: 53.5359
+        val lat = _location.value?.first ?: 53.5360
         val lon = _location.value?.second ?: 27.3400
         if (lat !in latNew - 0.01..latNew + 0.01|| lon !in lonNew-0.01..lonNew+0.01)
             _location.postValue(Pair(latNew, lonNew))
     }
 
     private fun loadWeatherToday(lat: String, lon: String, appid: String) {
-//        Log.e("TAG", "loadWeatherToday: $lat $lon", )
+        Log.e("TAG", "loadWeatherToday: $lat $lon", )
         ioScope.launch {
             try {
                 _weatherToday.postValue(loadWeatherUseCase.loadWeatherToday(lat, lon, appid))

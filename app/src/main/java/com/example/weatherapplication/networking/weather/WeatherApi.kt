@@ -11,25 +11,15 @@ import retrofit2.create
 
 
 object WeatherApi {
-
     fun provideRetrofit(): WeatherService {
-
         val interceptor = HttpLoggingInterceptor().apply {
-            if (BuildConfig.DEBUG)
+            if(BuildConfig.DEBUG)
                 level = HttpLoggingInterceptor.Level.BODY
         }
-
-        val client = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://www.nbrb.by/")
+        val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+        val retrofit = Retrofit.Builder().baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
-            .client(client)
-            .build()
-
+            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke()).client(client).build()
         return retrofit.create()
     }
 }

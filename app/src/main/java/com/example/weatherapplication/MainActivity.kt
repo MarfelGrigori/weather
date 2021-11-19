@@ -6,11 +6,14 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.text.DecimalFormat
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,16 +28,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel.loadAll(
-            viewModel.location.value?.first.toString(),
-            viewModel.location.value?.second.toString(),
-            KEY
-        )
-
-
-        viewModel.errorBus.observe(this) {
-            MaterialAlertDialogBuilder(this).setTitle("Error").setMessage(it).show()
+        if (viewModel.location.value != null)
+            viewModel.loadAll(
+                viewModel.location.value?.first.toString(),
+                viewModel.location.value?.second.toString(),
+                KEY
+            )
+        val city = findViewById<TextView>(R.id.city)
+        val main = findViewById<TextView>(R.id.main)
+        val temperature = findViewById<TextView>(R.id.temperature)
+        val text = findViewById<TextView>(R.id.text)
+        viewModel.weatherToday.observe(this){
+            text.text = it.toString()
+            city.text = ("${it.city}, ${it.country}")
+            main.text = it.main
+            temperature.text = it.temp.toString()
         }
+        viewModel.location.observe(this) {
+            if(viewModel.weatherToday.value==null||viewModel.weatherTo5Days.value==null)
+                viewModel.loadAll(it.first.toString(), it.second.toString(), KEY)
+        }
+
+//        viewModel.errorBus.observe(this) {
+//            MaterialAlertDialogBuilder(this).setTitle("Error").setMessage(it).show()
+//        }
 
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
 
