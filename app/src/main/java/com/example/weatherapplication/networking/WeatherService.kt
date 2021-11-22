@@ -25,6 +25,8 @@ interface WeatherService {
         lat:String,
         @Query("lon")
         lon:String,
+        @Query("cnt")
+        cnt:Int =5,
         @Query("units")
         units:String,
         @Query("appid")

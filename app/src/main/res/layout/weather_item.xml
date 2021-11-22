@@ -77,9 +77,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
                 android:text="25°C"
-                app:layout_constraintTop_toBottomOf="@+id/image_"
-                tools:layout_editor_absoluteX="340dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
