@@ -14,7 +14,7 @@ class WeatherRepository {
     }
 
     suspend fun loadWeatherTo5Days(lat:String, lon:String, appid:String): Response<Weather5DaysResponse> {
-        return api.loadWeatherTo5Days(lat, lon, 30,"metric",appid)
+        return api.loadWeatherTo5Days(lat, lon, 8,"metric",appid)
     }
     suspend fun loadWeatherWeek(lat:String, lon:String, appid:String): Response<WeatherWeekResponse> {
         return api.loadWeatherWeek(lat,lon,"currently","metric",appid )
