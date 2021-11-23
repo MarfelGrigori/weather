@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Weather Application</string>
+    <string name="minsk">minsk</string>
+    <string name="main">ясно</string>
+    <string name="today">сегодня</string>
+    <string name="todays">today</string>
+    <string name="_25_c">25°C</string>
+</resources>
