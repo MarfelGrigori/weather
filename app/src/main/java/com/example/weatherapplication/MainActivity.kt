@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.weatherapplication.recycler_adapter.Weather5DaysAdapter
+import com.example.weatherapplication.recycler_adapter.WeatherWeekAdapter
 import com.google.android.gms.location.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.DecimalFormat
@@ -43,9 +44,9 @@ class MainActivity : AppCompatActivity() {
                 KEY
             )
 //        val swipeToRefresh = findViewById<SwipeRefreshLayout>(R.id.swipe_refresh)
-        val button = findViewById<Button>(R.id.button)
-        button.setOnClickListener { val intent = Intent(this,SecondActivity::class.java)
-        startActivity(intent)}
+//        val button = findViewById<Button>(R.id.button)
+//        button.setOnClickListener { val intent = Intent(this,SecondActivity::class.java)
+//        startActivity(intent)}
         val city = findViewById<TextView>(R.id.city)
         val main = findViewById<TextView>(R.id.main)
         val temperature = findViewById<TextView>(R.id.temperature)
@@ -77,6 +78,11 @@ class MainActivity : AppCompatActivity() {
             Log.e("TAG",it.toString())
 //            text.text = it.toString()
             recyclerView.adapter = Weather5DaysAdapter(it)
+        }
+        viewModel.weatherWeek.observe(this){
+//            text.text = it.toString()
+            Log.e("TAG",it.toString())
+            recyclerView.adapter = WeatherWeekAdapter(it)
         }
 
         viewModel.errorBus.observe(this) {

@@ -105,12 +105,12 @@
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/weather_item" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="second activity"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="611dp" />
+<!--    <Button-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="second activity"-->
+<!--        tools:layout_editor_absoluteX="120dp"-->
+<!--        tools:layout_editor_absoluteY="611dp" />-->
     <!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

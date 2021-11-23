@@ -2,6 +2,7 @@ package com.example.weatherapplication.networking
 
 import com.example.weatherapplication.response.Weather5DaysResponse
 import com.example.weatherapplication.response.WeatherTodayResponse
+import com.example.weatherapplication.response.WeatherWeekResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -26,9 +27,22 @@ interface WeatherService {
         @Query("lon")
         lon:String,
         @Query("cnt")
-        cnt:Int =5,
+        cnt:Int =30,
         @Query("units")
         units:String,
         @Query("appid")
         appid:String): Response<Weather5DaysResponse>
+
+    @GET("data/2.5/onecall")
+    suspend fun loadWeatherWeek(
+        @Query("lat")
+        lat:String,
+        @Query("lon")
+        lon:String,
+        @Query("exclude")
+        cnt:String ="currently",
+        @Query("units")
+        units:String,
+        @Query("appid")
+        appid:String): Response<WeatherWeekResponse>
 }

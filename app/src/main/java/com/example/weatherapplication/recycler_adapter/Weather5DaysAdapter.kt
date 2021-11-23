@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
 import com.example.weatherapplication.entities.WeatherTo5Days
@@ -16,6 +19,7 @@ class Weather5DaysAdapter(val weatherList: List<WeatherTo5Days>):RecyclerView.Ad
     inner class WeatherViewHolder(private val view:View):RecyclerView.ViewHolder(view){
      fun setData(itemView: View,position: Int){
          val weatherForDay = weatherList[position]
+         val container = itemView.findViewById<ConstraintLayout>(R.id.item_container)
 
          val date = itemView.findViewById<TextView>(R.id.date)
          date.text = getDate(weatherForDay.time,"dd/MM/yyyy hh:mm")
@@ -31,6 +35,8 @@ class Weather5DaysAdapter(val weatherList: List<WeatherTo5Days>):RecyclerView.Ad
          when(weatherForDay.text){
              ("Clouds")-> {image.setImageResource(R.drawable.cloud)}
              ("Rain")-> {image.setImageResource(R.drawable.union)}
+             ("Clear")->{image.setImageResource(R.drawable.sun)}
+             ("Snow")->{image.setImageResource(R.drawable.snow)}
          }
      }
         @SuppressLint("SimpleDateFormat")

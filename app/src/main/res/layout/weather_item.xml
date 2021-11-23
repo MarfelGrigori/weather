@@ -14,7 +14,7 @@
         android:layout_margin="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/item_crypto_container"
+            android:id="@+id/item_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackground"

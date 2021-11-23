@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.entities.WeatherTo5Days
 import com.example.weatherapplication.entities.WeatherToday
+import com.example.weatherapplication.entities.WeatherWeek
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,10 +23,13 @@ class MainViewModel : ViewModel() {
     val errorBus: LiveData<String> = _errorBus
     private val _location = MutableLiveData<Pair<Double, Double>>()
     val location: LiveData<Pair<Double, Double>> = _location
+    private val _weatherWeek = MutableLiveData<List<WeatherWeek>>()
+    val weatherWeek: LiveData<List<WeatherWeek>> = _weatherWeek
 
     fun loadAll(lat: String, lon: String, appid: String) {
         loadWeatherToday(lat, lon, appid)
         loadWeatherTo5Days(lat, lon, appid)
+        loadWeatherWeek(lat, lon, appid)
         Log.e("TAG", "loadAll", )
     }
 
@@ -56,4 +60,14 @@ class MainViewModel : ViewModel() {
             }
         }
     }
+    private fun loadWeatherWeek(lat: String, lon: String, appid: String) {
+        ioScope.launch {
+            try {
+                _weatherWeek.postValue(loadWeatherUseCase.loadWeatherWeek(lat, lon, appid))
+            } catch (e: Exception) {
+                _errorBus.postValue(e.message)
+            }
+        }
+    }
+
 }
