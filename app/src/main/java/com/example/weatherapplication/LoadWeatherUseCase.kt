@@ -12,39 +12,40 @@ import com.example.weatherapplication.repository.WeatherRepository
 class LoadWeatherUseCase {
 
     private val weatherRepository = WeatherRepository()
-    private val weatherTodayResponseMapper= WeatherTodayResponseMapper()
+    private val weatherTodayResponseMapper = WeatherTodayResponseMapper()
     private val weatherTo5DaysResponseMapper = WeatherTo5DaysResponseMapper()
     private val weatherWeekResponseMapper = WeatherWeekResponseMapper()
 
 
-    suspend fun loadWeatherToday(lat:String, lon:String, appid:String): WeatherToday? {
+    suspend fun loadWeatherToday(lat: String, lon: String, appid: String): WeatherToday? {
         val response = weatherRepository.loadWeatherToday(lat, lon, appid)
         return if (response.isSuccessful) {
             response.body()?.let {
                 weatherTodayResponseMapper.map(it)
             }
-        }else {
+        } else {
             throw Throwable(response.errorBody().toString())
         }
     }
 
-    suspend fun loadWeatherTo5Days(lat:String, lon:String, appid:String):List<WeatherTo5Days>?{
+    suspend fun loadWeatherTo5Days(lat: String, lon: String, appid: String): List<WeatherTo5Days>? {
         val response = weatherRepository.loadWeatherTo5Days(lat, lon, appid)
-        return if(response.isSuccessful){
+        return if (response.isSuccessful) {
             response.body()?.let {
                 weatherTo5DaysResponseMapper.map(it)
             }
-        }else{
+        } else {
             throw Throwable(response.errorBody().toString())
         }
     }
-    suspend fun loadWeatherWeek(lat:String, lon:String, appid:String):List<WeatherWeek>?{
+
+    suspend fun loadWeatherWeek(lat: String, lon: String, appid: String): List<WeatherWeek>? {
         val response = weatherRepository.loadWeatherWeek(lat, lon, appid)
-        return if(response.isSuccessful){
+        return if (response.isSuccessful) {
             response.body()?.let {
                 weatherWeekResponseMapper.map(it)
             }
-        }else{
+        } else {
             throw Throwable(response.errorBody().toString())
         }
     }

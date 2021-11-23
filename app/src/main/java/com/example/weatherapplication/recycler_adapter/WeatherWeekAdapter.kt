@@ -11,13 +11,17 @@ import com.example.weatherapplication.R
 import com.example.weatherapplication.entities.WeatherWeek
 import com.example.weatherapplication.utils.Converter
 
-class WeatherWeekAdapter(val weatherList: List<WeatherWeek>): RecyclerView.Adapter<WeatherWeekAdapter.WeatherWeekViewHolder>() {
+class WeatherWeekAdapter(val weatherList: List<WeatherWeek>) :
+    RecyclerView.Adapter<WeatherWeekAdapter.WeatherWeekViewHolder>() {
     inner class WeatherWeekViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-         @SuppressLint("SetTextI18n")
-         fun setData(itemView: View, position: Int) {
+        @SuppressLint("SetTextI18n")
+        fun setData(itemView: View, position: Int) {
             val weatherForDay = weatherList[position]
             val date = itemView.findViewById<TextView>(R.id.date)
-            date.text = Converter.getDate(weatherForDay.time, "dd/MM/yyyy") + Converter.getDay(weatherForDay.time)
+            date.text = Converter.getDate(
+                weatherForDay.time,
+                "dd/MM/yyyy"
+            ) + Converter.getDay(weatherForDay.time)
             val temperature = itemView.findViewById<TextView>(R.id.temperature)
             temperature.text = weatherForDay.temp.toString() + "℃"
             val main = itemView.findViewById<TextView>(R.id.main)
@@ -54,6 +58,6 @@ class WeatherWeekAdapter(val weatherList: List<WeatherWeek>): RecyclerView.Adapt
     }
 
     override fun getItemCount(): Int {
-      return weatherList.size
+        return weatherList.size
     }
 }

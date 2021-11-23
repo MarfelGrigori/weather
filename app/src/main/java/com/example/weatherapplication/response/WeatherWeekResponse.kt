@@ -3,7 +3,7 @@ package com.example.weatherapplication.response
 import com.google.gson.annotations.SerializedName
 
 data class WeatherWeekResponse(
-   @SerializedName("daily")
+    @SerializedName("daily")
     val list: List<Daily>,
 ) {
     data class Daily(
@@ -11,7 +11,7 @@ data class WeatherWeekResponse(
         val dew_point: Double,
         @SerializedName("dt")
         val dt: Long,
-       @SerializedName("pressure")
+        @SerializedName("pressure")
         val pressure: Int,
         @SerializedName("temp")
         val temp: Temp,

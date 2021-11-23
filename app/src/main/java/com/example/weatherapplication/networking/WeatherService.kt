@@ -12,37 +12,40 @@ interface WeatherService {
     @GET("data/2.5/weather")
     suspend fun loadWeatherToday(
         @Query("lat")
-        lat:String,
+        lat: String,
         @Query("lon")
-        lon:String,
+        lon: String,
         @Query("units")
-        units:String,
+        units: String,
         @Query("appid")
-        appid:String): Response<WeatherTodayResponse>
+        appid: String
+    ): Response<WeatherTodayResponse>
 
     @GET("data/2.5/forecast")
     suspend fun loadWeatherTo5Days(
         @Query("lat")
-        lat:String,
+        lat: String,
         @Query("lon")
-        lon:String,
+        lon: String,
         @Query("cnt")
-        cnt:Int =8,
+        cnt: Int = 8,
         @Query("units")
-        units:String,
+        units: String,
         @Query("appid")
-        appid:String): Response<Weather5DaysResponse>
+        appid: String
+    ): Response<Weather5DaysResponse>
 
     @GET("data/2.5/onecall")
     suspend fun loadWeatherWeek(
         @Query("lat")
-        lat:String,
+        lat: String,
         @Query("lon")
-        lon:String,
+        lon: String,
         @Query("exclude")
-        cnt:String ="currently",
+        cnt: String = "currently",
         @Query("units")
-        units:String,
+        units: String,
         @Query("appid")
-        appid:String): Response<WeatherWeekResponse>
+        appid: String
+    ): Response<WeatherWeekResponse>
 }

@@ -16,7 +16,7 @@ data class Weather5DaysResponse(
         @SerializedName("weather")
         val weather: List<Weather?>?,
         @SerializedName("wind")
-        val wind : Wind
+        val wind: Wind
     ) {
         data class Main(
             @SerializedName("temp")
@@ -24,11 +24,15 @@ data class Weather5DaysResponse(
             @SerializedName("pressure")
             val pressure: Int?,
         )
+
         data class Weather(
             @SerializedName("main")
             val main: String?
         )
-        data class Wind(@SerializedName("speed")
-            val speed : Double)
+
+        data class Wind(
+            @SerializedName("speed")
+            val speed: Double
+        )
     }
 }

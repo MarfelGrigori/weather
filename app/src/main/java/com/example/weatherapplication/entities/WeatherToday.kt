@@ -11,13 +11,9 @@ data class WeatherToday(
     val pressure: Int,
     val speed: Double,
     val deg: String
-)
-{
-    fun location():String{
-        return "$city, $country"
-    }
+) {
 
-    fun weather():String{
+    fun weather(): String {
         return "$temp °C | $main"
     }
 }

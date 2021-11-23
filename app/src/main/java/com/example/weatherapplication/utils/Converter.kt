@@ -6,11 +6,6 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 object Converter {
-    fun millisToHours(mil: Long) = String.format(
-        "%02d:%02d",
-        TimeUnit.MILLISECONDS.toHours(mil) % 24,
-        TimeUnit.MILLISECONDS.toMinutes(mil) % 60
-    )
 
     fun degToWindRoze(deg: Int) =
         when (deg) {
@@ -24,7 +19,6 @@ object Converter {
             else -> "N"
         }
 
-    fun differenceDays(mil: Long, mil2: Long) = TimeUnit.MILLISECONDS.toDays(mil) != TimeUnit.MILLISECONDS.toDays(mil2)
     @SuppressLint("SimpleDateFormat")
     fun getDate(millis: Long, dateFormat: String): String {
         val formatter = SimpleDateFormat(dateFormat)

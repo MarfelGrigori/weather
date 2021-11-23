@@ -25,11 +25,15 @@ class MainViewModel : ViewModel() {
     val location: LiveData<Pair<Double, Double>> = _location
     private val _weatherWeek = MutableLiveData<List<WeatherWeek>>()
     val weatherWeek: LiveData<List<WeatherWeek>> = _weatherWeek
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
 
     fun loadAll(lat: String, lon: String, appid: String) {
+        _isLoading.value = true
         loadWeatherToday(lat, lon, appid)
         loadWeatherTo5Days(lat, lon, appid)
         loadWeatherWeek(lat, lon, appid)
+        _isLoading.postValue(false)
         Log.e("TAG", "loadAll", )
     }
 
