@@ -15,7 +15,7 @@ class WeatherTo5DaysResponseMapper : Mapper<Weather5DaysResponse, List<WeatherTo
                     temp = it.main?.temp,
                     newDay = it.dt.toString(),
                     pressure = it.main?.pressure,
-                    wind = it.main?.wind?.speed
+                    wind = it.wind.speed.toInt()
                 )
             )
         }

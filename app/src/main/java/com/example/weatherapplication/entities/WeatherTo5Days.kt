@@ -6,5 +6,5 @@ data class WeatherTo5Days(
     val text:String,
     val temp:Double?,
     val pressure: Int?,
-    val wind: Double?
+    val wind: Int
 )
