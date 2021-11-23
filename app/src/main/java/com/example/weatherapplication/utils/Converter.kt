@@ -1,5 +1,8 @@
 package com.example.weatherapplication.utils
 
+import android.annotation.SuppressLint
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 object Converter {
@@ -22,7 +25,13 @@ object Converter {
         }
 
     fun differenceDays(mil: Long, mil2: Long) = TimeUnit.MILLISECONDS.toDays(mil) != TimeUnit.MILLISECONDS.toDays(mil2)
-
+    @SuppressLint("SimpleDateFormat")
+    fun getDate(millis: Long, dateFormat: String): String {
+        val formatter = SimpleDateFormat(dateFormat)
+        val calendar: Calendar = Calendar.getInstance()
+        calendar.timeInMillis = millis
+        return formatter.format(calendar.time)
+    }
 
     fun getDay(mil: Long): String {
         val daysArray =

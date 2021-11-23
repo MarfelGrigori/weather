@@ -6,23 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
 import com.example.weatherapplication.entities.WeatherTo5Days
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.weatherapplication.utils.Converter
+
 
 class Weather5DaysAdapter(val weatherList: List<WeatherTo5Days>):RecyclerView.Adapter<Weather5DaysAdapter.WeatherViewHolder>() {
     inner class WeatherViewHolder(private val view:View):RecyclerView.ViewHolder(view){
-     fun setData(itemView: View,position: Int){
+     @SuppressLint("SetTextI18n")
+     fun setData(itemView: View, position: Int){
          val weatherForDay = weatherList[position]
-         val container = itemView.findViewById<ConstraintLayout>(R.id.item_container)
-
          val date = itemView.findViewById<TextView>(R.id.date)
-         date.text = getDate(weatherForDay.time,"dd/MM/yyyy hh:mm")
+         date.text = Converter.getDate(weatherForDay.time,"dd/MM/yyyy hh:mm")
          val temperature = itemView.findViewById<TextView>(R.id.temperature)
          temperature.text = weatherForDay.temp?.toInt().toString()+"℃"
          val main = itemView.findViewById<TextView>(R.id.main)
@@ -39,13 +35,6 @@ class Weather5DaysAdapter(val weatherList: List<WeatherTo5Days>):RecyclerView.Ad
              ("Snow")->{image.setImageResource(R.drawable.snow)}
          }
      }
-        @SuppressLint("SimpleDateFormat")
-        fun getDate(millis: Long, dateFormat: String): String {
-            val formatter = SimpleDateFormat(dateFormat)
-            val calendar: Calendar = Calendar.getInstance()
-                calendar.timeInMillis = millis
-            return formatter.format(calendar.time)
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {

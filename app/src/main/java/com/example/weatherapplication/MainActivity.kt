@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -29,59 +31,56 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
+
     companion object {
         internal const val KEY = "a5000964c71443402a055b2152004987"
     }
+
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val actionBar = (this).supportActionBar
         if (viewModel.location.value != null)
             viewModel.loadAll(
                 viewModel.location.value?.first.toString(),
                 viewModel.location.value?.second.toString(),
                 KEY
             )
-//        val swipeToRefresh = findViewById<SwipeRefreshLayout>(R.id.swipe_refresh)
-//        val button = findViewById<Button>(R.id.button)
-//        button.setOnClickListener { val intent = Intent(this,SecondActivity::class.java)
-//        startActivity(intent)}
+
         val city = findViewById<TextView>(R.id.city)
         val main = findViewById<TextView>(R.id.main)
         val temperature = findViewById<TextView>(R.id.temperature)
-        val text = findViewById<TextView>(R.id.text)
         val image = findViewById<ImageView>(R.id.image)
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        viewModel.weatherToday.observe(this){
+        viewModel.weatherToday.observe(this) {
             city.text = ("${it.city}, ${it.country}")
             main.text = it.main
             temperature.text = ("${it.temp}°C")
-            when(it.main){
-                ("Clouds")-> {image.setImageResource(R.drawable.cloud)}
-                ("Rain")-> {image.setImageResource(R.drawable.union)}
+            when (it.main) {
+                ("Clouds") -> {
+                    image.setImageResource(R.drawable.cloud)
+                }
+                ("Rain") -> {
+                    image.setImageResource(R.drawable.union)
+                }
+                ("Clear") -> {
+                    image.setImageResource(R.drawable.sun)
+                }
+                ("Snow") -> {
+                    image.setImageResource(R.drawable.snow)
+                }
             }
         }
-//        swipeToRefresh.setOnRefreshListener {
-//            viewModel.loadAll(
-//                viewModel.location.value?.first.toString(),
-//                viewModel.location.value?.second.toString(),
-//                KEY
-//            )
-//        }
+
         viewModel.location.observe(this) {
-            if(viewModel.weatherToday.value==null||viewModel.weatherTo5Days.value==null)
+            if (viewModel.weatherToday.value == null || viewModel.weatherTo5Days.value == null)
                 viewModel.loadAll(it.first.toString(), it.second.toString(), KEY)
         }
         recyclerView.layoutManager = LinearLayoutManager(this)
-        viewModel.weatherTo5Days.observe(this){
-            Log.e("TAG",it.toString())
-//            text.text = it.toString()
-            recyclerView.adapter = Weather5DaysAdapter(it)
-        }
-        viewModel.weatherWeek.observe(this){
-//            text.text = it.toString()
-            Log.e("TAG",it.toString())
+
+        viewModel.weatherWeek.observe(this) {
+            Log.e("TAG", it.toString())
             recyclerView.adapter = WeatherWeekAdapter(it)
         }
 
@@ -118,6 +117,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     @SuppressLint("MissingPermission")
     private fun startLocationUpdates(locationCallBack: LocationCallback) {
         fusedLocationProvider.requestLocationUpdates(
@@ -125,12 +125,24 @@ class MainActivity : AppCompatActivity() {
             Looper.getMainLooper()
         )
     }
+
     private fun getRequest() = LocationRequest.create().apply {
         interval = 1000
         fastestInterval = 2000
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home)
+            return true
+        startActivity(Intent(this, SecondActivity::class.java))
+        return super.onOptionsItemSelected(item)
+    }
+}
 
 
 
