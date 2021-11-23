@@ -6,31 +6,33 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
+import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.entities.WeatherWeek
 import com.example.weatherapplication.utils.Converter
 
 class WeatherWeekAdapter(val weatherList: List<WeatherWeek>) :
     RecyclerView.Adapter<WeatherWeekAdapter.WeatherWeekViewHolder>() {
-    inner class WeatherWeekViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class WeatherWeekViewHolder(private val binding:WeatherItemBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun setData(itemView: View, position: Int) {
             val weatherForDay = weatherList[position]
-            val date = itemView.findViewById<TextView>(R.id.date)
+            val date = binding.date
             date.text = Converter.getDate(
                 weatherForDay.time,
                 "dd/MM/yyyy"
             ) + Converter.getDay(weatherForDay.time)
-            val temperature = itemView.findViewById<TextView>(R.id.temperature)
+            val temperature = binding.temperature
             temperature.text = weatherForDay.temp.toString() + "℃"
-            val main = itemView.findViewById<TextView>(R.id.main)
+            val main = binding.main
             main.text = weatherForDay.text
-            val pressure = itemView.findViewById<TextView>(R.id.pressure)
+            val pressure = binding.pressure
             pressure.text = "pressure kPa: " + weatherForDay.pressure.toString()
-            val wind = itemView.findViewById<TextView>(R.id.wind)
+            val wind = binding.wind
             wind.text = "wind m/s :" + weatherForDay.wind
-            val image = itemView.findViewById<ImageView>(R.id.image_)
+            val image = binding.image
             when (weatherForDay.text) {
                 ("Clouds") -> {
                     image.setImageResource(R.drawable.cloud)
@@ -49,8 +51,8 @@ class WeatherWeekAdapter(val weatherList: List<WeatherWeek>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherWeekViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.weather_item, parent, false)
-        return WeatherWeekViewHolder(view)
+        val binding = DataBindingUtil.inflate<WeatherItemBinding>(LayoutInflater.from(parent.context),R.layout.weather_item,parent,false)
+        return WeatherWeekViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: WeatherWeekViewHolder, position: Int) {

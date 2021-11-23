@@ -12,29 +12,26 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherapplication.databinding.FragmentFirstBinding
 import com.example.weatherapplication.recycler_adapter.WeatherWeekAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FirstFragment : Fragment() {
-
+    lateinit var binding : FragmentFirstBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentFirstBinding.inflate(inflater,container,false)
         val viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         viewModel.weatherToday.observe(viewLifecycleOwner){
-            val city = view.findViewById<TextView>(R.id.city)
-            val main = view.findViewById<TextView>(R.id.main)
-            val temperature = view.findViewById<TextView>(R.id.temperature)
-            val image = view.findViewById<ImageView>(R.id.image)
-            val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
-            val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+            val city = binding.city
+            val main = binding.main
+            val temperature = binding.temperature
+            val image = binding.image
+            val recyclerView = binding.recyclerView
+            val progressBar = binding.progressBar
             viewModel.weatherToday.observe(this) {
                 city.text = ("${it.city}, ${it.country}")
                 main.text = it.main
@@ -53,7 +50,6 @@ class FirstFragment : Fragment() {
                         image.setImageResource(R.drawable.snow)
                     }
                 }
-                recyclerView.layoutManager = LinearLayoutManager(view.context)
 
                 viewModel.weatherWeek.observe(this) {
                     Log.e("TAG", it.toString())
@@ -61,7 +57,7 @@ class FirstFragment : Fragment() {
                 }
 
                 viewModel.errorBus.observe(this) {
-                    MaterialAlertDialogBuilder(view.context).setTitle("Error").setMessage(it).show()
+                    view?.context?.let { it1 -> MaterialAlertDialogBuilder(it1).setTitle("Error").setMessage(it).show() }
                 }
             }
             viewModel.isLoading.observe(this) {
@@ -69,6 +65,9 @@ class FirstFragment : Fragment() {
                 else progressBar.visibility = View.GONE
             }
         }
+        return binding.root
     }
+
+
 
 }
