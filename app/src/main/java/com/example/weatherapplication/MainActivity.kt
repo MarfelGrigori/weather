@@ -1,20 +1,13 @@
 package com.example.weatherapplication
 
-import android.Manifest
+
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 const val KEY = "a5000964c71443402a055b2152004987"
 
@@ -25,14 +18,17 @@ class MainActivity : AppCompatActivity() {
     }
     private val firstFragment = FirstFragment()
     private val secondFragment = SecondFragment()
-    private lateinit var fusedLocationProvider: FusedLocationProviderClient
+    companion object{
+        @SuppressLint("StaticFieldLeak")
+         lateinit var fusedLocationProvider: FusedLocationProviderClient}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view, firstFragment).commit()
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
-        getLocation()
+        Location.getLocation(viewModel,this)
         loadData()
     }
 
@@ -42,50 +38,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.location.observe(this) {
                 viewModel.loadAll(KEY)
         }
-    }
-
-    private fun getLocation() {
-        val locationCallBack = object : LocationCallback() {
-
-            override fun onLocationResult(locationResult: LocationResult?) {
-                locationResult ?: return
-                for (location in locationResult.locations) {
-                    viewModel.setLocation(location.latitude, location.longitude)
-                }
-            }
-        }
-
-        val requestPermissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                if (it)
-                    startLocationUpdates(locationCallBack)
-            }
-
-        when (PackageManager.PERMISSION_GRANTED) {
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) -> {
-                startLocationUpdates(locationCallBack)
-            }
-            else -> {
-                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            }
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun startLocationUpdates(locationCallBack: LocationCallback) {
-        fusedLocationProvider.requestLocationUpdates(
-            getRequest(), locationCallBack,
-            Looper.getMainLooper()
-        )
-    }
-
-    private fun getRequest() = LocationRequest.create().apply {
-        interval = 1000
-        fastestInterval = 2000
-        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
