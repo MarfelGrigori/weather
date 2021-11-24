@@ -7,13 +7,18 @@ import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.entities.WeatherTo5Days
 import com.example.weatherapplication.entities.WeatherToday
 import com.example.weatherapplication.entities.WeatherWeek
+import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
+import com.example.weatherapplication.useCases.LoadWeather5DayUseCase
+import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
 
-    private val loadWeatherUseCase = LoadWeatherUseCase()
+    private val loadWeatherUseCase = LoadWeather5DayUseCase()
+    private val loadWeatherTodayUseCase = LoadWeatherTodayUseCase()
+    private val loadWeatherWeekUseCase = LoadWeatherWeekUseCase()
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val _weatherToday = MutableLiveData<WeatherToday>()
     val weatherToday: LiveData<WeatherToday> = _weatherToday
@@ -50,7 +55,7 @@ class MainViewModel : ViewModel() {
         Log.e("TAG", "loadWeatherToday: $lat $lon")
         ioScope.launch {
             try {
-                _weatherToday.postValue(loadWeatherUseCase.loadWeatherToday(lat, lon, appid))
+                _weatherToday.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon, appid))
 
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
@@ -78,7 +83,7 @@ class MainViewModel : ViewModel() {
     private fun loadWeatherWeek(lat: String, lon: String, appid: String) {
         ioScope.launch {
             try {
-                _weatherWeek.postValue(loadWeatherUseCase.loadWeatherWeek(lat, lon, appid))
+                _weatherWeek.postValue(loadWeatherWeekUseCase.loadWeatherWeek(lat, lon, appid))
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }
