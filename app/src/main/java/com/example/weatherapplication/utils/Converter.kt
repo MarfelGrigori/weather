@@ -20,7 +20,7 @@ object Converter {
         }
 
     @SuppressLint("SimpleDateFormat")
-    fun String.getDate (millis: Long, dateFormat: String):String{
+    fun String.getDate(millis: Long, dateFormat: String): String {
         val formatter = SimpleDateFormat(dateFormat)
         val calendar: Calendar = Calendar.getInstance()
         calendar.timeInMillis = millis

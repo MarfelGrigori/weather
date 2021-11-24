@@ -3,7 +3,6 @@ package com.example.weatherapplication.mappers
 
 import com.example.weatherapplication.entities.WeatherToday
 import com.example.weatherapplication.response.WeatherTodayResponse
-import com.example.weatherapplication.utils.Converter
 import com.example.weatherapplication.utils.Converter.degToWindRoze
 
 class WeatherTodayResponseMapper : Mapper<WeatherTodayResponse, WeatherToday> {
@@ -21,4 +20,5 @@ class WeatherTodayResponseMapper : Mapper<WeatherTodayResponse, WeatherToday> {
             deg = "".degToWindRoze(from.wind?.deg ?: -1)
         )
     }
+
 }

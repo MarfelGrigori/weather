@@ -4,15 +4,14 @@ import com.example.weatherapplication.entities.WeatherTo5Days
 import com.example.weatherapplication.entities.WeatherToday
 import com.example.weatherapplication.entities.WeatherWeek
 import com.example.weatherapplication.mappers.WeatherTo5DaysResponseMapper
-import com.example.weatherapplication.mappers.WeatherTodayResponseMapper
 import com.example.weatherapplication.mappers.WeatherWeekResponseMapper
 import com.example.weatherapplication.repository.WeatherRepository
+import com.example.weatherapplication.response.WeatherTodayResponse.Companion.toWeatherToday
 
 
 class LoadWeatherUseCase {
 
     private val weatherRepository = WeatherRepository()
-    private val weatherTodayResponseMapper = WeatherTodayResponseMapper()
     private val weatherTo5DaysResponseMapper = WeatherTo5DaysResponseMapper()
     private val weatherWeekResponseMapper = WeatherWeekResponseMapper()
 
@@ -21,9 +20,7 @@ class LoadWeatherUseCase {
 
         val response = weatherRepository.loadWeatherToday(lat, lon, appid)
         return if (response.isSuccessful) {
-            response.body()?.let {
-                weatherTodayResponseMapper.map(it)
-            }
+            response.body()?.toWeatherToday()
         } else {
             throw Throwable(response.errorBody().toString())
         }

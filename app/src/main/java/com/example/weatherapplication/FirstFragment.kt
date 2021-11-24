@@ -1,30 +1,30 @@
 package com.example.weatherapplication
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.databinding.FragmentFirstBinding
 import com.example.weatherapplication.recycler_adapter.WeatherWeekAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FirstFragment : Fragment() {
-    lateinit var binding : FragmentFirstBinding
+    lateinit var binding: FragmentFirstBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFirstBinding.inflate(inflater,container,false)
+        binding = FragmentFirstBinding.inflate(inflater, container, false)
         val viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-        viewModel.weatherToday.observe(viewLifecycleOwner){
+        viewModel.weatherToday.observe(viewLifecycleOwner) {
             val city = binding.city
             val main = binding.main
             val temperature = binding.temperature
             val image = binding.image
             val recyclerView = binding.recyclerView
-            val adapter = view?.context?.let {  WeatherWeekAdapter() }
+            val adapter = view?.context?.let { WeatherWeekAdapter() }
             recyclerView.adapter = adapter
             val progressBar = binding.progressBar
             viewModel.weatherToday.observe(this) {
@@ -51,7 +51,9 @@ class FirstFragment : Fragment() {
                 }
 
                 viewModel.errorBus.observe(this) {
-                    view?.context?.let { it1 -> MaterialAlertDialogBuilder(it1).setTitle("Error").setMessage(it).show() }
+                    view?.context?.let { it1 ->
+                        MaterialAlertDialogBuilder(it1).setTitle("Error").setMessage(it).show()
+                    }
                 }
             }
             viewModel.isLoading.observe(this) {
@@ -61,7 +63,6 @@ class FirstFragment : Fragment() {
         }
         return binding.root
     }
-
 
 
 }

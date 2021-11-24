@@ -10,7 +10,7 @@ import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.recycler_adapter.Weather5DaysAdapter
 
 class SecondFragment : Fragment() {
-    lateinit var binding: FragmentSecondBinding
+    private lateinit var binding: FragmentSecondBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,7 +23,6 @@ class SecondFragment : Fragment() {
         viewModel.weatherTo5Days.observe(viewLifecycleOwner) {
            adapter.initialize(it)
         }
-        // Inflate the layout for this fragment
         return binding.root
 
     }

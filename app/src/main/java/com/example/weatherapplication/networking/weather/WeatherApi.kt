@@ -13,7 +13,7 @@ import retrofit2.create
 object WeatherApi {
     fun provideRetrofit(): WeatherService {
         val interceptor = HttpLoggingInterceptor().apply {
-            if(BuildConfig.DEBUG)
+            if (BuildConfig.DEBUG)
                 level = HttpLoggingInterceptor.Level.BODY
         }
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()

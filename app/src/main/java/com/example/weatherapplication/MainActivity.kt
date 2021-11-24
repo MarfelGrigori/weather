@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view, firstFragment).commit()
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
-        Location.getLocation(viewModel,this)
+        val currentLocation = Location()
+        currentLocation.getLocation(viewModel,this)
         loadData()
     }
 

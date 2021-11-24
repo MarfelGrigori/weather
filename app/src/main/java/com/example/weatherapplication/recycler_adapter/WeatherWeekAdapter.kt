@@ -14,11 +14,14 @@ import com.example.weatherapplication.utils.Converter.getDay
 class WeatherWeekAdapter :
     RecyclerView.Adapter<WeatherWeekAdapter.WeatherWeekViewHolder>() {
     private var weatherList = ArrayList<WeatherWeek>()
+    @SuppressLint("NotifyDataSetChanged")
     fun initialize(list: List<WeatherWeek>) {
         weatherList = list.toMutableList() as ArrayList<WeatherWeek>
         notifyDataSetChanged()
     }
-    inner class WeatherWeekViewHolder(private val binding:WeatherItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    inner class WeatherWeekViewHolder(private val binding: WeatherItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun setData(weatherForDay: WeatherWeek) {
             val date = binding.date
@@ -53,7 +56,12 @@ class WeatherWeekAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherWeekViewHolder {
-        val binding = DataBindingUtil.inflate<WeatherItemBinding>(LayoutInflater.from(parent.context),R.layout.weather_item,parent,false)
+        val binding = DataBindingUtil.inflate<WeatherItemBinding>(
+            LayoutInflater.from(parent.context),
+            R.layout.weather_item,
+            parent,
+            false
+        )
         return WeatherWeekViewHolder(binding)
     }
 

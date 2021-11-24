@@ -11,14 +11,17 @@ import com.example.weatherapplication.entities.WeatherTo5Days
 import com.example.weatherapplication.utils.Converter.getDate
 
 
-class Weather5DaysAdapter() :
+class Weather5DaysAdapter :
     RecyclerView.Adapter<Weather5DaysAdapter.WeatherViewHolder>() {
-    private var weatherList= ArrayList<WeatherTo5Days>()
+    private var weatherList = ArrayList<WeatherTo5Days>()
+    @SuppressLint("NotifyDataSetChanged")
     fun initialize(list: List<WeatherTo5Days>) {
         weatherList = list.toMutableList() as ArrayList<WeatherTo5Days>
         notifyDataSetChanged()
     }
-    inner class WeatherViewHolder(val binding:WeatherItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    inner class WeatherViewHolder(val binding: WeatherItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun setData(weatherForDay: WeatherTo5Days) {
             val date = binding.date
@@ -50,7 +53,12 @@ class Weather5DaysAdapter() :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
-        val binding = DataBindingUtil.inflate<WeatherItemBinding>(LayoutInflater.from(parent.context),R.layout.weather_item,parent,false)
+        val binding = DataBindingUtil.inflate<WeatherItemBinding>(
+            LayoutInflater.from(parent.context),
+            R.layout.weather_item,
+            parent,
+            false
+        )
         return WeatherViewHolder(binding)
     }
 

@@ -12,9 +12,9 @@ import com.google.android.gms.location.*
 
 class Location {
 
-companion object{
+
    fun getLocation(viewModel: MainViewModel,context: Context) {
-       var fusedLocationProvider: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
+       val fusedLocationProvider: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
         val locationCallBack = object : LocationCallback() {
 
             override fun onLocationResult(locationResult: LocationResult?) {
@@ -56,5 +56,5 @@ companion object{
         fastestInterval = 2000
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
-}
+
 }
