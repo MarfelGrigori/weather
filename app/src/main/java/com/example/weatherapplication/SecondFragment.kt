@@ -17,9 +17,11 @@ class SecondFragment : Fragment() {
     ): View {
         binding = FragmentSecondBinding.inflate(inflater,container,false)
         val recyclerView = binding.recyclerView
+        val adapter = Weather5DaysAdapter()
+        recyclerView.adapter = adapter
         val viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         viewModel.weatherTo5Days.observe(viewLifecycleOwner) {
-            recyclerView.adapter = Weather5DaysAdapter(it)
+           adapter.initialize(it)
         }
         // Inflate the layout for this fragment
         return binding.root

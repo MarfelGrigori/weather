@@ -12,12 +12,16 @@ import com.example.weatherapplication.entities.WeatherTo5Days
 import com.example.weatherapplication.utils.Converter
 
 
-class Weather5DaysAdapter(val weatherList: List<WeatherTo5Days>) :
+class Weather5DaysAdapter() :
     RecyclerView.Adapter<Weather5DaysAdapter.WeatherViewHolder>() {
+    private var weatherList= ArrayList<WeatherTo5Days>()
+    fun initialize(list: List<WeatherTo5Days>) {
+        weatherList = list.toMutableList() as ArrayList<WeatherTo5Days>
+        notifyDataSetChanged()
+    }
     inner class WeatherViewHolder(val binding:WeatherItemBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun setData(itemView: View, position: Int) {
-            val weatherForDay = weatherList[position]
+        fun setData(weatherForDay: WeatherTo5Days) {
             val date = binding.date
             date.text = Converter.getDate(weatherForDay.time, "dd/MM/yyyy hh:mm")
             val temperature = binding.temperature
@@ -52,7 +56,7 @@ class Weather5DaysAdapter(val weatherList: List<WeatherTo5Days>) :
     }
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
-        holder.setData(holder.itemView, position)
+        holder.setData(weatherList[position])
     }
 
     override fun getItemCount(): Int {

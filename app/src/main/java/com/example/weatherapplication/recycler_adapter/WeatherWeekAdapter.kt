@@ -2,10 +2,7 @@ package com.example.weatherapplication.recycler_adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
@@ -13,12 +10,16 @@ import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.entities.WeatherWeek
 import com.example.weatherapplication.utils.Converter
 
-class WeatherWeekAdapter(val weatherList: List<WeatherWeek>) :
+class WeatherWeekAdapter :
     RecyclerView.Adapter<WeatherWeekAdapter.WeatherWeekViewHolder>() {
+    private var weatherList = ArrayList<WeatherWeek>()
+    fun initialize(list: List<WeatherWeek>) {
+        weatherList = list.toMutableList() as ArrayList<WeatherWeek>
+        notifyDataSetChanged()
+    }
     inner class WeatherWeekViewHolder(private val binding:WeatherItemBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun setData(itemView: View, position: Int) {
-            val weatherForDay = weatherList[position]
+        fun setData(weatherForDay: WeatherWeek) {
             val date = binding.date
             date.text = Converter.getDate(
                 weatherForDay.time,
@@ -56,7 +57,7 @@ class WeatherWeekAdapter(val weatherList: List<WeatherWeek>) :
     }
 
     override fun onBindViewHolder(holder: WeatherWeekViewHolder, position: Int) {
-        holder.setData(holder.itemView, position)
+        holder.setData(weatherList[position])
     }
 
     override fun getItemCount(): Int {

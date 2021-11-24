@@ -1,7 +1,6 @@
 package com.example.weatherapplication
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +25,8 @@ class FirstFragment : Fragment() {
             val temperature = binding.temperature
             val image = binding.image
             val recyclerView = binding.recyclerView
+            val adapter = view?.context?.let {  WeatherWeekAdapter() }
+            recyclerView.adapter = adapter
             val progressBar = binding.progressBar
             viewModel.weatherToday.observe(this) {
                 city.text = ("${it.city}, ${it.country}")
@@ -47,8 +48,7 @@ class FirstFragment : Fragment() {
                 }
 
                 viewModel.weatherWeek.observe(this) {
-                    Log.e("TAG", it.toString())
-                    recyclerView.adapter = WeatherWeekAdapter(it)
+                    adapter?.initialize(it)
                 }
 
                 viewModel.errorBus.observe(this) {
