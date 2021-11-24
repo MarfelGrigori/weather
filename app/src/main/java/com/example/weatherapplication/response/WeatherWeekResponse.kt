@@ -1,5 +1,6 @@
 package com.example.weatherapplication.response
 
+import com.example.weatherapplication.entities.WeatherWeek
 import com.google.gson.annotations.SerializedName
 
 data class WeatherWeekResponse(
@@ -31,4 +32,21 @@ data class WeatherWeekResponse(
             val main: String
         )
     }
+    companion object{
+        fun WeatherWeekResponse.toWeatherWeek (from: WeatherWeekResponse): List<WeatherWeek> {
+        val list = ArrayList<WeatherWeek>()
+        from.list.forEach {
+            list.add(
+                WeatherWeek(
+                    time = it.dt.times(1000).toString().toLong(),
+                    text = it.weather[0].main,
+                    temp = it.temp.day.toInt(),
+                    pressure = it.pressure,
+                    wind = it.wind_speed.toInt()
+                )
+            )
+        }
+        return list
+    }}
+
 }

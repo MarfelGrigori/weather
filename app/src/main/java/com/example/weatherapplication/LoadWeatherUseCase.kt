@@ -3,17 +3,15 @@ package com.example.weatherapplication
 import com.example.weatherapplication.entities.WeatherTo5Days
 import com.example.weatherapplication.entities.WeatherToday
 import com.example.weatherapplication.entities.WeatherWeek
-import com.example.weatherapplication.mappers.WeatherTo5DaysResponseMapper
-import com.example.weatherapplication.mappers.WeatherWeekResponseMapper
 import com.example.weatherapplication.repository.WeatherRepository
+import com.example.weatherapplication.response.Weather5DaysResponse.Companion.toWeather5day
 import com.example.weatherapplication.response.WeatherTodayResponse.Companion.toWeatherToday
+import com.example.weatherapplication.response.WeatherWeekResponse.Companion.toWeatherWeek
 
 
 class LoadWeatherUseCase {
 
     private val weatherRepository = WeatherRepository()
-    private val weatherTo5DaysResponseMapper = WeatherTo5DaysResponseMapper()
-    private val weatherWeekResponseMapper = WeatherWeekResponseMapper()
 
 
     suspend fun loadWeatherToday(lat: String, lon: String, appid: String): WeatherToday? {
@@ -30,7 +28,7 @@ class LoadWeatherUseCase {
         val response = weatherRepository.loadWeatherTo5Days(lat, lon, appid)
         return if (response.isSuccessful) {
             response.body()?.let {
-                weatherTo5DaysResponseMapper.map(it)
+               it.toWeather5day(it)
             }
         } else {
             throw Throwable(response.errorBody().toString())
@@ -41,7 +39,7 @@ class LoadWeatherUseCase {
         val response = weatherRepository.loadWeatherWeek(lat, lon, appid)
         return if (response.isSuccessful) {
             response.body()?.let {
-                weatherWeekResponseMapper.map(it)
+                it.toWeatherWeek(it)
             }
         } else {
             throw Throwable(response.errorBody().toString())

@@ -124,4 +124,6 @@ data class WeatherTodayResponse(
         pressure = this.main?.pressure ?: -1,
         speed = this.wind?.speed ?: -1.0,
         deg = "".degToWindRoze(this.wind?.deg ?: -1))}
+
+
 }
