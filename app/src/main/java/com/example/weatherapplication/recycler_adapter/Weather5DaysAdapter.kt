@@ -2,14 +2,13 @@ package com.example.weatherapplication.recycler_adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.entities.WeatherTo5Days
-import com.example.weatherapplication.utils.Converter
+import com.example.weatherapplication.utils.Converter.getDate
 
 
 class Weather5DaysAdapter() :
@@ -23,7 +22,7 @@ class Weather5DaysAdapter() :
         @SuppressLint("SetTextI18n")
         fun setData(weatherForDay: WeatherTo5Days) {
             val date = binding.date
-            date.text = Converter.getDate(weatherForDay.time, "dd/MM/yyyy hh:mm")
+            date.text = "".getDate(weatherForDay.time, "dd/MM/yyyy hh:mm")
             val temperature = binding.temperature
             temperature.text = weatherForDay.temp?.toInt().toString() + " ℃"
             val main = binding.main

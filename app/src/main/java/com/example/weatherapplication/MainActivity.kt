@@ -12,6 +12,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 const val KEY = "a5000964c71443402a055b2152004987"
 
@@ -31,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         getLocation()
         loadData()
-
     }
 
     private fun loadData() {
@@ -43,13 +45,13 @@ class MainActivity : AppCompatActivity() {
             )
 
         viewModel.location.observe(this) {
-            if (viewModel.weatherToday.value == null || viewModel.weatherTo5Days.value == null)
                 viewModel.loadAll(it.first.toString(), it.second.toString(), KEY)
         }
     }
 
     private fun getLocation() {
         val locationCallBack = object : LocationCallback() {
+
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for (location in locationResult.locations) {

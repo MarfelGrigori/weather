@@ -18,6 +18,7 @@ class LoadWeatherUseCase {
 
 
     suspend fun loadWeatherToday(lat: String, lon: String, appid: String): WeatherToday? {
+
         val response = weatherRepository.loadWeatherToday(lat, lon, appid)
         return if (response.isSuccessful) {
             response.body()?.let {

@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.entities.WeatherWeek
-import com.example.weatherapplication.utils.Converter
+import com.example.weatherapplication.utils.Converter.getDate
+import com.example.weatherapplication.utils.Converter.getDay
 
 class WeatherWeekAdapter :
     RecyclerView.Adapter<WeatherWeekAdapter.WeatherWeekViewHolder>() {
@@ -21,10 +22,10 @@ class WeatherWeekAdapter :
         @SuppressLint("SetTextI18n")
         fun setData(weatherForDay: WeatherWeek) {
             val date = binding.date
-            date.text = Converter.getDate(
+            date.text = "".getDate(
                 weatherForDay.time,
                 "dd/MM/yyyy"
-            ) + Converter.getDay(weatherForDay.time)
+            ) + "".getDay(weatherForDay.time)
             val temperature = binding.temperature
             temperature.text = weatherForDay.temp.toString() + "℃"
             val main = binding.main

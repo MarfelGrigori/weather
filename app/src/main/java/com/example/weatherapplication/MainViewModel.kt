@@ -34,36 +34,45 @@ class MainViewModel : ViewModel() {
         loadWeatherTo5Days(lat, lon, appid)
         loadWeatherWeek(lat, lon, appid)
         _isLoading.postValue(false)
-        Log.e("TAG", "loadAll", )
+        Log.e("TAG", "loadAll")
     }
 
     fun setLocation(latNew: Double, lonNew: Double) {
         val lat = _location.value?.first ?: 53.5360
         val lon = _location.value?.second ?: 27.3400
-        if (lat !in latNew - 0.01..latNew + 0.01|| lon !in lonNew-0.01..lonNew+0.01)
+        if (lat !in latNew - 0.01..latNew + 0.01 || lon !in lonNew - 0.01..lonNew + 0.01)
             _location.postValue(Pair(latNew, lonNew))
     }
 
     private fun loadWeatherToday(lat: String, lon: String, appid: String) {
-        Log.e("TAG", "loadWeatherToday: $lat $lon", )
+        Log.e("TAG", "loadWeatherToday: $lat $lon")
         ioScope.launch {
             try {
                 _weatherToday.postValue(loadWeatherUseCase.loadWeatherToday(lat, lon, appid))
+
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }
         }
+
     }
 
     private fun loadWeatherTo5Days(lat: String, lon: String, appid: String) {
         ioScope.launch {
             try {
-                _weatherTo5Days.postValue(loadWeatherUseCase.loadWeatherTo5Days(lat, lon, appid))
+                _weatherTo5Days.postValue(
+                    loadWeatherUseCase.loadWeatherTo5Days(
+                        lat,
+                        lon,
+                        appid
+                    )
+                )
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }
         }
     }
+
     private fun loadWeatherWeek(lat: String, lon: String, appid: String) {
         ioScope.launch {
             try {
@@ -73,5 +82,4 @@ class MainViewModel : ViewModel() {
             }
         }
     }
-
 }
