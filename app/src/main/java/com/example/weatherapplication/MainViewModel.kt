@@ -20,8 +20,16 @@ class MainViewModel : ViewModel() {
     private val loadWeatherTodayUseCase = LoadWeatherTodayUseCase()
     private val loadWeatherWeekUseCase = LoadWeatherWeekUseCase()
     private val ioScope = CoroutineScope(Dispatchers.IO)
-    private val _weatherToday = MutableLiveData<WeatherToday>()
-    val weatherToday: LiveData<WeatherToday> = _weatherToday
+//    private val _weatherToday = MutableLiveData<WeatherToday>()
+//    val weatherToday: LiveData<WeatherToday> = _weatherToday
+    private val _temperatureToday = MutableLiveData<Int>()
+    val temperatureToday: LiveData<Int> = _temperatureToday
+    private val _mainToday = MutableLiveData<String>()
+    val mainToday: LiveData<String> = _mainToday
+    private val _currentCity = MutableLiveData<String>()
+    val currentCity: LiveData<String> = _currentCity
+    private val _currentCountry = MutableLiveData<String>()
+    val currentCountry: LiveData<String> = _currentCountry
     private val _weatherTo5Days = MutableLiveData<List<WeatherTo5Days>>()
     val weatherTo5Days: LiveData<List<WeatherTo5Days>> = _weatherTo5Days
     private val _errorBus = MutableLiveData<String>()
@@ -55,8 +63,10 @@ class MainViewModel : ViewModel() {
         Log.e("TAG", "loadWeatherToday: $lat $lon")
         ioScope.launch {
             try {
-                _weatherToday.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon, appid))
-
+                _temperatureToday.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon, appid)?.temp)
+                _mainToday.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon, appid)?.main)
+                _currentCity.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon, appid)?.city)
+                _currentCountry.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon, appid)?.country)
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }
