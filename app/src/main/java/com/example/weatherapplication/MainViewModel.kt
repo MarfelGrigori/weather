@@ -28,9 +28,11 @@ class MainViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun loadAll(lat: String, lon: String, appid: String) {
+    fun loadAll(appid: String) {
         _isLoading.value = true
-        loadWeatherToday(lat, lon, appid)
+        val lat = location.value?.first.toString()
+        val lon = location.value?.second.toString()
+        loadWeatherToday( lat,lon,appid)
         loadWeatherTo5Days(lat, lon, appid)
         loadWeatherWeek(lat, lon, appid)
         _isLoading.postValue(false)

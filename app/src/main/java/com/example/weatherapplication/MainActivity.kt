@@ -38,14 +38,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadData() {
         if (viewModel.location.value != null)
-            viewModel.loadAll(
-                viewModel.location.value?.first.toString(),
-                viewModel.location.value?.second.toString(),
-                KEY
-            )
-
+            viewModel.loadAll(KEY)
         viewModel.location.observe(this) {
-                viewModel.loadAll(it.first.toString(), it.second.toString(), KEY)
+                viewModel.loadAll(KEY)
         }
     }
 

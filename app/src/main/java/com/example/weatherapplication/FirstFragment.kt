@@ -16,7 +16,6 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentFirstBinding.inflate(inflater,container,false)
         val viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         viewModel.weatherToday.observe(viewLifecycleOwner){
