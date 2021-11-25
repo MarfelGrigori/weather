@@ -1,11 +1,11 @@
-package com.example.weatherapplication
+package com.example.weatherapplication.viewModel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.weatherapplication.entities.WeatherTo5Days
-import com.example.weatherapplication.entities.WeatherWeek
+import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
+import com.example.weatherapplication.screens.first.entities.WeatherWeek
 import com.example.weatherapplication.useCases.LoadWeather5DayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase

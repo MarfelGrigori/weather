@@ -1,4 +1,4 @@
-package com.example.weatherapplication.entities
+package com.example.weatherapplication.screens.second.entities
 
 data class WeatherTo5Days(
     var newDay: String? = null,

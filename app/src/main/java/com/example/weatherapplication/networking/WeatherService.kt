@@ -1,8 +1,8 @@
 package com.example.weatherapplication.networking
 
-import com.example.weatherapplication.networking.response.Weather5DaysResponse
-import com.example.weatherapplication.networking.response.WeatherTodayResponse
-import com.example.weatherapplication.networking.response.WeatherWeekResponse
+import com.example.weatherapplication.screens.second.networking.response.Weather5DaysResponse
+import com.example.weatherapplication.screens.first.networking.WeatherTodayResponse
+import com.example.weatherapplication.screens.first.networking.WeatherWeekResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

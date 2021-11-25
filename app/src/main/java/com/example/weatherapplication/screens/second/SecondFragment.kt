@@ -1,4 +1,4 @@
-package com.example.weatherapplication
+package com.example.weatherapplication.screens.second
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.weatherapplication.viewModel.MainViewModel
 import com.example.weatherapplication.databinding.FragmentSecondBinding
-import com.example.weatherapplication.recycler_adapter.Weather5DaysAdapter
+import com.example.weatherapplication.screens.second.recyclerAdapter.Weather5DaysAdapter
 
 class SecondFragment : Fragment() {
     private lateinit var binding: FragmentSecondBinding

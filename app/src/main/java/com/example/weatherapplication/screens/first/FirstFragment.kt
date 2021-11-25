@@ -1,4 +1,4 @@
-package com.example.weatherapplication
+package com.example.weatherapplication.screens.first
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherapplication.viewModel.MainViewModel
+import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentFirstBinding
-import com.example.weatherapplication.recycler_adapter.WeatherWeekAdapter
+import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FirstFragment : Fragment() {

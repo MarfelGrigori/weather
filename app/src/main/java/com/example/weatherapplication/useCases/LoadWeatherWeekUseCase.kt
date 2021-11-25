@@ -1,7 +1,7 @@
 package com.example.weatherapplication.useCases
 
-import com.example.weatherapplication.entities.WeatherWeek
-import com.example.weatherapplication.networking.mapper.WeatherWeekMapper.toWeatherWeek
+import com.example.weatherapplication.screens.first.entities.WeatherWeek
+import com.example.weatherapplication.screens.first.networking.WeatherWeekMapper.toWeatherWeek
 import com.example.weatherapplication.repository.WeatherRepository
 
 class LoadWeatherWeekUseCase {

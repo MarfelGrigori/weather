@@ -7,6 +7,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.weatherapplication.screens.first.FirstFragment
+import com.example.weatherapplication.screens.second.SecondFragment
+import com.example.weatherapplication.utils.Location
+import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 

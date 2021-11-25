@@ -1,7 +1,7 @@
 package com.example.weatherapplication.useCases
 
-import com.example.weatherapplication.entities.WeatherTo5Days
-import com.example.weatherapplication.networking.mapper.Weather5DayMapper.toWeather5day
+import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
+import com.example.weatherapplication.screens.second.networking.mapper.Weather5DayMapper.toWeather5day
 import com.example.weatherapplication.repository.WeatherRepository
 
 

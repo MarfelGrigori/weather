@@ -1,7 +1,5 @@
-package com.example.weatherapplication.networking.response
+package com.example.weatherapplication.screens.first.networking
 
-import com.example.weatherapplication.entities.WeatherToday
-import com.example.weatherapplication.utils.Converter.degToWindRoze
 import com.google.gson.annotations.SerializedName
 
 data class WeatherTodayResponse(

@@ -1,6 +1,5 @@
-package com.example.weatherapplication.networking.response
+package com.example.weatherapplication.screens.second.networking.response
 
-import com.example.weatherapplication.entities.WeatherTo5Days
 import com.google.gson.annotations.SerializedName
 
 data class Weather5DaysResponse(

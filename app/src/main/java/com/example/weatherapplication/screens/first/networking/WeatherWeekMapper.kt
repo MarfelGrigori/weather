@@ -1,7 +1,6 @@
-package com.example.weatherapplication.networking.mapper
+package com.example.weatherapplication.screens.first.networking
 
-import com.example.weatherapplication.entities.WeatherWeek
-import com.example.weatherapplication.networking.response.WeatherWeekResponse
+import com.example.weatherapplication.screens.first.entities.WeatherWeek
 
 object WeatherWeekMapper {
     fun WeatherWeekResponse.toWeatherWeek (): List<WeatherWeek> {

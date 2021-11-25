@@ -1,4 +1,4 @@
-package com.example.weatherapplication
+package com.example.weatherapplication.utils
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -8,6 +8,7 @@ import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.gms.location.*
 
 class Location(private val context: Context) {
