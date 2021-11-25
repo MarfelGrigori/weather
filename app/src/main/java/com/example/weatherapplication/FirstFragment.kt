@@ -4,27 +4,42 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.databinding.FragmentFirstBinding
 import com.example.weatherapplication.recycler_adapter.WeatherWeekAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FirstFragment : Fragment() {
     lateinit var binding: FragmentFirstBinding
+    lateinit var viewModel: MainViewModel
+    private lateinit var city: TextView
+    lateinit var main: TextView
+    private lateinit var temperature: TextView
+    private lateinit var image: ImageView
+    private lateinit var recyclerView: RecyclerView
+    lateinit var adapter: WeatherWeekAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFirstBinding.inflate(inflater, container, false)
-        val viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-        val city = binding.city
-        val main = binding.main
-        val temperature = binding.temperature
-        val image = binding.image
-        val recyclerView = binding.recyclerView
-        val adapter = WeatherWeekAdapter()
+        viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        city = binding.city
+        main = binding.main
+        temperature = binding.temperature
+        image = binding.image
+        recyclerView = binding.recyclerView
+        adapter = WeatherWeekAdapter()
         recyclerView.adapter = adapter
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.weatherWeek.observe(this) {
             adapter.initialize(it)
         }
@@ -34,9 +49,7 @@ class FirstFragment : Fragment() {
             else progressBar.visibility = View.GONE
         }
         viewModel.errorBus.observe(this) {
-            view?.context?.let { it1 ->
-                MaterialAlertDialogBuilder(it1).setTitle("Error").setMessage(it).show()
-            }
+                MaterialAlertDialogBuilder(view.context).setTitle("Error").setMessage(it).show()
         }
         viewModel.temperatureToday.observe(this) { temperature.text = ("${it}°C") }
         viewModel.currentCity.observe(this) { it1 ->
@@ -61,7 +74,10 @@ class FirstFragment : Fragment() {
                 }
             }
         }
-        return binding.root
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.unbind()
     }
 
 

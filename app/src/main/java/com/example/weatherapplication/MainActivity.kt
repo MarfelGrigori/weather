@@ -29,10 +29,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, firstFragment).commit()
+            .replace(R.id.fragment_container_view_tag, firstFragment).commit()
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
-        val currentLocation = Location()
-        currentLocation.getLocation(viewModel, this)
+        val currentLocation = Location(this)
+        currentLocation.getLocation(viewModel)
         loadData()
     }
 
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId == android.R.id.home)
             return true
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, secondFragment).commit()
+            .replace(R.id.fragment_container_view_tag, secondFragment).commit()
         return super.onOptionsItemSelected(item)
     }
 }

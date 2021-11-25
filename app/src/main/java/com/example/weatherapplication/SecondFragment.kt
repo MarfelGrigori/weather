@@ -1,29 +1,39 @@
 package com.example.weatherapplication
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.recycler_adapter.Weather5DaysAdapter
 
 class SecondFragment : Fragment() {
     private lateinit var binding: FragmentSecondBinding
+    private lateinit var viewModel: MainViewModel
+    private lateinit var adapter: Weather5DaysAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSecondBinding.inflate(inflater,container,false)
+        binding = FragmentSecondBinding.inflate(inflater, container, false)
         val recyclerView = binding.recyclerView
-        val adapter = Weather5DaysAdapter()
+        adapter = Weather5DaysAdapter()
         recyclerView.adapter = adapter
-        val viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-        viewModel.weatherTo5Days.observe(viewLifecycleOwner) {
-           adapter.initialize(it)
-        }
+        viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.weatherTo5Days.observe(viewLifecycleOwner) {
+            adapter.initialize(it)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.unbind()
     }
 }

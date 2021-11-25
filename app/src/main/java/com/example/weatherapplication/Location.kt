@@ -10,10 +10,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
 
-class Location {
-
-
-    fun getLocation(viewModel: MainViewModel, context: Context) {
+class Location(private val context: Context) {
+    fun getLocation(viewModel: MainViewModel) {
         val fusedLocationProvider: FusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(context)
         val locationCallBack = object : LocationCallback() {

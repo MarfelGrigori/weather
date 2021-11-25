@@ -125,7 +125,7 @@ data class WeatherTodayResponse(
             snow = this.snow?.oneH ?: -1.0,
             pressure = this.main?.pressure ?: -1,
             speed = this.wind?.speed ?: -1.0,
-            deg = "".degToWindRoze(this.wind?.deg ?: -1)
+            deg = this.wind?.deg?.degToWindRoze().toString()
         )
     }
 }
