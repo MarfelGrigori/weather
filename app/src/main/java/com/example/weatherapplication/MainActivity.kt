@@ -14,7 +14,7 @@ import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
-const val KEY = "a5000964c71443402a055b2152004987"
+//const val KEY = "a5000964c71443402a055b2152004987"
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadData(viewModel:MainViewModel) {
         viewModel.loadData()
         viewModel.location.observe(this) {
-            viewModel.loadAll(KEY)
+            viewModel.loadAll()
         }
     }
 

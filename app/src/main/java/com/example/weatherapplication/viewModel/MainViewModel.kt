@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.weatherapplication.KEY
 import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
 import com.example.weatherapplication.screens.first.entities.WeatherWeek
 import com.example.weatherapplication.useCases.LoadWeather5DayUseCase
@@ -39,13 +38,13 @@ class MainViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun loadAll(appid: String) {
+    fun loadAll() {
         _isLoading.value = true
         val lat = location.value?.first.toString()
         val lon = location.value?.second.toString()
-        loadWeatherToday(lat, lon, appid)
-        loadWeatherTo5Days(lat, lon, appid)
-        loadWeatherWeek(lat, lon, appid)
+        loadWeatherToday(lat, lon)
+        loadWeatherTo5Days(lat, lon)
+        loadWeatherWeek(lat, lon)
         Log.e("TAG", "loadAll")
         _isLoading.postValue(false)
     }
@@ -57,7 +56,7 @@ class MainViewModel : ViewModel() {
             _location.postValue(Pair(latNew, lonNew))
     }
 
-    private fun loadWeatherToday(lat: String, lon: String, appid: String) {
+    private fun loadWeatherToday(lat: String, lon: String) {
         Log.e("TAG", "loadWeatherToday: $lat $lon")
         ioScope.launch {
             try {
@@ -65,28 +64,27 @@ class MainViewModel : ViewModel() {
                     loadWeatherTodayUseCase.loadWeatherToday(
                         lat,
                         lon,
-                        appid
+
                     )?.temp
                 )
                 _mainToday.postValue(
                     loadWeatherTodayUseCase.loadWeatherToday(
                         lat,
                         lon,
-                        appid
+
                     )?.main
                 )
                 _currentCity.postValue(
                     loadWeatherTodayUseCase.loadWeatherToday(
                         lat,
                         lon,
-                        appid
+
                     )?.city
                 )
                 _currentCountry.postValue(
                     loadWeatherTodayUseCase.loadWeatherToday(
                         lat,
                         lon,
-                        appid
                     )?.country
                 )
             } catch (e: Exception) {
@@ -96,14 +94,14 @@ class MainViewModel : ViewModel() {
 
     }
 
-    private fun loadWeatherTo5Days(lat: String, lon: String, appid: String) {
+    private fun loadWeatherTo5Days(lat: String, lon: String) {
         ioScope.launch {
             try {
                 _weatherTo5Days.postValue(
                     loadWeatherUseCase.loadWeatherTo5Days(
                         lat,
                         lon,
-                        appid
+
                     )
                 )
             } catch (e: Exception) {
@@ -112,10 +110,10 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    private fun loadWeatherWeek(lat: String, lon: String, appid: String) {
+    private fun loadWeatherWeek(lat: String, lon: String) {
         ioScope.launch {
             try {
-                _weatherWeek.postValue(loadWeatherWeekUseCase.loadWeatherWeek(lat, lon, appid))
+                _weatherWeek.postValue(loadWeatherWeekUseCase.loadWeatherWeek(lat, lon))
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }
@@ -123,6 +121,7 @@ class MainViewModel : ViewModel() {
     }
     fun loadData (){
         if (location.value != null)
-            loadAll(KEY)
+            loadAll()
+
     }
 }

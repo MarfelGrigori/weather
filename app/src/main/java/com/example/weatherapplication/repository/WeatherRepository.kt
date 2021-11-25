@@ -8,16 +8,16 @@ import retrofit2.Response
 
 class WeatherRepository {
     private val api= WeatherApi.provideRetrofit()
-
-    suspend fun loadWeatherToday(lat:String, lon:String, appid:String): Response<WeatherTodayResponse> {
-        return  api.loadWeatherToday(lat, lon, "metric",appid)
+ private   val KEY = "a5000964c71443402a055b2152004987"
+    suspend fun loadWeatherToday(lat:String, lon:String): Response<WeatherTodayResponse> {
+        return  api.loadWeatherToday(lat, lon, "metric",KEY)
     }
 
-    suspend fun loadWeatherTo5Days(lat:String, lon:String, appid:String): Response<Weather5DaysResponse> {
-        return api.loadWeatherTo5Days(lat, lon, 8,"metric",appid)
+    suspend fun loadWeatherTo5Days(lat:String, lon:String): Response<Weather5DaysResponse> {
+        return api.loadWeatherTo5Days(lat, lon, 8,"metric",KEY)
     }
-    suspend fun loadWeatherWeek(lat:String, lon:String, appid:String): Response<WeatherWeekResponse> {
-        return api.loadWeatherWeek(lat,lon,"currently","metric",appid )
+    suspend fun loadWeatherWeek(lat:String, lon:String): Response<WeatherWeekResponse> {
+        return api.loadWeatherWeek(lat,lon,"currently","metric",KEY)
     }
 
 }

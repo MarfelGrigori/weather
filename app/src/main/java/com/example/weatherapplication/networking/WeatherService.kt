@@ -6,7 +6,6 @@ import com.example.weatherapplication.screens.first.networking.WeatherWeekRespon
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-
 interface WeatherService {
 
     @GET("data/2.5/weather")
