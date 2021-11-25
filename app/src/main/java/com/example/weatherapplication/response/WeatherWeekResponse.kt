@@ -1,9 +1,10 @@
 package com.example.weatherapplication.response
 
+import com.example.weatherapplication.entities.WeatherWeek
 import com.google.gson.annotations.SerializedName
 
 data class WeatherWeekResponse(
-   @SerializedName("daily")
+    @SerializedName("daily")
     val list: List<Daily>,
 ) {
     data class Daily(
@@ -11,7 +12,7 @@ data class WeatherWeekResponse(
         val dew_point: Double,
         @SerializedName("dt")
         val dt: Long,
-       @SerializedName("pressure")
+        @SerializedName("pressure")
         val pressure: Int,
         @SerializedName("temp")
         val temp: Temp,
@@ -31,4 +32,21 @@ data class WeatherWeekResponse(
             val main: String
         )
     }
+    companion object{
+        fun WeatherWeekResponse.toWeatherWeek (from: WeatherWeekResponse): List<WeatherWeek> {
+        val list = ArrayList<WeatherWeek>()
+        from.list.forEach {
+            list.add(
+                WeatherWeek(
+                    time = it.dt.times(1000).toString().toLong(),
+                    text = it.weather[0].main,
+                    temp = it.temp.day.toInt(),
+                    pressure = it.pressure,
+                    wind = it.wind_speed.toInt()
+                )
+            )
+        }
+        return list
+    }}
+
 }

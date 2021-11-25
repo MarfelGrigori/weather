@@ -6,13 +6,8 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 object Converter {
-    fun millisToHours(mil: Long) = String.format(
-        "%02d:%02d",
-        TimeUnit.MILLISECONDS.toHours(mil) % 24,
-        TimeUnit.MILLISECONDS.toMinutes(mil) % 60
-    )
 
-    fun degToWindRoze(deg: Int) =
+    fun String.degToWindRoze(deg: Int) =
         when (deg) {
             in 23..67 -> "NE"
             in 68..112 -> "E"
@@ -24,21 +19,18 @@ object Converter {
             else -> "N"
         }
 
-    fun differenceDays(mil: Long, mil2: Long) = TimeUnit.MILLISECONDS.toDays(mil) != TimeUnit.MILLISECONDS.toDays(mil2)
     @SuppressLint("SimpleDateFormat")
-    fun getDate(millis: Long, dateFormat: String): String {
+    fun String.getDate(millis: Long, dateFormat: String): String {
         val formatter = SimpleDateFormat(dateFormat)
         val calendar: Calendar = Calendar.getInstance()
         calendar.timeInMillis = millis
         return formatter.format(calendar.time)
     }
 
-    fun getDay(mil: Long): String {
+    fun String.getDay(mil: Long): String {
         val daysArray =
             arrayOf("Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday")
-
         val day: Int = ((TimeUnit.MILLISECONDS.toDays(mil) % 7).toInt())
-
         return daysArray[day]
     }
 }
