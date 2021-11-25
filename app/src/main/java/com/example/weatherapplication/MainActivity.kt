@@ -5,8 +5,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.screens.first.FirstFragment
 import com.example.weatherapplication.screens.second.SecondFragment
 import com.example.weatherapplication.utils.Location
@@ -18,12 +18,8 @@ const val KEY = "a5000964c71443402a055b2152004987"
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
-    }
     private val firstFragment = FirstFragment()
     private val secondFragment = SecondFragment()
-
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var fusedLocationProvider: FusedLocationProviderClient
@@ -32,15 +28,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val viewModel by viewModels<MainViewModel>()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view_tag, firstFragment).commit()
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val currentLocation = Location(this)
         currentLocation.getLocation(viewModel)
-        loadData()
+        loadData(viewModel)
     }
 
-    private fun loadData() {
+    private fun loadData(viewModel:MainViewModel) {
         viewModel.loadData()
         viewModel.location.observe(this) {
             viewModel.loadAll(KEY)

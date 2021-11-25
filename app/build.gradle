@@ -60,5 +60,8 @@ dependencies {
     implementation "androidx.activity:activity:1.4.0"
     implementation "androidx.fragment:fragment:1.4.0"
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    //ktx android
+    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
 
 }

@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.viewModel.MainViewModel
@@ -17,9 +19,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FirstFragment : Fragment() {
     lateinit var binding: FragmentFirstBinding
-    lateinit var viewModel: MainViewModel
     private lateinit var city: TextView
     lateinit var main: TextView
+    private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var temperature: TextView
     private lateinit var image: ImageView
     private lateinit var recyclerView: RecyclerView
@@ -29,7 +31,6 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFirstBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         city = binding.city
         main = binding.main
         temperature = binding.temperature

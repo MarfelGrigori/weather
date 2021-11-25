@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.viewModel.MainViewModel
 import com.example.weatherapplication.databinding.FragmentSecondBinding
@@ -12,7 +13,7 @@ import com.example.weatherapplication.screens.second.recyclerAdapter.Weather5Day
 
 class SecondFragment : Fragment() {
     private lateinit var binding: FragmentSecondBinding
-    private lateinit var viewModel: MainViewModel
+private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var adapter: Weather5DaysAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +23,6 @@ class SecondFragment : Fragment() {
         val recyclerView = binding.recyclerView
         adapter = Weather5DaysAdapter()
         recyclerView.adapter = adapter
-        viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         return binding.root
     }
 
