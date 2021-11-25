@@ -20,7 +20,6 @@ class Location(private val context: Context) {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for (location in locationResult.locations) {
-//                    viewModel.setLocation(location.latitude, location.longitude)
                     setLocation(location.latitude,location.longitude)
                 }
             }

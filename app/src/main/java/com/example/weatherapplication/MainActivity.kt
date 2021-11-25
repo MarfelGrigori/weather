@@ -20,7 +20,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-const val KEY = "a5000964c71443402a055b2152004987"
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun getLocation() {
         val locationCallBack = object : LocationCallback() {
-
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for (location in locationResult.locations) {
