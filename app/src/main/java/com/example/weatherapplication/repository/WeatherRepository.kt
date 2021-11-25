@@ -1,9 +1,9 @@
 package com.example.weatherapplication.repository
 
 import com.example.weatherapplication.networking.weather.WeatherApi
-import com.example.weatherapplication.response.Weather5DaysResponse
-import com.example.weatherapplication.response.WeatherTodayResponse
-import com.example.weatherapplication.response.WeatherWeekResponse
+import com.example.weatherapplication.networking.response.Weather5DaysResponse
+import com.example.weatherapplication.networking.response.WeatherTodayResponse
+import com.example.weatherapplication.networking.response.WeatherWeekResponse
 import retrofit2.Response
 
 class WeatherRepository {
