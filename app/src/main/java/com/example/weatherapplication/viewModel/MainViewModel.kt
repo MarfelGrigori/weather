@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.weatherapplication.KEY
 import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
 import com.example.weatherapplication.screens.first.entities.WeatherWeek
 import com.example.weatherapplication.useCases.LoadWeather5DayUseCase
@@ -119,5 +120,9 @@ class MainViewModel : ViewModel() {
                 _errorBus.postValue(e.message)
             }
         }
+    }
+    fun loadData (){
+        if (location.value != null)
+            loadAll(KEY)
     }
 }

@@ -15,12 +15,13 @@ class Location(private val context: Context) {
     fun getLocation(viewModel: MainViewModel) {
         val fusedLocationProvider: FusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(context)
+        val setLocation ={lat:Double,lon:Double->viewModel.setLocation(lat,lon)}
         val locationCallBack = object : LocationCallback() {
-
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for (location in locationResult.locations) {
-                    viewModel.setLocation(location.latitude, location.longitude)
+//                    viewModel.setLocation(location.latitude, location.longitude)
+                    setLocation(location.latitude,location.longitude)
                 }
             }
         }

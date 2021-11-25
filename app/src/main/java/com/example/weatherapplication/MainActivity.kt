@@ -41,8 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        if (viewModel.location.value != null)
-            viewModel.loadAll(KEY)
+        viewModel.loadData()
         viewModel.location.observe(this) {
             viewModel.loadAll(KEY)
         }
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId == android.R.id.home)
             return true
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view_tag, secondFragment).commit()
+            .replace(R.id.fragment_container_view_tag, secondFragment).addToBackStack(null).commit()
         return super.onOptionsItemSelected(item)
     }
 }
