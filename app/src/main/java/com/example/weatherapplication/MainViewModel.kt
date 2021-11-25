@@ -5,10 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.entities.WeatherTo5Days
-import com.example.weatherapplication.entities.WeatherToday
 import com.example.weatherapplication.entities.WeatherWeek
-import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeather5DayUseCase
+import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +19,6 @@ class MainViewModel : ViewModel() {
     private val loadWeatherTodayUseCase = LoadWeatherTodayUseCase()
     private val loadWeatherWeekUseCase = LoadWeatherWeekUseCase()
     private val ioScope = CoroutineScope(Dispatchers.IO)
-//    private val _weatherToday = MutableLiveData<WeatherToday>()
-//    val weatherToday: LiveData<WeatherToday> = _weatherToday
     private val _temperatureToday = MutableLiveData<Int>()
     val temperatureToday: LiveData<Int> = _temperatureToday
     private val _mainToday = MutableLiveData<String>()
@@ -45,11 +42,11 @@ class MainViewModel : ViewModel() {
         _isLoading.value = true
         val lat = location.value?.first.toString()
         val lon = location.value?.second.toString()
-        loadWeatherToday( lat,lon,appid)
+        loadWeatherToday(lat, lon, appid)
         loadWeatherTo5Days(lat, lon, appid)
         loadWeatherWeek(lat, lon, appid)
-        _isLoading.postValue(false)
         Log.e("TAG", "loadAll")
+        _isLoading.postValue(false)
     }
 
     fun setLocation(latNew: Double, lonNew: Double) {
@@ -63,10 +60,34 @@ class MainViewModel : ViewModel() {
         Log.e("TAG", "loadWeatherToday: $lat $lon")
         ioScope.launch {
             try {
-                _temperatureToday.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon, appid)?.temp)
-                _mainToday.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon, appid)?.main)
-                _currentCity.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon, appid)?.city)
-                _currentCountry.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon, appid)?.country)
+                _temperatureToday.postValue(
+                    loadWeatherTodayUseCase.loadWeatherToday(
+                        lat,
+                        lon,
+                        appid
+                    )?.temp
+                )
+                _mainToday.postValue(
+                    loadWeatherTodayUseCase.loadWeatherToday(
+                        lat,
+                        lon,
+                        appid
+                    )?.main
+                )
+                _currentCity.postValue(
+                    loadWeatherTodayUseCase.loadWeatherToday(
+                        lat,
+                        lon,
+                        appid
+                    )?.city
+                )
+                _currentCountry.postValue(
+                    loadWeatherTodayUseCase.loadWeatherToday(
+                        lat,
+                        lon,
+                        appid
+                    )?.country
+                )
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }

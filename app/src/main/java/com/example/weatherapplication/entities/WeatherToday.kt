@@ -11,9 +11,5 @@ data class WeatherToday(
     val pressure: Int,
     val speed: Double,
     val deg: String
-) {
+)
 
-    fun weather(): String {
-        return "$temp °C | $main"
-    }
-}

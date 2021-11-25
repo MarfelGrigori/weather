@@ -2,12 +2,13 @@ package com.example.weatherapplication
 
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 const val KEY = "a5000964c71443402a055b2152004987"
 
@@ -18,9 +19,11 @@ class MainActivity : AppCompatActivity() {
     }
     private val firstFragment = FirstFragment()
     private val secondFragment = SecondFragment()
-    companion object{
+
+    companion object {
         @SuppressLint("StaticFieldLeak")
-         lateinit var fusedLocationProvider: FusedLocationProviderClient}
+        lateinit var fusedLocationProvider: FusedLocationProviderClient
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container_view, firstFragment).commit()
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val currentLocation = Location()
-        currentLocation.getLocation(viewModel,this)
+        currentLocation.getLocation(viewModel, this)
         loadData()
     }
 
@@ -37,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         if (viewModel.location.value != null)
             viewModel.loadAll(KEY)
         viewModel.location.observe(this) {
-                viewModel.loadAll(KEY)
+            viewModel.loadAll(KEY)
         }
     }
 

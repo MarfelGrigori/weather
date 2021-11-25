@@ -13,8 +13,9 @@ import com.google.android.gms.location.*
 class Location {
 
 
-   fun getLocation(viewModel: MainViewModel,context: Context) {
-       val fusedLocationProvider: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
+    fun getLocation(viewModel: MainViewModel, context: Context) {
+        val fusedLocationProvider: FusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(context)
         val locationCallBack = object : LocationCallback() {
 
             override fun onLocationResult(locationResult: LocationResult?) {
@@ -26,9 +27,9 @@ class Location {
         }
         val componentActivity = ComponentActivity()
         val requestPermissionLauncher =
-             componentActivity.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            componentActivity.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
                 if (it)
-                    startLocationUpdates(locationCallBack,fusedLocationProvider)
+                    startLocationUpdates(locationCallBack, fusedLocationProvider)
             }
 
         when (PackageManager.PERMISSION_GRANTED) {
@@ -36,16 +37,20 @@ class Location {
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) -> {
-                startLocationUpdates(locationCallBack,fusedLocationProvider )
+                startLocationUpdates(locationCallBack, fusedLocationProvider)
             }
             else -> {
                 requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             }
         }
     }
+
     @SuppressLint("MissingPermission")
-    private fun startLocationUpdates(locationCallBack: LocationCallback,fusedLocationProvider: FusedLocationProviderClient) {
-      fusedLocationProvider.requestLocationUpdates(
+    private fun startLocationUpdates(
+        locationCallBack: LocationCallback,
+        fusedLocationProvider: FusedLocationProviderClient
+    ) {
+        fusedLocationProvider.requestLocationUpdates(
             getRequest(), locationCallBack,
             Looper.getMainLooper()
         )

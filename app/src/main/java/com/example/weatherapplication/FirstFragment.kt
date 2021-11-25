@@ -29,42 +29,38 @@ class FirstFragment : Fragment() {
             adapter.initialize(it)
         }
         val progressBar = binding.progressBar
-
-            viewModel.errorBus.observe(this) {
-                view?.context?.let { it1 ->
-                    MaterialAlertDialogBuilder(it1).setTitle("Error").setMessage(it).show()
+        viewModel.isLoading.observe(this) {
+            if (it == true) progressBar.visibility = View.VISIBLE
+            else progressBar.visibility = View.GONE
+        }
+        viewModel.errorBus.observe(this) {
+            view?.context?.let { it1 ->
+                MaterialAlertDialogBuilder(it1).setTitle("Error").setMessage(it).show()
+            }
+        }
+        viewModel.temperatureToday.observe(this) { temperature.text = ("${it}°C") }
+        viewModel.currentCity.observe(this) { it1 ->
+            viewModel.currentCountry.observe(this) { it2 ->
+                city.text = ("${it1}, $it2")
+            }
+        }
+        viewModel.mainToday.observe(this) {
+            main.text = it
+            when (it) {
+                ("Clouds") -> {
+                    image.setImageResource(R.drawable.cloud)
+                }
+                ("Rain") -> {
+                    image.setImageResource(R.drawable.union)
+                }
+                ("Clear") -> {
+                    image.setImageResource(R.drawable.sun)
+                }
+                ("Snow") -> {
+                    image.setImageResource(R.drawable.snow)
                 }
             }
-            viewModel.isLoading.observe(this) {
-                if (it) progressBar.visibility = View.VISIBLE
-                else progressBar.visibility = View.GONE
-            }
-
-            viewModel.temperatureToday.observe(this){temperature.text = ("${it}°C")}
-            viewModel.currentCity.observe(this){
-                it1->
-                viewModel.currentCountry.observe(this){
-                    it2->
-                    city.text = ("${it1}, $it2")
-                }
-            }
-            viewModel.mainToday.observe(this){
-                main.text = it
-                when (it) {
-                    ("Clouds") -> {
-                        image.setImageResource(R.drawable.cloud)
-                    }
-                    ("Rain") -> {
-                        image.setImageResource(R.drawable.union)
-                    }
-                    ("Clear") -> {
-                        image.setImageResource(R.drawable.sun)
-                    }
-                    ("Snow") -> {
-                        image.setImageResource(R.drawable.snow)
-                    }
-                }
-            }
+        }
         return binding.root
     }
 
