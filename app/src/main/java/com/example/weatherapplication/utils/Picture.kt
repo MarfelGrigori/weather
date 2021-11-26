@@ -13,18 +13,15 @@ enum class Picture(val main : String) {
         when (string) {
             (Picture.CLOUDS.main) -> {
                 image.setImageResource(R.drawable.cloud)
-                Log.e("TAG",Picture.CLOUDS.main)
             }
             (Picture.RAIN.main) -> {
                 image.setImageResource(R.drawable.union)
-                Log.e("TAG",Picture.RAIN.main)
             }
             (Picture.CLEAR.main) -> {
                 image.setImageResource(R.drawable.sun)
             }
             (Picture.SNOW.main) -> {
                 image.setImageResource(R.drawable.snow)
-                Log.e("TAG",Picture.SNOW.main)
             }
         }
     }

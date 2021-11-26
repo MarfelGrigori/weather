@@ -12,19 +12,13 @@ class WeatherWeekViewHolder(private val binding: WeatherItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
     @SuppressLint("SetTextI18n")
     fun setData(weatherForDay: WeatherWeek) {
-        val date = binding.date
-        date.text = weatherForDay.time.getDate(
+        binding.date.text = weatherForDay.time.getDate(
             "dd/MM/yyyy"
         ) + weatherForDay.time.getDay()
-        val temperature = binding.temperature
-        temperature.text = weatherForDay.temp.toString() + "℃"
-        val main = binding.main
-        main.text = weatherForDay.text
-        val pressure = binding.pressure
-        pressure.text = "pressure kPa: " + weatherForDay.pressure.toString()
-        val wind = binding.wind
-        wind.text = "wind m/s :" + weatherForDay.wind
-        val image = binding.image
-        setPicture(weatherForDay.text,image)
+        binding.temperature.text = weatherForDay.temp.toString() + "℃"
+        binding.main.text = weatherForDay.text
+        binding.pressure.text = "pressure kPa: " + weatherForDay.pressure.toString()
+        binding.wind.text = "wind m/s :" + weatherForDay.wind
+        setPicture(weatherForDay.text,binding.image)
     }
 }

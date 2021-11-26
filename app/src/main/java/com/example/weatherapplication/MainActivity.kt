@@ -2,6 +2,7 @@ package com.example.weatherapplication
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        viewModel.loadData()
         viewModel.location.observe(this) {
             viewModel.loadAll()
         }

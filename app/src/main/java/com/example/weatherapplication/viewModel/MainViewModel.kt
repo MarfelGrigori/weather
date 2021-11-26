@@ -39,6 +39,7 @@ class MainViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun loadAll() {
+        if (location.value != null){
         _isLoading.value = true
         val lat = location.value?.first.toString()
         val lon = location.value?.second.toString()
@@ -47,9 +48,11 @@ class MainViewModel : ViewModel() {
         loadWeatherWeek(lat, lon)
         Log.e("TAG", "loadAll")
         _isLoading.postValue(false)
+        Log.e("TAG","4")}
     }
 
     fun setLocation(latNew: Double, lonNew: Double) {
+        Log.e("TAG","3")
         val lat = _location.value?.first ?: 53.5360
         val lon = _location.value?.second ?: 27.3400
         if (lat !in latNew - 0.01..latNew + 0.01 || lon !in lonNew - 0.01..lonNew + 0.01)
@@ -64,7 +67,6 @@ class MainViewModel : ViewModel() {
                     loadWeatherTodayUseCase.loadWeatherToday(
                         lat,
                         lon,
-
                     )?.temp
                 )
                 _mainToday.postValue(
@@ -120,7 +122,8 @@ class MainViewModel : ViewModel() {
         }
     }
     fun loadData (){
-        if (location.value != null)
-            loadAll()
+//        if (location.value != null){
+//            Log.e("TAG","5")
+//            loadAll()}
     }
 }
