@@ -6,7 +6,6 @@ import com.example.weatherapplication.repository.WeatherRepository
 
 
 class LoadWeather5DayUseCase {
-
     private val weatherRepository = WeatherRepository()
 
     suspend fun loadWeatherTo5Days(lat: String, lon: String): List<WeatherTo5Days>? {

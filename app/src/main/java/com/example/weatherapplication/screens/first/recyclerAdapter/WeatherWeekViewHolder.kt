@@ -13,10 +13,9 @@ class WeatherWeekViewHolder(private val binding: WeatherItemBinding) :
     @SuppressLint("SetTextI18n")
     fun setData(weatherForDay: WeatherWeek) {
         val date = binding.date
-        date.text = "".getDate(
-            weatherForDay.time,
+        date.text = weatherForDay.time.getDate(
             "dd/MM/yyyy"
-        ) + "".getDay(weatherForDay.time)
+        ) + weatherForDay.time.getDay()
         val temperature = binding.temperature
         temperature.text = weatherForDay.temp.toString() + "℃"
         val main = binding.main
@@ -27,6 +26,5 @@ class WeatherWeekViewHolder(private val binding: WeatherItemBinding) :
         wind.text = "wind m/s :" + weatherForDay.wind
         val image = binding.image
         setPicture(weatherForDay.text,image)
-
     }
 }

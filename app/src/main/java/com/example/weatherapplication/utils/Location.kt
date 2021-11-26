@@ -2,17 +2,16 @@ package com.example.weatherapplication.utils
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Looper
-import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.gms.location.*
 
-class Location(private val context: Context) {
-    fun getLocation(viewModel: MainViewModel) {
+class Location() {
+    fun getLocation(context:AppCompatActivity,viewModel: MainViewModel) {
         val fusedLocationProvider: FusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(context)
         val setLocation ={lat:Double,lon:Double->viewModel.setLocation(lat,lon)}
@@ -24,9 +23,9 @@ class Location(private val context: Context) {
                 }
             }
         }
-        val componentActivity = ComponentActivity()
+
         val requestPermissionLauncher =
-            componentActivity.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            context.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
                 if (it)
                     startLocationUpdates(locationCallBack, fusedLocationProvider)
             }

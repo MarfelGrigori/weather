@@ -20,17 +20,17 @@ object Converter {
         }
 
     @SuppressLint("SimpleDateFormat")
-    fun String.getDate(millis: Long, dateFormat: String): String {
+    fun Long.getDate( dateFormat: String): String {
         val formatter = SimpleDateFormat(dateFormat)
         val calendar: Calendar = Calendar.getInstance()
-        calendar.timeInMillis = millis
+        calendar.timeInMillis = this
         return formatter.format(calendar.time)
     }
     private val daysArray =
         arrayOf("Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday")
 
-    fun String.getDay(mil: Long): String  {
-        val day: Int = ((TimeUnit.MILLISECONDS.toDays(mil) % 7).toInt())
+    fun Long.getDay(): String  {
+        val day: Int = ((TimeUnit.MILLISECONDS.toDays(this) % 7).toInt())
         return daysArray[day]
     }
 }

@@ -36,7 +36,4 @@ data class Weather5DaysResponse(
             val speed: Double
         )
     }
-    companion object{
-
-    }
 }

@@ -17,34 +17,21 @@ import com.example.weatherapplication.utils.setPicture
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FirstFragment : Fragment() {
-    lateinit var binding: FragmentFirstBinding
-    private lateinit var city: TextView
-    private lateinit var country: TextView
-    lateinit var main: TextView
+    private lateinit var binding: FragmentFirstBinding
     private val viewModel by activityViewModels<MainViewModel>()
-    private lateinit var temperature: TextView
-    private lateinit var image: ImageView
-    private lateinit var recyclerView: RecyclerView
-    lateinit var adapter: WeatherWeekAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFirstBinding.inflate(inflater, container, false)
-        city = binding.city
-        main = binding.main
-        temperature = binding.temperature
-        image = binding.image
-        recyclerView = binding.recyclerView
-        adapter = WeatherWeekAdapter()
-        recyclerView.adapter = adapter
-        country = binding.country
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val adapter = WeatherWeekAdapter()
+        binding.recyclerView.adapter = adapter
         viewModel.weatherWeek.observe(this) {
             adapter.setItems(it)
         }
@@ -57,36 +44,20 @@ class FirstFragment : Fragment() {
         viewModel.errorBus.observe(this) {
                 MaterialAlertDialogBuilder(requireContext()).setTitle("Error").setMessage(it).show()
         }
-        viewModel.temperatureToday.observe(this) { temperature.text = it.toString() }
+        viewModel.temperatureToday.observe(this) { binding.temperature.text = it.toString() }
         viewModel.currentCity.observe(this) {
-            city.text = it.toString()
+            binding.city.text = it.toString()
         }
         viewModel.currentCountry.observe(this) {
-            country.text = it
+            binding.country.text = it
         }
         viewModel.mainToday.observe(this) {
-            main.text = it
-            setPicture(it, image)
-//            when (it) {
-//                (Picture.CLOUDS.name) -> {
-//                    image.setImageResource(R.drawable.cloud)
-//                }
-//                (Picture.RAIN.name) -> {
-//                    image.setImageResource(R.drawable.union)
-//                }
-//                (Picture.CLEAR.name) -> {
-//                    image.setImageResource(R.drawable.sun)
-//                }
-//                (Picture.SNOW.name) -> {
-//                    image.setImageResource(R.drawable.snow)
-//                }
-//            }
+            binding.main.text = it
+            setPicture(it, binding.image)
         }
     }
     override fun onDestroyView() {
         super.onDestroyView()
         binding.unbind()
     }
-
-
 }

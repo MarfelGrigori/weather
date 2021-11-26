@@ -13,20 +13,19 @@ import com.example.weatherapplication.screens.second.recyclerAdapter.Weather5Day
 class SecondFragment : Fragment() {
     private lateinit var binding: FragmentSecondBinding
 private val viewModel by activityViewModels<MainViewModel>()
-    private lateinit var adapter: Weather5DaysAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSecondBinding.inflate(inflater, container, false)
-        val recyclerView = binding.recyclerView
-        adapter = Weather5DaysAdapter()
-        recyclerView.adapter = adapter
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recyclerView
+        val adapter = Weather5DaysAdapter()
+        binding.recyclerView.adapter = adapter
         viewModel.weatherTo5Days.observe(viewLifecycleOwner) {
             adapter.setItems(it)
         }

@@ -19,7 +19,6 @@ class Weather5DaysAdapter : RecyclerView.Adapter<Weather5DayViewHolder>() {
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Weather5DayViewHolder {
         val binding = DataBindingUtil.inflate<WeatherItemBinding>(
             LayoutInflater.from(parent.context),

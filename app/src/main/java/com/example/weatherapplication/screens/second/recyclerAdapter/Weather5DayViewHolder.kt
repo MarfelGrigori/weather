@@ -13,7 +13,7 @@ import com.example.weatherapplication.utils.setPicture
         @SuppressLint("SetTextI18n")
         fun setData(weatherForDay: WeatherTo5Days) {
             val date = binding.date
-            date.text = "".getDate(weatherForDay.time, "dd/MM/yyyy hh:mm")
+            date.text = weatherForDay.time.getDate( "dd/MM/yyyy hh:mm")
             val temperature = binding.temperature
             temperature.text = weatherForDay.temp?.toInt().toString() + " ℃"
             val main = binding.main
@@ -24,6 +24,5 @@ import com.example.weatherapplication.utils.setPicture
             wind.text = "wind m/s :" + weatherForDay.wind
             val image = binding.image
             setPicture(weatherForDay.text,image)
-
         }
     }
