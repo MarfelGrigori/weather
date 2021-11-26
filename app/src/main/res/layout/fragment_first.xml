@@ -33,6 +33,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView
+                    android:id="@+id/country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="80dp"
+                    android:text="@string/belarus"
+                    android:textSize="26sp"
+                    app:layout_constraintStart_toEndOf="@+id/city"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <TextView
                     android:id="@+id/temperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -40,6 +51,15 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/_25_c"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/c"
+                    app:layout_constraintStart_toEndOf="@+id/temperature"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView

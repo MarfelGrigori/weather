@@ -9,23 +9,18 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.screens.first.FirstFragment
 import com.example.weatherapplication.screens.second.SecondFragment
 import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.gms.location.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
-    }
+    private val viewModel by viewModels<MainViewModel>()
     private val firstFragment = FirstFragment()
     private val secondFragment = SecondFragment()
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
@@ -40,10 +35,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        if (viewModel.location.value != null)
-            viewModel.loadAll()
+        viewModel.loadData()
         viewModel.location.observe(this) {
-                viewModel.loadAll()
+            viewModel.loadAll()
         }
     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
@@ -15,11 +16,13 @@ import com.example.weatherapplication.viewModel.MainViewModel
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentFirstBinding
 import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekAdapter
+import com.example.weatherapplication.utils.changeVisibility
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FirstFragment : Fragment() {
     lateinit var binding: FragmentFirstBinding
     private lateinit var city: TextView
+    private lateinit var country: TextView
     lateinit var main: TextView
     private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var temperature: TextView
@@ -38,6 +41,8 @@ class FirstFragment : Fragment() {
         recyclerView = binding.recyclerView
         adapter = WeatherWeekAdapter()
         recyclerView.adapter = adapter
+        country = binding.country
+
         return binding.root
     }
 
@@ -46,19 +51,20 @@ class FirstFragment : Fragment() {
         viewModel.weatherWeek.observe(this) {
             adapter.initialize(it)
         }
+
         val progressBar = binding.progressBar
         viewModel.isLoading.observe(this) {
-            if (it == true) progressBar.visibility = View.VISIBLE
-            else progressBar.visibility = View.GONE
+            progressBar.changeVisibility(it)
         }
         viewModel.errorBus.observe(this) {
                 MaterialAlertDialogBuilder(view.context).setTitle("Error").setMessage(it).show()
         }
-        viewModel.temperatureToday.observe(this) { temperature.text = ("${it}°C") }
-        viewModel.currentCity.observe(this) { it1 ->
-            viewModel.currentCountry.observe(this) { it2 ->
-                city.text = ("${it1}, $it2")
-            }
+        viewModel.temperatureToday.observe(this) { temperature.text = it.toString() }
+        viewModel.currentCity.observe(this) {
+            city.text = it.toString()
+        }
+        viewModel.currentCountry.observe(this) {
+            country.text = it
         }
         viewModel.mainToday.observe(this) {
             main.text = it

@@ -122,6 +122,5 @@ class MainViewModel : ViewModel() {
     fun loadData (){
         if (location.value != null)
             loadAll()
-
     }
 }
