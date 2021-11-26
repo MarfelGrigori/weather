@@ -14,8 +14,8 @@ class WeatherWeekAdapter :
     private var weatherList = ArrayList<WeatherWeek>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun initialize(list: List<WeatherWeek>) {
-        weatherList = list.toMutableList() as ArrayList<WeatherWeek>
+    fun setItems(items: List<WeatherWeek>) {
+        weatherList = items.toMutableList() as ArrayList<WeatherWeek>
         notifyDataSetChanged()
     }
 

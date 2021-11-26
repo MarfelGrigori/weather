@@ -14,8 +14,8 @@ class Weather5DaysAdapter : RecyclerView.Adapter<Weather5DayViewHolder>() {
     private var weatherList = ArrayList<WeatherTo5Days>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun initialize(list: List<WeatherTo5Days>) {
-        weatherList = list.toMutableList() as ArrayList<WeatherTo5Days>
+    fun setItems(items: List<WeatherTo5Days>) {
+        weatherList = items.toMutableList() as ArrayList<WeatherTo5Days>
         notifyDataSetChanged()
     }
 

@@ -46,13 +46,14 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.weatherWeek.observe(this) {
-            adapter.initialize(it)
+            adapter.setItems(it)
         }
 
         val progressBar = binding.progressBar
         viewModel.isLoading.observe(this) {
             progressBar.changeVisibility(it)
         }
+//         надо исправить
         viewModel.errorBus.observe(this) {
                 MaterialAlertDialogBuilder(requireContext()).setTitle("Error").setMessage(it).show()
         }

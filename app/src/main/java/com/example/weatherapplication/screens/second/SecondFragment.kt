@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.viewModel.MainViewModel
 import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.screens.second.recyclerAdapter.Weather5DaysAdapter
@@ -29,7 +28,7 @@ private val viewModel by activityViewModels<MainViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.weatherTo5Days.observe(viewLifecycleOwner) {
-            adapter.initialize(it)
+            adapter.setItems(it)
         }
     }
 
