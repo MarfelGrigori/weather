@@ -5,18 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.viewModel.MainViewModel
-import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentFirstBinding
 import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekAdapter
 import com.example.weatherapplication.utils.changeVisibility
+import com.example.weatherapplication.utils.setPicture
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FirstFragment : Fragment() {
@@ -57,7 +54,7 @@ class FirstFragment : Fragment() {
             progressBar.changeVisibility(it)
         }
         viewModel.errorBus.observe(this) {
-                MaterialAlertDialogBuilder(view.context).setTitle("Error").setMessage(it).show()
+                MaterialAlertDialogBuilder(requireContext()).setTitle("Error").setMessage(it).show()
         }
         viewModel.temperatureToday.observe(this) { temperature.text = it.toString() }
         viewModel.currentCity.observe(this) {
@@ -68,20 +65,21 @@ class FirstFragment : Fragment() {
         }
         viewModel.mainToday.observe(this) {
             main.text = it
-            when (it) {
-                ("Clouds") -> {
-                    image.setImageResource(R.drawable.cloud)
-                }
-                ("Rain") -> {
-                    image.setImageResource(R.drawable.union)
-                }
-                ("Clear") -> {
-                    image.setImageResource(R.drawable.sun)
-                }
-                ("Snow") -> {
-                    image.setImageResource(R.drawable.snow)
-                }
-            }
+            setPicture(it, image)
+//            when (it) {
+//                (Picture.CLOUDS.name) -> {
+//                    image.setImageResource(R.drawable.cloud)
+//                }
+//                (Picture.RAIN.name) -> {
+//                    image.setImageResource(R.drawable.union)
+//                }
+//                (Picture.CLEAR.name) -> {
+//                    image.setImageResource(R.drawable.sun)
+//                }
+//                (Picture.SNOW.name) -> {
+//                    image.setImageResource(R.drawable.snow)
+//                }
+//            }
         }
     }
     override fun onDestroyView() {

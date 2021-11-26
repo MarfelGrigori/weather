@@ -2,11 +2,10 @@ package com.example.weatherapplication.screens.second.recyclerAdapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
 import com.example.weatherapplication.utils.Converter.getDate
-
+import com.example.weatherapplication.utils.setPicture
 
 
  class Weather5DayViewHolder(private val binding: WeatherItemBinding) :
@@ -24,19 +23,7 @@ import com.example.weatherapplication.utils.Converter.getDate
             val wind = binding.wind
             wind.text = "wind m/s :" + weatherForDay.wind
             val image = binding.image
-            when (weatherForDay.text) {
-                ("Clouds") -> {
-                    image.setImageResource(R.drawable.cloud)
-                }
-                ("Rain") -> {
-                    image.setImageResource(R.drawable.union)
-                }
-                ("Clear") -> {
-                    image.setImageResource(R.drawable.sun)
-                }
-                ("Snow") -> {
-                    image.setImageResource(R.drawable.snow)
-                }
-            }
+            setPicture(weatherForDay.text,image)
+
         }
     }
