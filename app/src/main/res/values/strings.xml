@@ -8,4 +8,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="belarus">Belarus</string>
     <string name="c">°C</string>
+    <string name="error">Error</string>
+    <string name="error_network_text">No address associated with hostname</string>
+    <string name="error_network">network error</string>
+    <string name="something_went_wrong">something went wrong, check your internet connection or location permission, or just relaunch app</string>
 </resources>
