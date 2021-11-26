@@ -41,16 +41,7 @@ class FirstFragment : Fragment() {
         }
 //         надо исправить
         viewModel.errorBus.observe(this) {
-            Log.e("TAG", it.toString())
-            Log.e("TAG", getString(R.string.error_network_text))
-            if (it.contains(getString(R.string.error_network_text), true)) {
-                MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.error)
-                    .setMessage(getString(R.string.error_network)).show()
-            } else{
-                MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.error)
-                    .setMessage(getString(R.string.something_went_wrong)).show()
-            }
-
+            checkError(it)
         }
         viewModel.temperatureToday.observe(this) { binding.temperature.text = it.toString() }
         viewModel.currentCity.observe(this) {
@@ -68,5 +59,14 @@ class FirstFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding.unbind()
+    }
+    fun checkError(string: String){
+        if (string.contains(getString(R.string.error_network_text), true)) {
+            MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.error)
+                .setMessage(getString(R.string.error_network)).show()
+        } else{
+            MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.error)
+                .setMessage(getString(R.string.something_went_wrong)).show()
+        }
     }
 }
