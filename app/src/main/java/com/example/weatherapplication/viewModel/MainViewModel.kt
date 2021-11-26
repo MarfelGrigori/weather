@@ -14,7 +14,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
-
+    private  val MIN_LATITUDE = -90.0
+    private val MAX_LATITUDE = 90.0
+    private val MIN_LONGITUDE = -180.0
+    private val MAX_LONGITUDE = 180.0
     private val loadWeatherUseCase = LoadWeather5DayUseCase()
     private val loadWeatherTodayUseCase = LoadWeatherTodayUseCase()
     private val loadWeatherWeekUseCase = LoadWeatherWeekUseCase()
@@ -31,32 +34,33 @@ class MainViewModel : ViewModel() {
     val weatherTo5Days: LiveData<List<WeatherTo5Days>> = _weatherTo5Days
     private val _errorBus = MutableLiveData<String>()
     val errorBus: LiveData<String> = _errorBus
-    private val _location = MutableLiveData<Pair<Double, Double>>()
-    val location: LiveData<Pair<Double, Double>> = _location
+    private var _location: Pair<Double,Double> = Pair(1000.0,1000.0)
     private val _weatherWeek = MutableLiveData<List<WeatherWeek>>()
     val weatherWeek: LiveData<List<WeatherWeek>> = _weatherWeek
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun loadAll() {
-        if (location.value != null){
         _isLoading.value = true
-        val lat = location.value?.first.toString()
-        val lon = location.value?.second.toString()
+        val lat = _location.first.toString()
+        val lon = _location.second.toString()
+        if (lat.toDouble() in MIN_LATITUDE..MAX_LATITUDE && lon.toDouble() in MIN_LONGITUDE..MAX_LONGITUDE){
         loadWeatherToday(lat, lon)
         loadWeatherTo5Days(lat, lon)
         loadWeatherWeek(lat, lon)
         Log.e("TAG", "loadAll")
         _isLoading.postValue(false)
-        Log.e("TAG","4")}
+        Log.e("TAG","4")
+        }
     }
 
     fun setLocation(latNew: Double, lonNew: Double) {
         Log.e("TAG","3")
-        val lat = _location.value?.first ?: 53.5360
-        val lon = _location.value?.second ?: 27.3400
+        val lat = _location.first
+        val lon = _location.second
         if (lat !in latNew - 0.01..latNew + 0.01 || lon !in lonNew - 0.01..lonNew + 0.01)
-            _location.postValue(Pair(latNew, lonNew))
+            _location=(Pair(latNew, lonNew))
+        loadAll()
     }
 
     private fun loadWeatherToday(lat: String, lon: String) {
@@ -121,9 +125,5 @@ class MainViewModel : ViewModel() {
             }
         }
     }
-    fun loadData (){
-//        if (location.value != null){
-//            Log.e("TAG","5")
-//            loadAll()}
-    }
+
 }

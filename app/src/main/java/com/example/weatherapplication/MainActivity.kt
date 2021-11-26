@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        viewModel.location.observe(this) {
+
             viewModel.loadAll()
-        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
