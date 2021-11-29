@@ -1,5 +1,7 @@
 package com.example.weatherapplication.repository
 
+import com.example.weatherapplication.di.AppComponent
+import com.example.weatherapplication.di.DaggerAppComponent
 import com.example.weatherapplication.networking.weather.WeatherApi
 import com.example.weatherapplication.screens.second.networking.response.Weather5DaysResponse
 import com.example.weatherapplication.screens.first.networking.WeatherTodayResponse
@@ -8,7 +10,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class WeatherRepository  {
-    private val api= WeatherApi.provideRetrofit()
+    private val appComponent: AppComponent = DaggerAppComponent.create()
+    private val api= appComponent.retrofit.provideRetrofit()
  private   val KEY = "a5000964c71443402a055b2152004987"
     suspend fun loadWeatherToday(lat:String, lon:String): Response<WeatherTodayResponse> {
         return  api.loadWeatherToday(lat, lon, "metric",KEY)

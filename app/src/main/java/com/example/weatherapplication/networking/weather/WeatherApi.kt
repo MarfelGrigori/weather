@@ -10,10 +10,11 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
-object WeatherApi {
+class WeatherApi @Inject constructor() {
     @Singleton
     @Provides
     fun provideRetrofit(): WeatherService {
