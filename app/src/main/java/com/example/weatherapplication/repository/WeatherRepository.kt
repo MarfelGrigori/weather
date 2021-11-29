@@ -5,8 +5,9 @@ import com.example.weatherapplication.screens.second.networking.response.Weather
 import com.example.weatherapplication.screens.first.networking.WeatherTodayResponse
 import com.example.weatherapplication.screens.first.networking.WeatherWeekResponse
 import retrofit2.Response
+import javax.inject.Inject
 
-class WeatherRepository {
+class WeatherRepository @Inject constructor() {
     private val api= WeatherApi.provideRetrofit()
  private   val KEY = "a5000964c71443402a055b2152004987"
     suspend fun loadWeatherToday(lat:String, lon:String): Response<WeatherTodayResponse> {

@@ -48,14 +48,11 @@ class MainViewModel : ViewModel() {
         loadWeatherToday(lat, lon)
         loadWeatherTo5Days(lat, lon)
         loadWeatherWeek(lat, lon)
-        Log.e("TAG", "loadAll")
         _isLoading.postValue(false)
-        Log.e("TAG","4")
         }
     }
 
     fun setLocation(latNew: Double, lonNew: Double) {
-        Log.e("TAG","3")
         val lat = _location.first
         val lon = _location.second
         if (lat !in latNew - 0.01..latNew + 0.01 || lon !in lonNew - 0.01..lonNew + 0.01)
