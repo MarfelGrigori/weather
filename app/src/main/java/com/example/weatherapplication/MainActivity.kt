@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.weatherapplication.di.AppComponent
+import com.example.weatherapplication.di.DaggerAppComponent
 import com.example.weatherapplication.screens.first.FirstFragment
 import com.example.weatherapplication.screens.second.SecondFragment
 import com.example.weatherapplication.utils.Location
@@ -20,9 +21,11 @@ class MainActivity : AppCompatActivity() {
     private val firstFragment = FirstFragment()
     private val secondFragment = SecondFragment()
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
-//    private lateinit var appComponent : AppComponent
+    private lateinit var appComponent : AppComponent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appComponent = DaggerAppComponent.create()
+        appComponent.inject(this)
         setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view_tag, firstFragment).addToBackStack(null).commit()
