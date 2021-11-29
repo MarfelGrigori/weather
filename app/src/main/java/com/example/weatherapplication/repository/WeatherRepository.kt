@@ -7,7 +7,7 @@ import com.example.weatherapplication.screens.first.networking.WeatherWeekRespon
 import retrofit2.Response
 import javax.inject.Inject
 
-class WeatherRepository @Inject constructor() {
+class WeatherRepository  {
     private val api= WeatherApi.provideRetrofit()
  private   val KEY = "a5000964c71443402a055b2152004987"
     suspend fun loadWeatherToday(lat:String, lon:String): Response<WeatherTodayResponse> {
