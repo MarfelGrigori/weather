@@ -12,4 +12,5 @@
     <string name="error_network_text">No address associated with hostname</string>
     <string name="error_network">network error</string>
     <string name="something_went_wrong">something went wrong, check your internet connection or location permission, or just relaunch app</string>
+    <string name="out_of_enum">This value is out of enum</string>
 </resources>

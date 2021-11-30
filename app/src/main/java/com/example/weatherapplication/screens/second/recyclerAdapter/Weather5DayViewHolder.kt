@@ -6,6 +6,7 @@ import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
 import com.example.weatherapplication.utils.Converter.getDate
 import com.example.weatherapplication.utils.setPicture
+import com.example.weatherapplication.utils.toPicture
 
 
 class Weather5DayViewHolder(private val binding: WeatherItemBinding) :
@@ -17,6 +18,7 @@ class Weather5DayViewHolder(private val binding: WeatherItemBinding) :
         binding.main.text = weatherForDay.text
         binding.pressure.text = "pressure kPa: " + weatherForDay.pressure.toString()
         binding.wind.text = "wind m/s :" + weatherForDay.wind
-        setPicture(weatherForDay.text, binding.image)
+//        setPicture(weatherForDay.text, binding.image)
+        (weatherForDay.text.toPicture()).setPicture(binding.image)
     }
 }

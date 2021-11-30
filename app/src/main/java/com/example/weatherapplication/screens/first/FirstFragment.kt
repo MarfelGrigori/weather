@@ -13,6 +13,7 @@ import com.example.weatherapplication.di.DaggerAppComponent
 import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekAdapter
 import com.example.weatherapplication.utils.changeVisibility
 import com.example.weatherapplication.utils.setPicture
+import com.example.weatherapplication.utils.toPicture
 import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
@@ -59,7 +60,8 @@ class FirstFragment : Fragment() {
         }
         viewModel.mainToday.observe(this) {
             binding.main.text = it
-            setPicture(it, binding.image)
+            (it.toPicture()).setPicture(binding.image)
+//            setPicture(it, binding.image)
         }
     }
 

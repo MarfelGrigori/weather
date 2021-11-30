@@ -7,6 +7,7 @@ import com.example.weatherapplication.screens.first.entities.WeatherWeek
 import com.example.weatherapplication.utils.Converter.getDate
 import com.example.weatherapplication.utils.Converter.getDay
 import com.example.weatherapplication.utils.setPicture
+import com.example.weatherapplication.utils.toPicture
 
 class WeatherWeekViewHolder(private val binding: WeatherItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -19,6 +20,7 @@ class WeatherWeekViewHolder(private val binding: WeatherItemBinding) :
         binding.main.text = weatherForDay.text
         binding.pressure.text = "pressure kPa: " + weatherForDay.pressure.toString()
         binding.wind.text = "wind m/s :" + weatherForDay.wind
-        setPicture(weatherForDay.text,binding.image)
+//        setPicture(weatherForDay.text,binding.image)
+        (weatherForDay.text.toPicture()).setPicture(binding.image)
     }
 }
