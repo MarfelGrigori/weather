@@ -10,11 +10,10 @@ import androidx.core.content.ContextCompat
 import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.gms.location.*
 
-class Location() {
-    fun getLocation(context: AppCompatActivity, viewModel: MainViewModel) {
+class Location {
+    fun getLocation(context: AppCompatActivity, viewModel: MainViewModel,setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double -> viewModel.setLocation(lat, lon) }) {
         val fusedLocationProvider: FusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(context)
-        val setLocation = { lat: Double, lon: Double -> viewModel.setLocation(lat, lon) }
         val locationCallBack = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
