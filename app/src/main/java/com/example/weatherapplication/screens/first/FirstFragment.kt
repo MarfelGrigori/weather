@@ -18,10 +18,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
 
 class FirstFragment : Fragment() {
-    private  var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     private val viewModel by activityViewModels<MainViewModel>()
-    private lateinit var appComponent : AppComponent
+    private lateinit var appComponent: AppComponent
+
     @Inject
     lateinit var adapter: WeatherWeekAdapter
     override fun onCreateView(
@@ -66,11 +67,12 @@ class FirstFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-    private fun checkError(string: String){
+
+    private fun checkError(string: String) {
         if (string.contains(getString(R.string.error_network_text), true)) {
             MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.error)
                 .setMessage(getString(R.string.error_network)).show()
-        } else{
+        } else {
             MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.error)
                 .setMessage(getString(R.string.something_went_wrong)).show()
         }

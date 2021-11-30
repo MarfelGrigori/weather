@@ -3,7 +3,7 @@ package com.example.weatherapplication.useCases
 import com.example.weatherapplication.di.AppComponent
 import com.example.weatherapplication.di.DaggerAppComponent
 import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
-import com.example.weatherapplication.screens.second.networking.mapper.Weather5DayMapper.toWeather5day
+import com.example.weatherapplication.screens.second.networking.mapper.toWeather5day
 
 
 class LoadWeather5DayUseCase {

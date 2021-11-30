@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val firstFragment = FirstFragment()
     private val secondFragment = SecondFragment()
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
-    private lateinit var appComponent : AppComponent
+    private lateinit var appComponent: AppComponent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent = DaggerAppComponent.create()
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-            viewModel.loadAll()
+        viewModel.loadAll()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

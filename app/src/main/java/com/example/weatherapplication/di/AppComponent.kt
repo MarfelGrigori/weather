@@ -7,11 +7,11 @@ import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekA
 import com.example.weatherapplication.screens.second.recyclerAdapter.Weather5DaysAdapter
 import dagger.Component
 
-@Component(modules = [AppModule::class,WeatherApi::class])
+@Component(modules = [AppModule::class, WeatherApi::class])
 interface AppComponent {
-    val recyclerAdapterWeek : WeatherWeekAdapter
-    val recyclerAdapter5Day : Weather5DaysAdapter
-    val repository : WeatherRepository
-    fun inject (activity: MainActivity)
-    val retrofit : WeatherApi
+    val recyclerAdapterWeek: WeatherWeekAdapter
+    val recyclerAdapter5Day: Weather5DaysAdapter
+    val repository: WeatherRepository
+    fun inject(activity: MainActivity)
+    val retrofit: WeatherApi
 }

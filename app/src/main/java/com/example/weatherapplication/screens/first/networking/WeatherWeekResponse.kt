@@ -31,7 +31,4 @@ data class WeatherWeekResponse(
             val main: String
         )
     }
-    companion object{
-}
-
 }

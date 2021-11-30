@@ -3,7 +3,6 @@ package com.example.weatherapplication.screens.second.networking.mapper
 import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
 import com.example.weatherapplication.screens.second.networking.response.Weather5DaysResponse
 
-object Weather5DayMapper {
     fun Weather5DaysResponse.toWeather5day(): List<WeatherTo5Days>{
         val list = ArrayList<WeatherTo5Days>()
         this.list?.forEach{
@@ -20,4 +19,3 @@ object Weather5DayMapper {
         }
         return list
     }
-}

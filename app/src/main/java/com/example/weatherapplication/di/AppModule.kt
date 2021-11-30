@@ -9,16 +9,17 @@ import dagger.Provides
 @Module
 class AppModule {
     @Provides
-    fun provideRecyclerWeek (): WeatherWeekAdapter {
+    fun provideRecyclerWeek(): WeatherWeekAdapter {
         return WeatherWeekAdapter()
     }
 
     @Provides
-    fun provideRecycler5Day (): Weather5DaysAdapter {
+    fun provideRecycler5Day(): Weather5DaysAdapter {
         return Weather5DaysAdapter()
     }
+
     @Provides
-    fun  provideRepository():WeatherRepository{
+    fun provideRepository(): WeatherRepository {
         return WeatherRepository()
     }
 

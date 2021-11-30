@@ -3,7 +3,7 @@ package com.example.weatherapplication.useCases
 
 import com.example.weatherapplication.repository.WeatherRepository
 import com.example.weatherapplication.screens.first.entities.WeatherToday
-import com.example.weatherapplication.screens.first.networking.WeatherTodayMapper.toWeatherToday
+import com.example.weatherapplication.screens.first.networking.toWeatherToday
 
 class LoadWeatherTodayUseCase {
     private val weatherRepository = WeatherRepository()

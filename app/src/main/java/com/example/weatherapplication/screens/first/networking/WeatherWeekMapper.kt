@@ -2,7 +2,6 @@ package com.example.weatherapplication.screens.first.networking
 
 import com.example.weatherapplication.screens.first.entities.WeatherWeek
 
-object WeatherWeekMapper {
     fun WeatherWeekResponse.toWeatherWeek (): List<WeatherWeek> {
         val list = ArrayList<WeatherWeek>()
         this.list.forEach {
@@ -18,4 +17,3 @@ object WeatherWeekMapper {
         }
         return list
     }
-}
