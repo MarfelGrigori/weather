@@ -18,7 +18,6 @@ class Weather5DayViewHolder(private val binding: WeatherItemBinding) :
         binding.main.text = weatherForDay.text
         binding.pressure.text = "pressure kPa: " + weatherForDay.pressure.toString()
         binding.wind.text = "wind m/s :" + weatherForDay.wind
-//        setPicture(weatherForDay.text, binding.image)
         (weatherForDay.text.toPicture()).setPicture(binding.image)
     }
 }

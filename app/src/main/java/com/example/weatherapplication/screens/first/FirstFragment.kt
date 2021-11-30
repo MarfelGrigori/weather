@@ -47,7 +47,6 @@ class FirstFragment : Fragment() {
         viewModel.isLoading.observe(this) {
             progressBar.changeVisibility(it)
         }
-//         надо исправить
         viewModel.errorBus.observe(this) {
             checkError(it)
         }
@@ -61,7 +60,6 @@ class FirstFragment : Fragment() {
         viewModel.mainToday.observe(this) {
             binding.main.text = it
             (it.toPicture()).setPicture(binding.image)
-//            setPicture(it, binding.image)
         }
     }
 
