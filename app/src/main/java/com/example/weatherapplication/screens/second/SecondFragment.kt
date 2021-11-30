@@ -14,7 +14,8 @@ import com.example.weatherapplication.viewModel.MainViewModel
 import javax.inject.Inject
 
 class SecondFragment : Fragment() {
-    private lateinit var binding: FragmentSecondBinding
+    private var _binding: FragmentSecondBinding? = null
+    private val binding get() = _binding
     private lateinit var appComponent: AppComponent
 
     @Inject
@@ -23,17 +24,17 @@ class SecondFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         appComponent = DaggerAppComponent.create()
-        binding = FragmentSecondBinding.inflate(inflater, container, false)
-        return binding.root
+        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView
+        binding?.recyclerView
         adapter = appComponent.recyclerAdapter5Day
-        binding.recyclerView.adapter = adapter
+        binding?.recyclerView?.adapter = adapter
         viewModel.weatherTo5Days.observe(viewLifecycleOwner) {
             adapter.setItems(it)
         }
@@ -41,6 +42,6 @@ class SecondFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.unbind()
+        _binding = null
     }
 }
