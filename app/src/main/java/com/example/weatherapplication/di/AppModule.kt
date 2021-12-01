@@ -1,27 +1,33 @@
 package com.example.weatherapplication.di
 
-import com.example.weatherapplication.networking.weather.WeatherApi
-import com.example.weatherapplication.repository.WeatherRepository
-import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekAdapter
-import com.example.weatherapplication.screens.second.recyclerAdapter.Weather5DaysAdapter
+import android.app.Application
+import android.content.Context
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
+
 
 @Module
+
 class AppModule {
+
+
     @Provides
-    fun provideRecyclerWeek(): WeatherWeekAdapter {
-        return WeatherWeekAdapter()
+    @Named("info")
+    fun provideInfo(): String {
+        return "Hello Dagger"
+    }
+
+
+    @Provides
+    @Named("hello")
+    fun provideHello(): String {
+        return "Hello"
     }
 
     @Provides
-    fun provideRecycler5Day(): Weather5DaysAdapter {
-        return Weather5DaysAdapter()
-    }
-
-    @Provides
-    fun provideRepository(): WeatherRepository {
-        return WeatherRepository(api = WeatherApi())
+    fun provideContext(app: Application): Context {
+        return app.applicationContext
     }
 
 }

@@ -25,7 +25,6 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        appComponent = DaggerAppComponent.create()
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding?.root
     }
@@ -33,7 +32,7 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.recyclerView
-        adapter = appComponent.recyclerAdapter5Day
+        adapter = Weather5DaysAdapter()
         binding?.recyclerView?.adapter = adapter
         viewModel.weatherTo5Days.observe(viewLifecycleOwner) {
             adapter.setItems(it)

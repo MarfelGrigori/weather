@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentFirstBinding
-import com.example.weatherapplication.di.AppComponent
-import com.example.weatherapplication.di.DaggerAppComponent
 import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekAdapter
 import com.example.weatherapplication.utils.changeVisibility
 import com.example.weatherapplication.utils.setPicture
@@ -22,7 +20,6 @@ class FirstFragment : Fragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     private val viewModel by activityViewModels<MainViewModel>()
-    private lateinit var appComponent: AppComponent
 
     @Inject
     lateinit var adapter: WeatherWeekAdapter
@@ -30,14 +27,13 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        appComponent = DaggerAppComponent.create()
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = appComponent.recyclerAdapterWeek
+        adapter = WeatherWeekAdapter()
         binding.recyclerView.adapter = adapter
         viewModel.weatherWeek.observe(this) {
             adapter.setItems(it)

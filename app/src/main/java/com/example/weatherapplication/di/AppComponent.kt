@@ -1,17 +1,29 @@
 package com.example.weatherapplication.di
 
-import com.example.weatherapplication.MainActivity
-import com.example.weatherapplication.networking.weather.WeatherApi
-import com.example.weatherapplication.repository.WeatherRepository
-import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekAdapter
-import com.example.weatherapplication.screens.second.recyclerAdapter.Weather5DaysAdapter
+import android.app.Application
+import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
+import javax.inject.Singleton
 
-@Component(modules = [AppModule::class, WeatherApi::class])
-interface AppComponent {
-    val recyclerAdapterWeek: WeatherWeekAdapter
-    val recyclerAdapter5Day: Weather5DaysAdapter
-    val repository: WeatherRepository
-    fun inject(activity: MainActivity)
-    val retrofit: WeatherApi
+@Singleton
+@Component(
+    modules = [
+        AndroidInjectionModule::class,
+        ActivityBuilderModule::class,
+        ViewModelModule::class,
+        AppModule::class
+    ]
+)
+
+interface AppComponent : AndroidInjector<App> {
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        fun provideApplication(app: Application): Builder
+        fun build(): AppComponent
+
+    }
+
 }
