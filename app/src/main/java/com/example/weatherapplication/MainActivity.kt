@@ -4,7 +4,6 @@ package com.example.weatherapplication
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.screens.first.FirstFragment
 import com.example.weatherapplication.screens.second.SecondFragment
@@ -17,7 +16,6 @@ import javax.inject.Inject
 
 
 class MainActivity : DaggerAppCompatActivity() {
-//    private val viewModel by viewModels<MainViewModel>()
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -28,8 +26,6 @@ class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        appComponent = DaggerAppComponent.create()
-//        appComponent.inject(this)
         setContentView(R.layout.activity_main)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         supportFragmentManager.beginTransaction()
@@ -37,12 +33,12 @@ class MainActivity : DaggerAppCompatActivity() {
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val location = Location()
         location.getLocation(this, viewModel)
-        loadData()
+        viewModel.callLoadAll()
     }
 
-    private fun loadData() {
-        viewModel.loadAll()
-    }
+//    private fun loadData() {
+//        viewModel.loadAll()
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)

@@ -24,9 +24,6 @@ class MainViewModel @Inject constructor(
     private val MIN_LONGITUDE = -180.0
     private val MAX_LONGITUDE = 180.0
 
-    //    private val loadWeatherUseCase = LoadWeather5DayUseCase()
-//    private val loadWeatherTodayUseCase = LoadWeatherTodayUseCase()
-//    private val loadWeatherWeekUseCase = LoadWeatherWeekUseCase()
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val _temperatureToday = MutableLiveData<Int>()
     val temperatureToday: LiveData<Int> = _temperatureToday
@@ -63,6 +60,10 @@ class MainViewModel @Inject constructor(
         val lon = _location.second
         if (lat !in latNew - 0.01..latNew + 0.01 || lon !in lonNew - 0.01..lonNew + 0.01)
             _location = (Pair(latNew, lonNew))
+        callLoadAll()
+    }
+
+    fun callLoadAll() {
         loadAll()
     }
 

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentFirstBinding
+import com.example.weatherapplication.di.BaseFragment
+import com.example.weatherapplication.di.activityViewModelProvider
 import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekAdapter
 import com.example.weatherapplication.utils.changeVisibility
 import com.example.weatherapplication.utils.setPicture
@@ -16,10 +16,10 @@ import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
 
-class FirstFragment : Fragment() {
+class FirstFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by activityViewModels<MainViewModel>()
+    lateinit var viewModel: MainViewModel
 
     @Inject
     lateinit var adapter: WeatherWeekAdapter
@@ -28,6 +28,7 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        viewModel = activityViewModelProvider()
         return binding.root
     }
 

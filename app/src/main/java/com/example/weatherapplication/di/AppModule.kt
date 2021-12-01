@@ -11,20 +11,6 @@ import javax.inject.Named
 
 class AppModule {
 
-
-    @Provides
-    @Named("info")
-    fun provideInfo(): String {
-        return "Hello Dagger"
-    }
-
-
-    @Provides
-    @Named("hello")
-    fun provideHello(): String {
-        return "Hello"
-    }
-
     @Provides
     fun provideContext(app: Application): Context {
         return app.applicationContext

@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
+import javax.inject.Inject
 
 
-class Weather5DaysAdapter : RecyclerView.Adapter<Weather5DayViewHolder>() {
+class Weather5DaysAdapter @Inject constructor() : RecyclerView.Adapter<Weather5DayViewHolder>() {
     private var weatherList = ArrayList<WeatherTo5Days>()
 
     @SuppressLint("NotifyDataSetChanged")

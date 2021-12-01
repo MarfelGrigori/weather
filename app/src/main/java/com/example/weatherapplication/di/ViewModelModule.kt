@@ -16,9 +16,5 @@ abstract class ViewModelModule {
     @ViewModelKey(MainViewModel::class)
     abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(MainViewModel::class)
-//    abstract fun bindBlankFragmentViewModel(blankFragmentViewModel: MainViewModel): ViewModel
 
 }
