@@ -12,15 +12,21 @@ import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val loadWeatherUseCase: LoadWeather5DayUseCase,
+    private val loadWeatherTodayUseCase: LoadWeatherTodayUseCase,
+    private val loadWeatherWeekUseCase: LoadWeatherWeekUseCase
+) : ViewModel() {
     private val MIN_LATITUDE = -90.0
     private val MAX_LATITUDE = 90.0
     private val MIN_LONGITUDE = -180.0
     private val MAX_LONGITUDE = 180.0
-    private val loadWeatherUseCase = LoadWeather5DayUseCase()
-    private val loadWeatherTodayUseCase = LoadWeatherTodayUseCase()
-    private val loadWeatherWeekUseCase = LoadWeatherWeekUseCase()
+
+    //    private val loadWeatherUseCase = LoadWeather5DayUseCase()
+//    private val loadWeatherTodayUseCase = LoadWeatherTodayUseCase()
+//    private val loadWeatherWeekUseCase = LoadWeatherWeekUseCase()
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val _temperatureToday = MutableLiveData<Int>()
     val temperatureToday: LiveData<Int> = _temperatureToday

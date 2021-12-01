@@ -1,5 +1,6 @@
 package com.example.weatherapplication.di
 
+import com.example.weatherapplication.networking.weather.WeatherApi
 import com.example.weatherapplication.repository.WeatherRepository
 import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekAdapter
 import com.example.weatherapplication.screens.second.recyclerAdapter.Weather5DaysAdapter
@@ -20,7 +21,7 @@ class AppModule {
 
     @Provides
     fun provideRepository(): WeatherRepository {
-        return WeatherRepository()
+        return WeatherRepository(api = WeatherApi())
     }
 
 }
