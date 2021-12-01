@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.screens.first.entities.WeatherWeek
+import javax.inject.Inject
 
-class WeatherWeekAdapter :
+class WeatherWeekAdapter @Inject constructor() :
     RecyclerView.Adapter<WeatherWeekViewHolder>() {
     private var weatherList = ArrayList<WeatherWeek>()
 
