@@ -1,4 +1,4 @@
-package com.example.myapplicationdagger.di
+package com.example.weatherapplication.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

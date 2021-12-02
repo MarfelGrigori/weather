@@ -36,10 +36,6 @@ class MainActivity : DaggerAppCompatActivity() {
         viewModel.callLoadAll()
     }
 
-//    private fun loadData() {
-//        viewModel.loadAll()
-//    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true

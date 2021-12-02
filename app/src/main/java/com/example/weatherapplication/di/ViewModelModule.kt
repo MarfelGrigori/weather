@@ -1,7 +1,6 @@
 package com.example.weatherapplication.di
 
 import androidx.lifecycle.ViewModel
-import com.example.myapplicationdagger.di.ViewModelKey
 import com.example.weatherapplication.viewModel.MainViewModel
 import dagger.Binds
 import dagger.Module
