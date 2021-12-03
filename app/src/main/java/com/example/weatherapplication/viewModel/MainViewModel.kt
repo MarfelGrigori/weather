@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
+open class MainViewModel @Inject constructor(
     private val loadWeatherUseCase: LoadWeatherDayUseCase,
     private val loadWeatherTodayUseCase: LoadWeatherTodayUseCase,
     private val loadWeatherWeekUseCase: LoadWeatherWeekUseCase
