@@ -1,4 +1,4 @@
-package com.example.weatherapplication.screens.first
+package com.example.weatherapplication.screens.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentFirstBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.di.activityViewModelProvider
-import com.example.weatherapplication.screens.first.recyclerAdapter.WeatherWeekAdapter
+import com.example.weatherapplication.screens.home.recyclerAdapter.WeatherWeekAdapter
 import com.example.weatherapplication.utils.changeVisibility
 import com.example.weatherapplication.utils.setPicture
 import com.example.weatherapplication.utils.toPicture

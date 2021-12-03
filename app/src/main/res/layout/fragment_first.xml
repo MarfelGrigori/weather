@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screens.first.FirstFragment">
+        tools:context=".screens.home.FirstFragment">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/head"

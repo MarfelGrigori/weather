@@ -2,18 +2,14 @@ package com.example.weatherapplication
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.weatherapplication.networking.WeatherService
 import com.example.weatherapplication.networking.weather.WeatherApi
-import com.example.weatherapplication.repository.WeatherRepository
-import com.example.weatherapplication.screens.first.entities.WeatherToday
-import com.example.weatherapplication.useCases.LoadWeather5DayUseCase
+import com.example.weatherapplication.screens.home.entities.WeatherToday
+import com.example.weatherapplication.useCases.LoadWeatherDayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
 import com.example.weatherapplication.viewModel.MainViewModel
 import junit.framework.Assert.*
-import net.bytebuddy.matcher.ElementMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +17,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
-import javax.inject.Inject
 
 
 @RunWith(AndroidJUnit4::class)
@@ -39,7 +34,7 @@ class ViewModelTest {
     @Mock
     var api = WeatherApi()
     // 3
-    lateinit var first : LoadWeather5DayUseCase
+    lateinit var first : LoadWeatherDayUseCase
 
     lateinit var second : LoadWeatherTodayUseCase
 
@@ -48,7 +43,7 @@ class ViewModelTest {
     // 4
     @Before
     fun setup() {
-        first = mock(LoadWeather5DayUseCase::class.java)
+        first = mock(LoadWeatherDayUseCase::class.java)
         second = mock(LoadWeatherTodayUseCase::class.java)
         third = mock(LoadWeatherWeekUseCase::class.java)
         MockitoAnnotations.initMocks(this)

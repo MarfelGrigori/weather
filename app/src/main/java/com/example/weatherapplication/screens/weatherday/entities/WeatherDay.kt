@@ -1,6 +1,6 @@
-package com.example.weatherapplication.screens.second.entities
+package com.example.weatherapplication.screens.weatherday.entities
 
-data class WeatherTo5Days(
+data class WeatherDay(
     var newDay: String? = null,
     val time: Long,
     val text: String,

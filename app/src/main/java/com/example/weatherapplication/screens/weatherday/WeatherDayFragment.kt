@@ -1,4 +1,4 @@
-package com.example.weatherapplication.screens.second
+package com.example.weatherapplication.screens.weatherday
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.di.activityViewModelProvider
-import com.example.weatherapplication.screens.second.recyclerAdapter.Weather5DaysAdapter
+import com.example.weatherapplication.screens.weatherday.recyclerAdapter.WeatherDayAdapter
 import com.example.weatherapplication.viewModel.MainViewModel
 import javax.inject.Inject
 
-class SecondFragment : BaseFragment() {
+class WeatherDayFragment : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding
     lateinit var viewModel: MainViewModel
 
     @Inject
-    lateinit var adapter: Weather5DaysAdapter
+    lateinit var adapter: WeatherDayAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,9 +30,9 @@ class SecondFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.recyclerView
-        adapter = Weather5DaysAdapter()
+        adapter = WeatherDayAdapter()
         binding?.recyclerView?.adapter = adapter
-        viewModel.weatherTo5Days.observe(viewLifecycleOwner) {
+        viewModel.weatherToDay.observe(viewLifecycleOwner) {
             adapter.setItems(it)
         }
     }

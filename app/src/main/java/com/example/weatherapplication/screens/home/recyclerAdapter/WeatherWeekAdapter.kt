@@ -1,4 +1,4 @@
-package com.example.weatherapplication.screens.first.recyclerAdapter
+package com.example.weatherapplication.screens.home.recyclerAdapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
-import com.example.weatherapplication.screens.first.entities.WeatherWeek
+import com.example.weatherapplication.screens.home.entities.WeatherWeek
 import javax.inject.Inject
 
 class WeatherWeekAdapter @Inject constructor() :

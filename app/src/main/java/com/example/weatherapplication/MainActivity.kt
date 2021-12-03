@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
-import com.example.weatherapplication.screens.first.FirstFragment
-import com.example.weatherapplication.screens.second.SecondFragment
+import com.example.weatherapplication.screens.home.FirstFragment
+import com.example.weatherapplication.screens.weatherday.WeatherDayFragment
 import com.example.weatherapplication.utils.Location
 import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -21,7 +21,7 @@ class MainActivity : DaggerAppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: MainViewModel
     private val firstFragment = FirstFragment()
-    private val secondFragment = SecondFragment()
+    private val secondFragment = WeatherDayFragment()
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {

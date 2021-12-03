@@ -1,4 +1,4 @@
-package com.example.weatherapplication.screens.first.entities
+package com.example.weatherapplication.screens.home.entities
 
 data class WeatherWeek(
     val time: Long,

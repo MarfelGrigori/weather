@@ -1,13 +1,13 @@
-package com.example.weatherapplication.screens.second.networking.mapper
+package com.example.weatherapplication.screens.weatherday.networking.mapper
 
-import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
-import com.example.weatherapplication.screens.second.networking.response.Weather5DaysResponse
+import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
+import com.example.weatherapplication.screens.weatherday.networking.response.WeatherDayResponse
 
-    fun Weather5DaysResponse.toWeather5day(): List<WeatherTo5Days>{
-        val list = ArrayList<WeatherTo5Days>()
+fun WeatherDayResponse.toWeatherDay(): List<WeatherDay>{
+        val list = ArrayList<WeatherDay>()
         this.list?.forEach{
             list.add(
-                WeatherTo5Days(
+                WeatherDay(
                     time = it.dt?.times(1000).toString().toLong(),
                     text = it.weather?.get(0)?.main.toString(),
                     temp = it.main?.temp,

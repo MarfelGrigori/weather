@@ -1,4 +1,4 @@
-package com.example.weatherapplication.screens.second.recyclerAdapter
+package com.example.weatherapplication.screens.weatherday.recyclerAdapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,30 +7,30 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
-import com.example.weatherapplication.screens.second.entities.WeatherTo5Days
+import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import javax.inject.Inject
 
 
-class Weather5DaysAdapter @Inject constructor() : RecyclerView.Adapter<Weather5DayViewHolder>() {
-    private var weatherList = ArrayList<WeatherTo5Days>()
+class WeatherDayAdapter @Inject constructor() : RecyclerView.Adapter<WeatherDayViewHolder>() {
+    private var weatherList = ArrayList<WeatherDay>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(items: List<WeatherTo5Days>) {
-        weatherList = items.toMutableList() as ArrayList<WeatherTo5Days>
+    fun setItems(items: List<WeatherDay>) {
+        weatherList = items.toMutableList() as ArrayList<WeatherDay>
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Weather5DayViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherDayViewHolder {
         val binding = DataBindingUtil.inflate<WeatherItemBinding>(
             LayoutInflater.from(parent.context),
             R.layout.weather_item,
             parent,
             false
         )
-        return Weather5DayViewHolder(binding)
+        return WeatherDayViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: Weather5DayViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: WeatherDayViewHolder, position: Int) {
         holder.setData(weatherList[position])
     }
 

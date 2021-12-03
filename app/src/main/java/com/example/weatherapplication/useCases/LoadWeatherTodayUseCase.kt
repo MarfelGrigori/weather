@@ -2,8 +2,8 @@ package com.example.weatherapplication.useCases
 
 
 import com.example.weatherapplication.repository.WeatherRepository
-import com.example.weatherapplication.screens.first.entities.WeatherToday
-import com.example.weatherapplication.screens.first.networking.toWeatherToday
+import com.example.weatherapplication.screens.home.entities.WeatherToday
+import com.example.weatherapplication.screens.home.networking.toWeatherToday
 import javax.inject.Inject
 
 class LoadWeatherTodayUseCase @Inject constructor(private val weatherRepository : WeatherRepository) {

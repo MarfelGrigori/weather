@@ -1,7 +1,7 @@
 package com.example.weatherapplication.di
 
-import com.example.weatherapplication.screens.first.FirstFragment
-import com.example.weatherapplication.screens.second.SecondFragment
+import com.example.weatherapplication.screens.home.FirstFragment
+import com.example.weatherapplication.screens.weatherday.WeatherDayFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -13,6 +13,6 @@ interface FragmentBuilderModule {
     abstract fun contributeBlankFragment(): FirstFragment
     @ContributesAndroidInjector
     @FragmentScoped
-    abstract fun contributeSecondFragment(): SecondFragment
+    abstract fun contributeSecondFragment(): WeatherDayFragment
 
 }

@@ -1,8 +1,8 @@
-package com.example.weatherapplication.screens.second.networking.response
+package com.example.weatherapplication.screens.weatherday.networking.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Weather5DaysResponse(
+data class WeatherDayResponse(
     @SerializedName("list")
     val list: List<Weathers>?,
 ) {

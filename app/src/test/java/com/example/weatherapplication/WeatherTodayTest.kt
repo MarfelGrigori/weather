@@ -1,6 +1,6 @@
 package com.example.weatherapplication
 
-import com.example.weatherapplication.screens.first.entities.WeatherToday
+import com.example.weatherapplication.screens.home.entities.WeatherToday
 import org.junit.After
 import org.junit.Assert
 

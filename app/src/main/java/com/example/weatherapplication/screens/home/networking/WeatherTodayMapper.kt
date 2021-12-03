@@ -1,6 +1,6 @@
-package com.example.weatherapplication.screens.first.networking
+package com.example.weatherapplication.screens.home.networking
 
-import com.example.weatherapplication.screens.first.entities.WeatherToday
+import com.example.weatherapplication.screens.home.entities.WeatherToday
 import com.example.weatherapplication.utils.Converter.degToWindRoze
 
 

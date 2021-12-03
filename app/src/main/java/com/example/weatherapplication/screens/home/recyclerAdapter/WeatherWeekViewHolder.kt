@@ -1,9 +1,9 @@
-package com.example.weatherapplication.screens.first.recyclerAdapter
+package com.example.weatherapplication.screens.home.recyclerAdapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.databinding.WeatherItemBinding
-import com.example.weatherapplication.screens.first.entities.WeatherWeek
+import com.example.weatherapplication.screens.home.entities.WeatherWeek
 import com.example.weatherapplication.utils.Converter.getDate
 import com.example.weatherapplication.utils.Converter.getDay
 import com.example.weatherapplication.utils.setPicture
