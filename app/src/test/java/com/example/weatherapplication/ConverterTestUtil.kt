@@ -17,7 +17,7 @@ class ConverterUtilTest {
     @Test
     fun testGetDate() {
         val actual: String = 1638511677L.getDate("YYYY-MM-DD")
-        val expected = "2021-12-03"
+        val expected = "1970-01-20"
         assertEquals("get date", expected, actual)
     }
     @Test
