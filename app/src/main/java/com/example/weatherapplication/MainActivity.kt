@@ -4,8 +4,9 @@ package com.example.weatherapplication
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.example.weatherapplication.screens.home.FirstFragment
+import com.example.weatherapplication.screens.home.HomeFragment
 import com.example.weatherapplication.screens.weatherday.WeatherDayFragment
 import com.example.weatherapplication.utils.Location
 import com.example.weatherapplication.viewModel.MainViewModel
@@ -19,15 +20,14 @@ class MainActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel: MainViewModel
-    private val firstFragment = FirstFragment()
+    private val viewModel by viewModels<MainViewModel> { viewModelFactory }
+    private val firstFragment = HomeFragment()
     private val secondFragment = WeatherDayFragment()
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view_tag, firstFragment).addToBackStack(null).commit()
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
