@@ -19,8 +19,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.spy
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import javax.inject.Inject
 
@@ -39,19 +38,19 @@ class ViewModelTest {
     private lateinit var observer: Observer<in Boolean>
     @Mock
     var api = WeatherApi()
-    @Mock
-    var rep = WeatherRepository(api)
     // 3
-    @Mock
-    var first = LoadWeather5DayUseCase(rep)
-    @Mock
-    var second = LoadWeatherTodayUseCase(rep)
-    @Mock
-    var third = LoadWeatherWeekUseCase(rep)
+    lateinit var first : LoadWeather5DayUseCase
+
+    lateinit var second : LoadWeatherTodayUseCase
+
+   lateinit var third : LoadWeatherWeekUseCase
 
     // 4
     @Before
     fun setup() {
+        first = mock(LoadWeather5DayUseCase::class.java)
+        second = mock(LoadWeatherTodayUseCase::class.java)
+        third = mock(LoadWeatherWeekUseCase::class.java)
         MockitoAnnotations.initMocks(this)
         viewModel = spy(MainViewModel(first,second,third))
         isLoadingLiveData = viewModel.isLoading
