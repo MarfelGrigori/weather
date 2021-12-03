@@ -14,14 +14,12 @@ import com.example.weatherapplication.utils.setPicture
 import com.example.weatherapplication.utils.toPicture
 import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import javax.inject.Inject
 
 class FirstFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     lateinit var viewModel: MainViewModel
 
-    @Inject
     lateinit var adapter: WeatherWeekAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -9,14 +9,12 @@ import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.di.activityViewModelProvider
 import com.example.weatherapplication.screens.weatherday.recyclerAdapter.WeatherDayAdapter
 import com.example.weatherapplication.viewModel.MainViewModel
-import javax.inject.Inject
 
 class WeatherDayFragment : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding
     lateinit var viewModel: MainViewModel
 
-    @Inject
     lateinit var adapter: WeatherDayAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
