@@ -5,7 +5,7 @@ import com.example.weatherapplication.screens.home.entities.WeatherWeek
 import com.example.weatherapplication.screens.home.networking.toWeatherWeek
 import javax.inject.Inject
 
-class LoadWeatherWeekUseCase @Inject constructor(private val weatherRepository : WeatherRepository) {
+open class LoadWeatherWeekUseCase @Inject constructor(private val weatherRepository : WeatherRepository) {
 
 
     suspend fun loadWeatherWeek(lat: String, lon: String): List<WeatherWeek>? {

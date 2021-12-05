@@ -6,7 +6,7 @@ import com.example.weatherapplication.screens.weatherday.networking.mapper.toWea
 import javax.inject.Inject
 
 
-class LoadWeatherDayUseCase @Inject constructor(private val weatherRepository: WeatherRepository) {
+open class LoadWeatherDayUseCase @Inject constructor(private val weatherRepository: WeatherRepository) {
 
     suspend fun loadWeatherDay(lat: String, lon: String): List<WeatherDay>? {
         val response = weatherRepository.loadWeatherTo5Days(lat, lon)

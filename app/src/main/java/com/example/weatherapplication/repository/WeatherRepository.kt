@@ -7,7 +7,7 @@ import com.example.weatherapplication.screens.weatherday.networking.response.Wea
 import retrofit2.Response
 import javax.inject.Inject
 
-class WeatherRepository @Inject constructor(private  val api : WeatherApi) {
+open class WeatherRepository @Inject constructor(private  val api : WeatherApi) {
 
 
     private val KEY = "a5000964c71443402a055b2152004987"
