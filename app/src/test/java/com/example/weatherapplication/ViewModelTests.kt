@@ -49,43 +49,15 @@ class ViewModelTests {
         assertNotNull(viewModel.loadAll())
         viewModel.isLoading.observeForever(observer)
         verify(observer).onChanged(true)
-    }
-
-    @Test
-    fun `verify livedata city value changes on event`() {
-        assertNotNull(viewModel.loadAll())
         assertNotNull(viewModel.currentCity)
-    }
-
-    @Test
-    fun `verify livedata country value changes on event`() {
-        assertNotNull(viewModel.loadAll())
         assertNotNull(viewModel.currentCountry)
-    }
-
-    @Test
-    fun `verify livedata weather week value changes on event`() {
-        assertNotNull(viewModel.loadAll())
         assertNotNull(viewModel.weatherWeek)
-    }
-
-    @Test
-    fun `verify livedata weather day value changes on event`() {
-        assertNotNull(viewModel.loadAll())
         assertNotNull(viewModel.weatherToDay)
-    }
-
-    @Test
-    fun `verify livedata weatherToday value changes on event`() {
-        assertNotNull(viewModel.loadAll())
         assertNotNull(viewModel.mainToday)
-    }
-
-    @Test
-    fun `verify livedata temperatureToday value changes on event`() {
-        assertNotNull(viewModel.loadAll())
+        assertNotNull(viewModel.temperatureToday)
         assertNotNull(viewModel.temperatureToday)
     }
+
     @Test
     fun  `set location test`(){
         assertNotNull(viewModel.setLocation(0.0,0.0))
