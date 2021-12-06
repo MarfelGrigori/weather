@@ -86,4 +86,8 @@ class ViewModelTests {
         assertNotNull(viewModel.loadAll())
         assertNotNull(viewModel.temperatureToday)
     }
+    @Test
+    fun  `set location test`(){
+        assertNotNull(viewModel.setLocation(0.0,0.0))
+    }
 }

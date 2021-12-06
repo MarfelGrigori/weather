@@ -14,13 +14,11 @@ class WeatherDayFragment : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding
     val viewModel: MainViewModel by activityViewModels { viewModelFactory }
-
     lateinit var adapter: WeatherDayAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding?.root
     }

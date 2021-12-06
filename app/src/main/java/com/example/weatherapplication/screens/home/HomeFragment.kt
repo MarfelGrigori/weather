@@ -19,7 +19,6 @@ class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     val viewModel: MainViewModel by activityViewModels { viewModelFactory }
-
     lateinit var adapter: WeatherWeekAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
