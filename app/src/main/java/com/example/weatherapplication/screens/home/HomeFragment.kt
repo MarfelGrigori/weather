@@ -30,7 +30,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = WeatherWeekAdapter()
+        adapter = WeatherWeekAdapter(viewModel)
         binding.recyclerView.adapter = adapter
         viewModel.weatherWeek.observe(this) {
             adapter.setItems(it)

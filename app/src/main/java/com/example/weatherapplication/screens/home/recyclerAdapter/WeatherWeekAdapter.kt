@@ -8,15 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.screens.home.entities.WeatherWeek
+import com.example.weatherapplication.viewModel.MainViewModel
 import javax.inject.Inject
 
-class WeatherWeekAdapter @Inject constructor() :
+class WeatherWeekAdapter @Inject constructor(private val viewModel: MainViewModel) :
     RecyclerView.Adapter<WeatherWeekViewHolder>() {
     private var weatherList = ArrayList<WeatherWeek>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: List<WeatherWeek>) {
         weatherList = items.toMutableList() as ArrayList<WeatherWeek>
+       weatherList.removeAt(weatherList.size-1)
+       weatherList.removeAt(weatherList.size-1)
+
         notifyDataSetChanged()
     }
 
@@ -27,7 +31,7 @@ class WeatherWeekAdapter @Inject constructor() :
             parent,
             false
         )
-        return WeatherWeekViewHolder(binding)
+        return WeatherWeekViewHolder(binding,viewModel)
     }
 
     override fun onBindViewHolder(holder: WeatherWeekViewHolder, position: Int) {

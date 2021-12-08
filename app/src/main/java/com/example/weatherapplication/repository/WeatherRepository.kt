@@ -16,7 +16,7 @@ open class WeatherRepository @Inject constructor(private  val api : WeatherApi) 
     }
 
     suspend fun loadWeatherTo5Days(lat: String, lon: String): Response<WeatherDayResponse> {
-        return api.provideRetrofit().loadWeatherDay(lat, lon, 8, "metric", KEY)
+        return api.provideRetrofit().loadWeatherDay(lat, lon,  "metric", KEY)
     }
 
     suspend fun loadWeatherWeek(lat: String, lon: String): Response<WeatherWeekResponse> {

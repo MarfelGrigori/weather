@@ -12,6 +12,7 @@ import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 open class MainViewModel @Inject constructor(
@@ -42,7 +43,7 @@ open class MainViewModel @Inject constructor(
     val weatherWeek: LiveData<List<WeatherWeek>> = _weatherWeek
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
-
+    var date : String = "TODO()"
     fun loadAll() {
         _isLoading.value = true
         val lat = _location.first.toString()

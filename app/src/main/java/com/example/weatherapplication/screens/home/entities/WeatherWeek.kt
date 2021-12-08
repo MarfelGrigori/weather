@@ -7,3 +7,4 @@ data class WeatherWeek(
     val pressure: Int?,
     val wind: Int
 )
+

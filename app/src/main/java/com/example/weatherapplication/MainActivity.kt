@@ -22,31 +22,17 @@ class MainActivity : DaggerAppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
     private val firstFragment = HomeFragment()
-    private val secondFragment = WeatherDayFragment()
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view_tag, firstFragment).addToBackStack(null).commit()
+            .replace(R.id.fragment_container_view_tag, firstFragment).commit()
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val location = Location()
         location.getLocation(this, viewModel)
         viewModel.callLoadAll()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home)
-            return true
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view_tag, secondFragment).addToBackStack(null).commit()
-        return super.onOptionsItemSelected(item)
     }
 }
 
