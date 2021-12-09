@@ -7,7 +7,6 @@ import javax.inject.Inject
 
 open class LoadWeatherWeekUseCase @Inject constructor(private val weatherRepository : WeatherRepository) {
 
-
     suspend fun loadWeatherWeek(lat: String, lon: String): List<WeatherWeek>? {
         val response = weatherRepository.loadWeatherWeek(lat, lon)
         return if (response.isSuccessful) {

@@ -1,6 +1,6 @@
 package com.example.weatherapplication.screens.home.entities
 
- data class WeatherToday(
+data class WeatherToday(
     val city: String,
     val country: String,
     val temp: Int,

@@ -1,15 +1,12 @@
 package com.example.weatherapplication.screens.weatherday.recyclerAdapter
 
 import android.annotation.SuppressLint
-import android.view.View
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.utils.Converter.getDate
 import com.example.weatherapplication.utils.setPicture
 import com.example.weatherapplication.utils.toPicture
-import com.example.weatherapplication.viewModel.MainViewModel
 
 
 class WeatherDayViewHolder(private val binding: WeatherItemBinding) :

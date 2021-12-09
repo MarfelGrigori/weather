@@ -9,8 +9,9 @@ import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.weatherday.recyclerAdapter.WeatherDayAdapter
 import com.example.weatherapplication.viewModel.MainViewModel
+import java.util.*
 
-class WeatherDayFragment : BaseFragment() {
+class WeatherDayFragment(val date: String) : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding
     val viewModel: MainViewModel by activityViewModels { viewModelFactory }
@@ -25,11 +26,11 @@ class WeatherDayFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.recyclerView
+        val neededDate = date
         adapter = WeatherDayAdapter()
         binding?.recyclerView?.adapter = adapter
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
-            adapter.setItems(it)
+            adapter.setItems(it,neededDate)
         }
     }
 

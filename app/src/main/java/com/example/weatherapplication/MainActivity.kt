@@ -32,7 +32,7 @@ class MainActivity : DaggerAppCompatActivity() {
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val location = Location()
         location.getLocation(this, viewModel)
-        viewModel.callLoadAll()
+        viewModel.loadAll()
     }
 }
 

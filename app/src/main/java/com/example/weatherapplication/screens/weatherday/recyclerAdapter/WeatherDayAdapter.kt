@@ -9,19 +9,19 @@ import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.utils.Converter.getDate
-import com.example.weatherapplication.viewModel.MainViewModel
-import com.example.weatherapplication.viewModel.MainViewModel.Companion.date
 import javax.inject.Inject
 
 
 class WeatherDayAdapter @Inject constructor() : RecyclerView.Adapter<WeatherDayViewHolder>() {
     private var weatherList = ArrayList<WeatherDay>()
+
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(items: List<WeatherDay>) {
-        items.forEach { if (it.time.getDate("dd/MM/yyyy")==date()){
-            weatherList.add(it)
-        } }
-//        weatherList = items.toMutableList() as ArrayList<WeatherDay>
+    fun setItems(items: List<WeatherDay>, date : String?) {
+        items.forEach {
+            if (it.time.getDate("dd/MM/yyyy") == date) {
+                weatherList.add(it)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherDayViewHolder {

@@ -11,6 +11,7 @@ interface FragmentBuilderModule {
     @ContributesAndroidInjector
     @FragmentScoped
     abstract fun contributeBlankFragment(): HomeFragment
+
     @ContributesAndroidInjector
     @FragmentScoped
     abstract fun contributeSecondFragment(): WeatherDayFragment
