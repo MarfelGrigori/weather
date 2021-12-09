@@ -12,7 +12,7 @@ import com.example.weatherapplication.utils.toPicture
 import com.example.weatherapplication.viewModel.MainViewModel
 
 
-class WeatherDayViewHolder(private val binding: WeatherItemBinding,private val viewModel: MainViewModel) :
+class WeatherDayViewHolder(private val binding: WeatherItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
     @SuppressLint("SetTextI18n")
     fun setData(weatherForDay: WeatherDay) {
@@ -22,8 +22,5 @@ class WeatherDayViewHolder(private val binding: WeatherItemBinding,private val v
         binding.pressure.text = "pressure kPa: " + weatherForDay.pressure.toString()
         binding.wind.text = "wind m/s :" + weatherForDay.wind
         (weatherForDay.text.toPicture()).setPicture(binding.image)
-//        if (weatherForDay.time.getDate("dd/MM/yyyy")!=viewModel.date){
-//            binding.itemContainer.visibility = View.INVISIBLE
-//        }
     }
 }

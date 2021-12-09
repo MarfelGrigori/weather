@@ -43,7 +43,14 @@ open class MainViewModel @Inject constructor(
     val weatherWeek: LiveData<List<WeatherWeek>> = _weatherWeek
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
-    var date : String = "TODO()"
+
+   companion object{
+       private var _date : String = "TODO()"
+       fun date() = _date
+       fun setDate (date:String){
+           _date = date
+       }}
+
     fun loadAll() {
         _isLoading.value = true
         val lat = _location.first.toString()
@@ -124,7 +131,7 @@ open class MainViewModel @Inject constructor(
     private fun loadWeatherWeek(lat: String, lon: String) {
         ioScope.launch {
             try {
-                _weatherWeek.postValue(loadWeatherWeekUseCase.loadWeatherWeek(lat, lon))
+                _weatherWeek.postValue(loadWeatherWeekUseCase.loadWeatherWeek(lat, lon)?.subList(0,6))
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }

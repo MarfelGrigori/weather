@@ -26,7 +26,7 @@ class WeatherDayFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.recyclerView
-        adapter = WeatherDayAdapter(viewModel)
+        adapter = WeatherDayAdapter()
         binding?.recyclerView?.adapter = adapter
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
             adapter.setItems(it)

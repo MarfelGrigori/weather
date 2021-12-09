@@ -16,9 +16,11 @@ import com.example.weatherapplication.utils.changeVisibility
 import com.example.weatherapplication.utils.setPicture
 import com.example.weatherapplication.utils.toPicture
 import com.example.weatherapplication.viewModel.MainViewModel
+import com.example.weatherapplication.viewModel.MainViewModel.Companion.setDate
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import java.util.*
 
 class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
@@ -37,23 +39,14 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val itemAdapter = ItemAdapter<WeatherWeek>()
         val fastAdapter = FastAdapter.with(itemAdapter)
+
         binding.recyclerView.adapter = fastAdapter
         viewModel.weatherWeek.observe(this) {
             itemAdapter.set(it)
         }
+
         fastAdapter.onClickListener = { _, _, item, _ ->
-            // Handle click here
-            viewModel.date = item.time.getDate("dd/MM/yyyy")
-            val fragmentForDay = WeatherDayFragment()
-            val activity: AppCompatActivity = binding.root.context as AppCompatActivity
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view_tag, WeatherDayFragment(),"tag")
-                .addToBackStack(null)
-                .commit()
-            val fragmentManager = fragmentForDay.activity?.supportFragmentManager
-            val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragment_container_view_tag,fragmentForDay,"tag")
-            fragmentTransaction?.commit()
+          changeFragment(item)
             false
         }
         val progressBar = binding.progressBar
@@ -90,4 +83,17 @@ class HomeFragment : BaseFragment() {
                 .setMessage(getString(R.string.something_went_wrong)).show()
         }
     }
+private fun changeFragment (item : WeatherWeek){
+    setDate(item.time.getDate("dd/MM/yyyy"))
+    val fragmentForDay = WeatherDayFragment()
+    val activity: AppCompatActivity = binding.root.context as AppCompatActivity
+    activity.supportFragmentManager.beginTransaction()
+        .replace(R.id.fragment_container_view_tag, WeatherDayFragment(),"tag")
+        .addToBackStack(null)
+        .commit()
+    val fragmentManager = fragmentForDay.activity?.supportFragmentManager
+    val fragmentTransaction = fragmentManager?.beginTransaction()
+    fragmentTransaction?.replace(R.id.fragment_container_view_tag,fragmentForDay,"tag")
+    fragmentTransaction?.commit()
+}
 }
