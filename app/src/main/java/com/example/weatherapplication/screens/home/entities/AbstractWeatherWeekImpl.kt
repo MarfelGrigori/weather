@@ -11,8 +11,8 @@ import com.example.weatherapplication.utils.setPicture
 import com.example.weatherapplication.utils.toPicture
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class AbstractWeatherWeek(private val weatherWeek: WeatherWeek) :
-    AbstractBindingItem<WeatherItemBinding>() {
+class AbstractWeatherWeekImpl(private val weatherWeek: WeatherWeek) : AbstractBindingItem<WeatherItemBinding>() {
+
     override val type: Int
         get() = R.id.item_container
 
@@ -28,6 +28,5 @@ class AbstractWeatherWeek(private val weatherWeek: WeatherWeek) :
         binding.pressure.text = "pressure ${weatherWeek.pressure}pressure kPa"
         binding.temperature.text = "${weatherWeek.temp}°C"
         weatherWeek.text.toPicture().setPicture(binding.image)
-
     }
 }

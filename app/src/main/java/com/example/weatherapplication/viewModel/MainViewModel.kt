@@ -1,9 +1,14 @@
 package com.example.weatherapplication.viewModel
 
+import android.annotation.SuppressLint
+import android.provider.Settings.System.getString
 import android.util.Log
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.weatherapplication.MainActivity
+import com.example.weatherapplication.R
 import com.example.weatherapplication.screens.home.entities.WeatherWeek
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.useCases.LoadWeatherDayUseCase
@@ -23,6 +28,7 @@ open class MainViewModel @Inject constructor(
     private val MAX_LATITUDE = 90.0
     private val MIN_LONGITUDE = -180.0
     private val MAX_LONGITUDE = 180.0
+    private var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
@@ -50,8 +56,6 @@ open class MainViewModel @Inject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)
-
     fun loadAll() {
         _isLoading.value = true
         val lat = _location.first.toString()
@@ -76,15 +80,15 @@ open class MainViewModel @Inject constructor(
         Log.e("TAG", "loadWeatherToday: $lat $lon")
         ioScope.launch {
             try {
-                _temperatureToday.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat, lon,)?.temp)
-                _mainToday.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat,lon)?.main)
-                _currentCity.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat,lon)?.city)
-                _currentCountry.postValue(loadWeatherTodayUseCase.loadWeatherToday(lat,lon)?.country)
+                val weatherToday = loadWeatherTodayUseCase.loadWeatherToday(lat, lon,)
+                _temperatureToday.postValue(weatherToday?.temp)
+                _mainToday.postValue(weatherToday?.main)
+                _currentCity.postValue(weatherToday?.city)
+                _currentCountry.postValue(weatherToday?.country)
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }
         }
-
     }
 
     private fun loadWeatherDay(lat: String, lon: String) {
@@ -109,11 +113,10 @@ open class MainViewModel @Inject constructor(
             }
         }
     }
-
-    fun error() {
-        when (errorBus.value) {
-
+    fun checkError(): String {
+        when(errorBus.value){
+            (R.string.error_network_text.toString())-> return R.string.error.toString()
+          else ->  return R.string.something_went_wrong.toString()
         }
     }
-
 }

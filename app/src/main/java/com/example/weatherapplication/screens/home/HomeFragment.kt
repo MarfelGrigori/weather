@@ -53,9 +53,7 @@ class HomeFragment : BaseFragment() {
             binding.progressBar.changeVisibility(it)
         }
         viewModel.errorBus.observe(viewLifecycleOwner) {
-            MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.error)
-                .setMessage(it).show()
-            Log.e("TAG",it)
+            checkError(it)
         }
         viewModel.temperatureToday.observe(viewLifecycleOwner) { binding.temperature.text = it.toString() }
         viewModel.currentCity.observe(viewLifecycleOwner) {
@@ -66,7 +64,6 @@ class HomeFragment : BaseFragment() {
         }
         viewModel.mainToday.observe(viewLifecycleOwner) {
             binding.main.text = it
-
         }
         viewModel.mainToday.observe(viewLifecycleOwner){
             (it.toPicture()).setPicture(binding.image)
@@ -83,20 +80,13 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun checkError(string: String) {
-        if (string.contains(getString(R.string.error_network_text), true)) {
-            MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.error)
+        viewModel.checkError()
+        MaterialAlertDialogBuilder(requireContext()).setTitle(viewModel.checkError())
                 .setMessage(string).show()
-        } else {
-            MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.error)
-                .setMessage(getString(R.string.something_went_wrong)).show()
-        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
-
 }
