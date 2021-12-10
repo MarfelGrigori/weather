@@ -27,7 +27,7 @@ data class WeatherDayResponse(
         )
 
         data class Weather(
-            @SerializedName("main")
+            @SerializedName("description")
             val main: String?
         )
 

@@ -28,7 +28,7 @@ object Converter {
     }
 
     private val daysArray =
-        arrayOf("Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday")
+        arrayOf("Четверг", "Пятница", "Суббота", "Воскресенье", "Понедельник", "Вторник", "Среда")
 
     fun Long.getDay(): String {
         val day: Int = ((TimeUnit.MILLISECONDS.toDays(this) % 7).toInt())

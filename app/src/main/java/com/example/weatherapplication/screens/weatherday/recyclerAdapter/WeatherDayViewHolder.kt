@@ -16,8 +16,8 @@ class WeatherDayViewHolder(private val binding: WeatherItemBinding) :
         binding.date.text = weatherForDay.time.getDate("dd/MM/yyyy hh:mm")
         binding.temperature.text = weatherForDay.temp?.toInt().toString() + " ℃"
         binding.main.text = weatherForDay.text
-        binding.pressure.text = "pressure kPa: " + weatherForDay.pressure.toString()
-        binding.wind.text = "wind m/s :" + weatherForDay.wind
+        binding.pressure.text = "давление кПа: " + weatherForDay.pressure.toString()
+        binding.wind.text = "ветер м/с :" + weatherForDay.wind
         (weatherForDay.text.toPicture()).setPicture(binding.image)
     }
 }

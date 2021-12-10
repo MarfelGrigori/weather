@@ -4,10 +4,15 @@ import android.widget.ImageView
 import com.example.weatherapplication.R
 
 enum class Picture(val main: String, val imageResource: Int) {
-    CLOUDS("Clouds", R.drawable.cloud),
-    RAIN("Rain", R.drawable.union),
-    CLEAR("Clear", R.drawable.sun),
-    SNOW("Snow", R.drawable.snow)
+    CLOUDS("пасмурно", R.drawable.cloud),
+    CLOUDS_("облачно с прояснениями", R.drawable.cloud),
+    CLOUDS_C("переменная облачность", R.drawable.cloud),
+    RAIN("дождь", R.drawable.union),
+    SMALL_RAIN("небольшой дождь", R.drawable.union),
+    RAIN_SNOW("снег с дождём",R.drawable.union),
+    CLEAR("ясно", R.drawable.sun),
+    SNOW("снег", R.drawable.snow),
+    UNKNOWN("", R.drawable.ic_android_black_24dp)
 }
 
 fun String.toPicture(): Picture {
@@ -15,7 +20,19 @@ fun String.toPicture(): Picture {
         (Picture.CLOUDS.main) -> {
             Picture.CLOUDS
         }
+        (Picture.CLOUDS_.main) -> {
+            Picture.CLOUDS
+        }
+        (Picture.RAIN_SNOW.main) -> {
+            Picture.RAIN
+        }
+        (Picture.CLOUDS_C.main) -> {
+            Picture.CLOUDS
+        }
         (Picture.RAIN.main) -> {
+            Picture.RAIN
+        }
+        (Picture.SMALL_RAIN.main) -> {
             Picture.RAIN
         }
         (Picture.CLEAR.main) -> {
@@ -24,7 +41,7 @@ fun String.toPicture(): Picture {
         (Picture.SNOW.main) -> {
             Picture.SNOW
         }
-        else -> throw IllegalStateException("${R.string.out_of_enum}")
+        else -> Picture.UNKNOWN
     }
 }
 

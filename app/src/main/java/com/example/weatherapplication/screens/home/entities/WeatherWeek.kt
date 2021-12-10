@@ -30,8 +30,8 @@ data class WeatherWeek(
     override fun bindView(binding: WeatherItemBinding, payloads: List<Any>) {
         binding.date.text = time.getDate("dd/MM/yyyy") + time.getDay()
         binding.main.text = text
-        binding.wind.text = "wind: $wind m/s"
-        binding.pressure.text = "pressure $pressure kPa"
+        binding.wind.text = "ветер: $wind м/c"
+        binding.pressure.text = "давление $pressure кПа"
         binding.temperature.text = "$temp °C"
         text.toPicture().setPicture(binding.image)
     }
