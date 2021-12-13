@@ -19,6 +19,7 @@ import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 
 class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
@@ -40,8 +41,9 @@ class HomeFragment : BaseFragment() {
         val fastAdapter = FastAdapter.with(itemAdapter)
         binding.recyclerView.adapter = fastAdapter
         binding.recyclerView.itemAnimator = null
+        val util = FastAdapterDiffUtil
         viewModel.weatherWeek.observe(viewLifecycleOwner) {
-            itemAdapter.set(it)
+            util[itemAdapter] = it
         }
 
         fastAdapter.onClickListener = { _, _, item, _ ->
