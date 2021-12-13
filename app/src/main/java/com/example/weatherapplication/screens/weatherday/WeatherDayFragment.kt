@@ -32,12 +32,12 @@ class WeatherDayFragment(val date: String) : BaseFragment() {
         val neededDate = date
         val itemAdapter = ItemAdapter<WeatherDay>()
         val fastAdapter = FastAdapter.with(itemAdapter)
-       val util = FastAdapterDiffUtil
         binding?.recyclerView?.adapter = fastAdapter
         binding?.recyclerView?.itemAnimator = null
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
-          val list =  it.filter { it.time.getDate("dd/MM/yyyy").contains(neededDate) }
-            util[itemAdapter] = list
+          val list =  it.filter {
+              it.time.getDate("dd/MM/yyyy").contains(neededDate) }
+            FastAdapterDiffUtil[itemAdapter] = list
         }
     }
 
