@@ -8,12 +8,52 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.weatherapplication.viewModel.MainViewModel
+import com.example.weatherapplication.viewModel.SecondViewModel
 import com.google.android.gms.location.*
 
 class Location {
     fun getLocation(
         context: AppCompatActivity,
         viewModel: MainViewModel,
+        setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double ->
+            viewModel.setLocation(
+                lat,
+                lon
+            )
+        }
+    ) {
+        val fusedLocationProvider: FusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(context)
+        val locationCallBack = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                for (location in locationResult.locations) {
+                    setLocation(location.latitude, location.longitude)
+                }
+            }
+        }
+
+        val requestPermissionLauncher =
+            context.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+                if (it)
+                    startLocationUpdates(locationCallBack, fusedLocationProvider)
+            }
+
+        when (PackageManager.PERMISSION_GRANTED) {
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) -> {
+                startLocationUpdates(locationCallBack, fusedLocationProvider)
+            }
+            else -> {
+                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+        }
+    }
+    fun getLocation2(
+        context: AppCompatActivity,
+        viewModel: SecondViewModel,
         setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double ->
             viewModel.setLocation(
                 lat,

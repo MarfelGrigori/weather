@@ -10,6 +10,7 @@ import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.utils.Converter.getDate
 import com.example.weatherapplication.viewModel.MainViewModel
+import com.example.weatherapplication.viewModel.SecondViewModel
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
@@ -17,7 +18,7 @@ import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 class WeatherDayFragment(val date: String) : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding
-    val viewModel: MainViewModel by activityViewModels { viewModelFactory }
+    val viewModel: SecondViewModel by activityViewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +35,7 @@ class WeatherDayFragment(val date: String) : BaseFragment() {
         val fastAdapter = FastAdapter.with(itemAdapter)
         binding?.recyclerView?.adapter = fastAdapter
         binding?.recyclerView?.itemAnimator = null
+        viewModel.loadData()
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
           val list =  it.filter {
               it.time.getDate("dd/MM/yyyy").contains(neededDate) }

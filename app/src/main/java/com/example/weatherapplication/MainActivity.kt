@@ -10,6 +10,7 @@ import com.example.weatherapplication.screens.home.HomeFragment
 import com.example.weatherapplication.screens.weatherday.WeatherDayFragment
 import com.example.weatherapplication.utils.Location
 import com.example.weatherapplication.viewModel.MainViewModel
+import com.example.weatherapplication.viewModel.SecondViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.android.support.DaggerAppCompatActivity
@@ -21,6 +22,7 @@ class MainActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
+    private val viewModel1 by viewModels<SecondViewModel> { viewModelFactory }
     private val firstFragment = HomeFragment()
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
 
@@ -32,6 +34,7 @@ class MainActivity : DaggerAppCompatActivity() {
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val location = Location()
         location.getLocation(this, viewModel)
+        location.getLocation2(this,viewModel1)
         viewModel.loadAll()
     }
 }
