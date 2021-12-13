@@ -9,8 +9,12 @@
     <string name="belarus">Belarus</string>
     <string name="c">°C</string>
     <string name="error">Error</string>
-    <string name="error_network_text">No address associated with hostname</string>
+    <string name="error_network_text">Unable to resolve host \"api.openweathermap.org\" : No address associated with hostname</string>
     <string name="error_network">network error</string>
     <string name="something_went_wrong">something went wrong, check your internet connection or location permission, or just relaunch app</string>
     <string name="out_of_enum">This value is out of enum</string>
+    <string name="_1016">давление 1016 кПа</string>
+    <string name="_2_28">ветер 2,28 м/с</string>
+    <string name="rain">небольшой дождь</string>
+    <string name="_02_11_2021">02.11.2021 чт</string>
 </resources>

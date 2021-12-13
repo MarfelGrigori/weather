@@ -1,4 +1,4 @@
-package com.example.weatherapplication.screens.first.networking
+package com.example.weatherapplication.screens.home.networking
 
 import com.google.gson.annotations.SerializedName
 
@@ -27,7 +27,7 @@ data class WeatherWeekResponse(
         )
 
         data class Weather(
-            @SerializedName("main")
+            @SerializedName("description")
             val main: String
         )
     }

@@ -8,7 +8,6 @@ import dagger.android.ContributesAndroidInjector
 
 abstract class ActivityBuilderModule {
 
-
     @ActivityScoped
     @ContributesAndroidInjector(
         modules =

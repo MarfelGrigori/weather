@@ -11,7 +11,16 @@ import com.example.weatherapplication.viewModel.MainViewModel
 import com.google.android.gms.location.*
 
 class Location {
-    fun getLocation(context: AppCompatActivity, viewModel: MainViewModel,setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double -> viewModel.setLocation(lat, lon) }) {
+    fun getLocation(
+        context: AppCompatActivity,
+        viewModel: MainViewModel,
+        setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double ->
+            viewModel.setLocation(
+                lat,
+                lon
+            )
+        }
+    ) {
         val fusedLocationProvider: FusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(context)
         val locationCallBack = object : LocationCallback() {

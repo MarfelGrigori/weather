@@ -1,8 +1,8 @@
 package com.example.weatherapplication.networking
 
-import com.example.weatherapplication.screens.first.networking.WeatherTodayResponse
-import com.example.weatherapplication.screens.first.networking.WeatherWeekResponse
-import com.example.weatherapplication.screens.second.networking.response.Weather5DaysResponse
+import com.example.weatherapplication.screens.home.networking.WeatherTodayResponse
+import com.example.weatherapplication.screens.home.networking.WeatherWeekResponse
+import com.example.weatherapplication.screens.weatherday.networking.response.WeatherDayResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,23 +17,25 @@ interface WeatherService {
         lon: String,
         @Query("units")
         units: String,
+        @Query("lang")
+        language : String,
         @Query("appid")
         appid: String
     ): Response<WeatherTodayResponse>
 
     @GET("data/2.5/forecast")
-    suspend fun loadWeatherTo5Days(
+    suspend fun loadWeatherDay(
         @Query("lat")
         lat: String,
         @Query("lon")
         lon: String,
-        @Query("cnt")
-        cnt: Int = 8,
         @Query("units")
         units: String,
+        @Query("lang")
+        language : String,
         @Query("appid")
         appid: String
-    ): Response<Weather5DaysResponse>
+    ): Response<WeatherDayResponse>
 
     @GET("data/2.5/onecall")
     suspend fun loadWeatherWeek(
@@ -45,6 +47,8 @@ interface WeatherService {
         cnt: String = "currently",
         @Query("units")
         units: String,
+        @Query("lang")
+        language : String,
         @Query("appid")
         appid: String
     ): Response<WeatherWeekResponse>

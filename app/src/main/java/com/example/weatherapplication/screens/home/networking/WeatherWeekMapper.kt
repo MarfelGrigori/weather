@@ -1,6 +1,6 @@
-package com.example.weatherapplication.screens.first.networking
+package com.example.weatherapplication.screens.home.networking
 
-import com.example.weatherapplication.screens.first.entities.WeatherWeek
+import com.example.weatherapplication.screens.home.entities.WeatherWeek
 
     fun WeatherWeekResponse.toWeatherWeek (): List<WeatherWeek> {
         val list = ArrayList<WeatherWeek>()
