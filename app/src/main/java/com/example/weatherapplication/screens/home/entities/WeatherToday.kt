@@ -3,7 +3,7 @@ package com.example.weatherapplication.screens.home.entities
 data class WeatherToday(
     val city: String,
     val country: String,
-    val temp: Int,
+    val temp: String,
     val main: String,
     val humidity: Int,
     val rain: Double,

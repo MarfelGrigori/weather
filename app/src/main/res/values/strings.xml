@@ -7,7 +7,6 @@
     <string name="_25_c">25</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="belarus">Belarus</string>
-    <string name="c">°C</string>
     <string name="error">Error</string>
     <string name="error_network_text">Unable to resolve host \"api.openweathermap.org\" : No address associated with hostname</string>
     <string name="error_network">network error</string>
@@ -17,4 +16,12 @@
     <string name="_2_28">ветер 2,28 м/с</string>
     <string name="rain">небольшой дождь</string>
     <string name="_02_11_2021">02.11.2021 чт</string>
+    <string name="_2_288">2.28</string>
+    <string name="wind">ветер:</string>
+    <string name="meters_per_second">м/с</string>
+    <string name="_1020">1020</string>
+    <string name="pressure">давление:</string>
+    <string name="kPa">кПа</string>
+    <string name="_25">25</string>
+    <string name="c">°C</string>
 </resources>

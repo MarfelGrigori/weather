@@ -55,16 +55,10 @@ class HomeFragment : BaseFragment() {
         viewModel.errorBus.observe(viewLifecycleOwner) {
             checkError(it)
         }
-        viewModel.temperatureToday.observe(viewLifecycleOwner) { binding.temperature.text = it.toString() }
-        viewModel.currentCity.observe(viewLifecycleOwner) {
-            binding.city.text = it.toString()
-        }
-        viewModel.currentCountry.observe(viewLifecycleOwner) {
-            binding.country.text = it
-        }
-        viewModel.mainToday.observe(viewLifecycleOwner) {
-            binding.main.text = it
-        }
+        viewModel.temperatureToday.observe(viewLifecycleOwner,binding.temperature::setText)
+        viewModel.currentCity.observe(viewLifecycleOwner,binding.city::setText)
+        viewModel.currentCountry.observe(viewLifecycleOwner,binding.country::setText)
+        viewModel.mainToday.observe(viewLifecycleOwner,binding.main::setText)
         viewModel.mainToday.observe(viewLifecycleOwner){
             (it.toPicture()).setPicture(binding.image)
         }

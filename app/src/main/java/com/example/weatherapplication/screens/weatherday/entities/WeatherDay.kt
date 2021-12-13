@@ -19,6 +19,7 @@ data class WeatherDay(
     val wind: Int
 ): AbstractBindingItem<WeatherItemBinding>()
 {
+    private val currentTime = time.getDate("dd/MM/yyyy hh-mm")
     override val type: Int
         get() = R.id.item_container
 
@@ -27,11 +28,11 @@ data class WeatherDay(
     }
     @SuppressLint("SetTextI18n")
     override fun bindView(binding: WeatherItemBinding, payloads: List<Any>) {
-        binding.date.text = time.getDate("dd/MM/yyyy hh-mm")
+        binding.date.text = currentTime
         binding.main.text = text
-        binding.wind.text = "ветер: $wind м/c"
-        binding.pressure.text = "давление $pressure кПа"
-        binding.temperature.text = "${temp?.toInt()} °C"
+        binding.wind.text = wind.toString()
+        binding.pressure.text = pressure.toString()
+        binding.temperature.text = temp?.toInt().toString()
         text.toPicture().setPicture(binding.image)
     }
 }
