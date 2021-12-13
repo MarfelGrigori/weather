@@ -53,7 +53,8 @@ class HomeFragment : BaseFragment() {
             binding.progressBar.changeVisibility(it)
         }
         viewModel.errorBus.observe(viewLifecycleOwner) {
-            checkError(it)
+            MaterialAlertDialogBuilder(requireContext()).setTitle(it)
+                .setMessage(it).show()
         }
         viewModel.temperatureToday.observe(viewLifecycleOwner,binding.temperature::setText)
         viewModel.currentCity.observe(viewLifecycleOwner,binding.city::setText)
@@ -73,11 +74,9 @@ class HomeFragment : BaseFragment() {
             .commit()
     }
 
-    private fun checkError(string: String) {
-        viewModel.checkError()
-        MaterialAlertDialogBuilder(requireContext()).setTitle(viewModel.checkError())
-                .setMessage(string).show()
-    }
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

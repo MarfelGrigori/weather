@@ -64,6 +64,7 @@ open class MainViewModel @Inject constructor(
             loadWeatherToday(lat, lon)
             loadWeatherDay(lat, lon)
             loadWeatherWeek(lat, lon)
+            checkError()
             _isLoading.postValue(false)
         }
     }
@@ -113,10 +114,10 @@ open class MainViewModel @Inject constructor(
             }
         }
     }
-    fun checkError(): String {
-        when(errorBus.value){
-            (R.string.error_network_text.toString())-> return R.string.error.toString()
-          else ->  return R.string.something_went_wrong.toString()
-        }
+  private  fun checkError() {
+      when(errorBus.value){
+          (R.string.error_network_text.toString()) -> _errorBus.value = R.string.error.toString()
+          else -> _errorBus.value = R.string.something_went_wrong.toString()
+      }
     }
 }
