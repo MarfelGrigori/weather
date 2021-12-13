@@ -28,7 +28,7 @@ data class WeatherWeek(
 
     @SuppressLint("SetTextI18n")
     override fun bindView(binding: WeatherItemBinding, payloads: List<Any>) {
-        binding.date.text = time.getDate("dd/MM/yyyy") + time.getDay()
+        binding.date.text = time.getDate("dd/MM/yyyy ") + time.getDay()
         binding.main.text = text
         binding.wind.text = "ветер: $wind м/c"
         binding.pressure.text = "давление $pressure кПа"

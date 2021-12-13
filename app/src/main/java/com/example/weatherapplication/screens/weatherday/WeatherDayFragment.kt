@@ -7,15 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.di.BaseFragment
-import com.example.weatherapplication.screens.weatherday.recyclerAdapter.WeatherDayAdapter
+import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
+import com.example.weatherapplication.utils.Converter.getDate
 import com.example.weatherapplication.viewModel.MainViewModel
-import java.util.*
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
 
 class WeatherDayFragment(val date: String) : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding
     val viewModel: MainViewModel by activityViewModels { viewModelFactory }
-    lateinit var adapter: WeatherDayAdapter
+
+    //    lateinit var adapter: WeatherDayAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,10 +30,15 @@ class WeatherDayFragment(val date: String) : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val neededDate = date
-        adapter = WeatherDayAdapter()
-        binding?.recyclerView?.adapter = adapter
+//        adapter = WeatherDayAdapter()
+//        binding?.recyclerView?.adapter = adapter
+        val itemAdapter = ItemAdapter<WeatherDay>()
+        val fastAdapter = FastAdapter.with(itemAdapter)
+        binding?.recyclerView?.adapter = fastAdapter
+        binding?.recyclerView?.itemAnimator = null
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
-            adapter.setItems(it,neededDate)
+          val list =  it.filter { it.time.getDate("dd/MM/yyyy").contains(neededDate) }
+            itemAdapter.set(list)
         }
     }
 

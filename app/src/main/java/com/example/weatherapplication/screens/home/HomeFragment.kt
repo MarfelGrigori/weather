@@ -38,7 +38,6 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val itemAdapter = ItemAdapter<WeatherWeek>()
         val fastAdapter = FastAdapter.with(itemAdapter)
-        binding.recyclerView.itemAnimator
         binding.recyclerView.adapter = fastAdapter
         binding.recyclerView.itemAnimator = null
         viewModel.weatherWeek.observe(viewLifecycleOwner) {

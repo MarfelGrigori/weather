@@ -13,7 +13,7 @@ enum class Picture(val main: String, val imageResource: Int) {
     RAIN_SNOW("снег с дождём",R.drawable.union),
     CLEAR("ясно", R.drawable.sun),
     SNOW("снег", R.drawable.snow),
-    SNOW_S("небольшой  снег", R.drawable.snow),
+    SNOW_S("небольшой снег", R.drawable.snow),
     UNKNOWN("", R.drawable.ic_android_black_24dp)
 }
 
