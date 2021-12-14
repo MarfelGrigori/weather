@@ -9,7 +9,7 @@ fun WeatherDayResponse.toWeatherDay(): List<WeatherDay> {
     this.list?.forEach {
         list.add(
             WeatherDay(
-                time = it.dt?.times(1000)?.getDate("dd/MM/yyyy hh:mm").toString(),
+                time = it.dt?.times(1000)?.getDate("dd/MM/yyyy HH:mm").toString(),
                 text = it.weather?.get(0)?.main.toString(),
                 temp = it.main?.temp,
                 newDay = it.dt.toString(),
