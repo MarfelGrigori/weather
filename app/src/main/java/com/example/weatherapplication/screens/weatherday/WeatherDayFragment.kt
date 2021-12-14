@@ -8,9 +8,8 @@ import androidx.fragment.app.activityViewModels
 import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
+import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
 import com.example.weatherapplication.utils.Converter.getDate
-import com.example.weatherapplication.viewModel.MainViewModel
-import com.example.weatherapplication.viewModel.SecondViewModel
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil

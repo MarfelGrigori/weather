@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.example.weatherapplication.useCases.LoadWeatherDayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
-import com.example.weatherapplication.viewModel.MainViewModel
+import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule

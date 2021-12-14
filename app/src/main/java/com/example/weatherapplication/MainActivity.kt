@@ -6,8 +6,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.screens.home.HomeFragment
 import com.example.weatherapplication.utils.Location
-import com.example.weatherapplication.viewModel.MainViewModel
-import com.example.weatherapplication.viewModel.SecondViewModel
+import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
+import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.android.support.DaggerAppCompatActivity
