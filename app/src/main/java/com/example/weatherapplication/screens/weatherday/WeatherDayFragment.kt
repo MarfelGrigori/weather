@@ -10,11 +10,12 @@ import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
 import com.example.weatherapplication.utils.Converter.getDate
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 
-class WeatherDayFragment(val date: String) : BaseFragment() {
+class WeatherDayFragment(private val date: String) : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding
     val viewModel: SecondViewModel by activityViewModels { viewModelFactory }
@@ -39,6 +40,10 @@ class WeatherDayFragment(val date: String) : BaseFragment() {
           val list =  it.filter {
               it.time.getDate("dd/MM/yyyy").contains(neededDate) }
             FastAdapterDiffUtil[itemAdapter] = list
+        }
+        viewModel.errorBus.observe(viewLifecycleOwner){
+            MaterialAlertDialogBuilder(requireContext()).setTitle(it)
+                .setMessage(it).show()
         }
     }
 

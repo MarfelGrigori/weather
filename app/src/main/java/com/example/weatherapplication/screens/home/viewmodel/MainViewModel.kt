@@ -27,9 +27,9 @@ open class MainViewModel @Inject constructor(
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
-
     private val _temperatureToday = MutableLiveData<String>()
     val temperatureToday: LiveData<String> = _temperatureToday
+
     private val _mainToday = MutableLiveData<String>()
     val mainToday: LiveData<String> = _mainToday
 

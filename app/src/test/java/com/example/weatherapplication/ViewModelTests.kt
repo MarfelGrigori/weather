@@ -3,10 +3,9 @@ package com.example.weatherapplication
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.example.weatherapplication.useCases.LoadWeatherDayUseCase
+import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
 import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
-import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
@@ -29,9 +28,8 @@ class ViewModelTests {
 
     // 3
 
-    private val first = mock(LoadWeatherDayUseCase::class.java)
-    private val second = mock(LoadWeatherWeekUseCase::class.java)
-    private val third = mock(LoadWeatherTodayUseCase::class.java)
+    private val first = mock(LoadWeatherWeekUseCase::class.java)
+    private val second = mock(LoadWeatherTodayUseCase::class.java)
 
     // 4
     @get:Rule
@@ -40,7 +38,7 @@ class ViewModelTests {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        viewModel = spy(MainViewModel(first, third, second))
+        viewModel = spy(MainViewModel(second, first))
         isLoadingLiveData = viewModel.isLoading
     }
 
@@ -59,7 +57,7 @@ class ViewModelTests {
     }
 
     @Test
-    fun  `set location test`(){
-        assertNotNull(viewModel.setLocation(0.0,0.0))
+    fun `set location test`() {
+        assertNotNull(viewModel.setLocation(0.0, 0.0))
     }
 }
