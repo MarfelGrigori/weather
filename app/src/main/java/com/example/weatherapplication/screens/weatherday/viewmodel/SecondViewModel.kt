@@ -26,7 +26,7 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
     private val _errorBus = MutableLiveData<String>()
     val errorBus: LiveData<String> = _errorBus
 
-
+    var date : String? = null
 
     fun loadData() {
         val lat = _location.first.toString()
@@ -50,7 +50,7 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
         ioScope.launch {
             try {
                 _weatherDay.postValue(
-                    loadWeatherUseCase.loadWeatherDay(lat,lon))
+                    loadWeatherUseCase.loadWeatherDay(lat,lon)?.filter { it.time.contains(date.toString()) })
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }

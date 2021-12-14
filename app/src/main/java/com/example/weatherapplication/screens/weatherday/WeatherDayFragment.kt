@@ -30,16 +30,13 @@ class WeatherDayFragment(private val date: String) : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val neededDate = date
         val itemAdapter = ItemAdapter<WeatherDay>()
         val fastAdapter = FastAdapter.with(itemAdapter)
         binding?.recyclerView?.adapter = fastAdapter
         binding?.recyclerView?.itemAnimator = null
         viewModel.loadData()
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
-          val list =  it.filter {
-              it.time.contains(neededDate) }
-            FastAdapterDiffUtil[itemAdapter] = list
+            FastAdapterDiffUtil[itemAdapter] = it
         }
         viewModel.errorBus.observe(viewLifecycleOwner){
             MaterialAlertDialogBuilder(requireContext()).setTitle(it)
