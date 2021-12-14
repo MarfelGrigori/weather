@@ -1,6 +1,7 @@
 package com.example.weatherapplication.screens.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import com.mikepenz.fastadapter.items.AbstractItem
 
 class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
@@ -40,8 +42,13 @@ class HomeFragment : BaseFragment() {
         binding.recyclerView.adapter = fastAdapter
         binding.recyclerView.itemAnimator = null
         viewModel.weatherWeek.observe(viewLifecycleOwner) {
-            FastAdapterDiffUtil[itemAdapter] = it
+            val items = mutableListOf<WeatherWeek>()
+            repeat(it.size) { index->
+                items.add(it[index].withIdentifier((index.toLong() + 1)))
+                Log.e("TAG", it[index].identifier.toString())
+            }
         }
+
 
         fastAdapter.onClickListener = { _, _, item, _ ->
           changeFragment(item)

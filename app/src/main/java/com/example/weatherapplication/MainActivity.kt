@@ -30,7 +30,7 @@ class MainActivity : DaggerAppCompatActivity() {
             .replace(R.id.fragment_container_view_tag, firstFragment).commit()
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val location = Location()
-        location.getLocation(this,viewModel ,viewModel1)
+        location.getLocation(this,viewModel, viewModel1)
         viewModel.loadAll()
         viewModel1.loadData()
     }

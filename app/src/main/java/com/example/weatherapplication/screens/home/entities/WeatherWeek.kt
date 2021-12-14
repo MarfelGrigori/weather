@@ -1,6 +1,7 @@
 package com.example.weatherapplication.screens.home.entities
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.weatherapplication.R
@@ -18,9 +19,13 @@ data class WeatherWeek(
     val wind: Int
 ) : AbstractBindingItem<WeatherItemBinding>() {
 
-
     override val type: Int
         get() = R.id.item_container
+
+    fun withIdentifier(identifier: Long): WeatherWeek {
+        this.identifier = identifier
+        return this
+    }
 
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): WeatherItemBinding {
         return WeatherItemBinding.inflate(inflater, parent, false)
