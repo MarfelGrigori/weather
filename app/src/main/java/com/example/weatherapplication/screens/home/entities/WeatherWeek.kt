@@ -22,8 +22,8 @@ data class WeatherWeek(
     override val type: Int
         get() = R.id.item_container
 
-    fun withIdentifier(identifier: Long): WeatherWeek {
-        this.identifier = identifier
+    fun withIdentifier(): WeatherWeek {
+        this.identifier = this.hashCode().toLong()
         return this
     }
 
@@ -33,7 +33,8 @@ data class WeatherWeek(
 
     @SuppressLint("SetTextI18n")
     override fun bindView(binding: WeatherItemBinding, payloads: List<Any>) {
-        binding.date.text = date + day
+        binding.date.text = date
+        binding.day.text = day
         binding.main.text = text
         binding.wind.text = wind.toString()
         binding.pressure.text = pressure.toString()

@@ -44,9 +44,10 @@ class HomeFragment : BaseFragment() {
         viewModel.weatherWeek.observe(viewLifecycleOwner) {
             val items = mutableListOf<WeatherWeek>()
             repeat(it.size) { index->
-                items.add(it[index].withIdentifier((index.toLong() + 1)))
+                items.add(it[index].withIdentifier())
                 Log.e("TAG", it[index].identifier.toString())
             }
+            FastAdapterDiffUtil[itemAdapter] = items
         }
 
 
