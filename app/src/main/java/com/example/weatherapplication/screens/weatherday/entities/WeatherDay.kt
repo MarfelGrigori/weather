@@ -12,14 +12,14 @@ import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 data class WeatherDay(
     var newDay: String? = null,
-    val time: Long,
+    val time: String,
     val text: String,
     val temp: Double?,
     val pressure: Int?,
     val wind: Int
 ): AbstractBindingItem<WeatherItemBinding>()
 {
-    private val currentTime = time.getDate("dd/MM/yyyy hh-mm")
+    private val currentTime = time
     override val type: Int
         get() = R.id.item_container
 

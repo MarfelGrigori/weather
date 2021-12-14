@@ -5,21 +5,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
-import com.example.weatherapplication.utils.Converter.getDate
-import com.example.weatherapplication.utils.Converter.getDay
 import com.example.weatherapplication.utils.setPicture
 import com.example.weatherapplication.utils.toPicture
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 data class WeatherWeek(
-    val time: Long,
+    val date: String,
+    val day : String,
     val text: String,
     val temp: Int,
     val pressure: Int?,
     val wind: Int
 ) : AbstractBindingItem<WeatherItemBinding>() {
 
-    private val currentTime = time.getDate("dd/MM/yyyy ") + time.getDay()
+
     override val type: Int
         get() = R.id.item_container
 
@@ -29,7 +28,7 @@ data class WeatherWeek(
 
     @SuppressLint("SetTextI18n")
     override fun bindView(binding: WeatherItemBinding, payloads: List<Any>) {
-        binding.date.text = currentTime
+        binding.date.text = date + day
         binding.main.text = text
         binding.wind.text = wind.toString()
         binding.pressure.text = pressure.toString()

@@ -38,7 +38,7 @@ class WeatherDayFragment(private val date: String) : BaseFragment() {
         viewModel.loadData()
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
           val list =  it.filter {
-              it.time.getDate("dd/MM/yyyy").contains(neededDate) }
+              it.time.contains(neededDate) }
             FastAdapterDiffUtil[itemAdapter] = list
         }
         viewModel.errorBus.observe(viewLifecycleOwner){

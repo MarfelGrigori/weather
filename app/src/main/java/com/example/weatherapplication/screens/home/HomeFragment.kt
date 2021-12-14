@@ -11,7 +11,6 @@ import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.home.entities.WeatherWeek
 import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
 import com.example.weatherapplication.screens.weatherday.WeatherDayFragment
-import com.example.weatherapplication.utils.Converter.getDate
 import com.example.weatherapplication.utils.changeVisibility
 import com.example.weatherapplication.utils.setPicture
 import com.example.weatherapplication.utils.toPicture
@@ -65,7 +64,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun changeFragment (item : WeatherWeek){
-        val date =item.time.getDate("dd/MM/yyyy")
+        val date =item.date
         val secondFragment = WeatherDayFragment(date)
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view_tag, secondFragment)
