@@ -29,9 +29,9 @@ data class WeatherWeek(
         binding.date.text = data.date
         binding.day.text = data.day
         binding.main.text = data.text
-        binding.wind.text = data.wind.toString()
-        binding.pressure.text = data.pressure.toString()
-        binding.temperature.text = data.temp.toString()
+        binding.wind.text = data.wind
+        binding.pressure.text = data.pressure
+        binding.temperature.text = data.temp
         data.text.toPicture().setPicture(binding.image)
     }
 }

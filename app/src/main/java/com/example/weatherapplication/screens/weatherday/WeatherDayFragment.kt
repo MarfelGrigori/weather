@@ -36,10 +36,6 @@ class WeatherDayFragment(private val date: String) : BaseFragment() {
         binding?.recyclerView?.itemAnimator = null
         viewModel.loadData()
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) {
-                MaterialAlertDialogBuilder(requireContext()).setTitle("")
-                    .setMessage(getString(R.string.forecast_is_unavailable)).show()
-            } else
                 FastAdapterDiffUtil[itemAdapter] = it
         }
         viewModel.errorBus.observe(viewLifecycleOwner) {

@@ -1,7 +1,6 @@
 package com.example.weatherapplication.screens.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,7 @@ class HomeFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     val viewModel: MainViewModel by activityViewModels { viewModelFactory }
-    val viewModel1 : SecondViewModel by activityViewModels { viewModelFactory }
+    val viewModel1: SecondViewModel by activityViewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,16 +42,11 @@ class HomeFragment : BaseFragment() {
         binding.recyclerView.adapter = fastAdapter
         binding.recyclerView.itemAnimator = null
         viewModel.weatherWeek.observe(viewLifecycleOwner) {
-            val items = mutableListOf<WeatherWeek>()
-            repeat(it.size) { index->
-                items.add(it[index])
-                Log.e("TAG", it[index].identifier.toString())
-            }
-            FastAdapterDiffUtil[itemAdapter] = items
+            FastAdapterDiffUtil[itemAdapter] = it
         }
 
         fastAdapter.onClickListener = { _, _, item, _ ->
-          changeFragment(item)
+            changeFragment(item)
             false
         }
         viewModel.isLoading.observe(viewLifecycleOwner) {
@@ -62,17 +56,17 @@ class HomeFragment : BaseFragment() {
             MaterialAlertDialogBuilder(requireContext()).setTitle(it)
                 .setMessage(it).show()
         }
-        viewModel.temperatureToday.observe(viewLifecycleOwner,binding.temperature::setText)
-        viewModel.currentCity.observe(viewLifecycleOwner,binding.city::setText)
-        viewModel.currentCountry.observe(viewLifecycleOwner,binding.country::setText)
-        viewModel.mainToday.observe(viewLifecycleOwner,binding.main::setText)
-        viewModel.mainToday.observe(viewLifecycleOwner){
+        viewModel.temperatureToday.observe(viewLifecycleOwner, binding.temperature::setText)
+        viewModel.currentCity.observe(viewLifecycleOwner, binding.city::setText)
+        viewModel.currentCountry.observe(viewLifecycleOwner, binding.country::setText)
+        viewModel.mainToday.observe(viewLifecycleOwner, binding.main::setText)
+        viewModel.mainToday.observe(viewLifecycleOwner) {
             (it.toPicture()).setPicture(binding.image)
         }
     }
 
-    private fun changeFragment (item : WeatherWeek){
-        val date =item.data.date
+    private fun changeFragment(item: WeatherWeek) {
+        val date = item.data.date
         viewModel1.date = date
         val secondFragment = WeatherDayFragment(date)
         parentFragmentManager.beginTransaction()

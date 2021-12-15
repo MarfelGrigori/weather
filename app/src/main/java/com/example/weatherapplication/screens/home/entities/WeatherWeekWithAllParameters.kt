@@ -4,7 +4,7 @@ data class WeatherWeekWithAllParameters(
     val date: String,
     val day: String,
     val text: String,
-    val temp: Int,
-    val pressure: Int?,
-    val wind: Int
+    val temp: String,
+    val pressure: String?,
+    val wind: String
 )
