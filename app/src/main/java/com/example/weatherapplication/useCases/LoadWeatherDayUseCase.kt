@@ -1,7 +1,6 @@
 package com.example.weatherapplication.useCases
 
 import com.example.weatherapplication.repository.WeatherRepository
-import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDayWithAllParameters
 import com.example.weatherapplication.screens.weatherday.networking.mapper.toWeatherDay
 import javax.inject.Inject

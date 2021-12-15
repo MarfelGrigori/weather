@@ -14,7 +14,6 @@ import com.example.weatherapplication.screens.weatherday.WeatherDayFragment
 import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
 import com.example.weatherapplication.utils.changeVisibility
 import com.example.weatherapplication.utils.setPicture
-import com.example.weatherapplication.utils.toPicture
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -42,10 +41,7 @@ class HomeFragment : BaseFragment() {
         binding.recyclerView.adapter = fastAdapter
         binding.recyclerView.itemAnimator = null
         viewModel.weatherWeek.observe(viewLifecycleOwner) {
-           val items = mutableListOf<WeatherWeek>()
-            it.forEach { it1->
-               items.add(WeatherWeek(it1))
-           }
+            val items = it.map { WeatherWeek(it) }
             FastAdapterDiffUtil[itemAdapter] = items
         }
 
@@ -64,7 +60,7 @@ class HomeFragment : BaseFragment() {
         viewModel.currentCity.observe(viewLifecycleOwner, binding.city::setText)
         viewModel.currentCountry.observe(viewLifecycleOwner, binding.country::setText)
         viewModel.mainToday.observe(viewLifecycleOwner, binding.main::setText)
-        viewModel.picture.observe(viewLifecycleOwner){
+        viewModel.picture.observe(viewLifecycleOwner) {
             it.setPicture(binding.image)
         }
     }

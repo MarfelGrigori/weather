@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.R
-import com.example.weatherapplication.screens.home.entities.WeatherWeek
 import com.example.weatherapplication.screens.home.entities.WeatherWeekWithAllParameters
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
@@ -53,8 +52,8 @@ open class MainViewModel @Inject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _picture =MutableLiveData<Picture>()
-     val picture :LiveData<Picture> = _picture
+    private val _picture = MutableLiveData<Picture>()
+    val picture: LiveData<Picture> = _picture
 
     fun loadAll() {
         _isLoading.value = true
@@ -80,7 +79,7 @@ open class MainViewModel @Inject constructor(
         Log.e("TAG", "loadWeatherToday: $lat $lon")
         ioScope.launch {
             try {
-                val weatherToday = loadWeatherTodayUseCase.loadWeatherToday(lat, lon,)
+                val weatherToday = loadWeatherTodayUseCase.loadWeatherToday(lat, lon)
                 _temperatureToday.postValue(weatherToday?.temp)
                 _mainToday.postValue(weatherToday?.main)
                 _currentCity.postValue(weatherToday?.city)
@@ -102,7 +101,9 @@ open class MainViewModel @Inject constructor(
             }
         }
     }
-  private  fun checkError() {
-        if (_errorBus.value==R.string.error_network_text.toString()) _errorBus.value = R.string.error.toString()
+
+    private fun checkError() {
+        if (_errorBus.value == R.string.error_network_text.toString()) _errorBus.value =
+            R.string.error.toString()
     }
 }

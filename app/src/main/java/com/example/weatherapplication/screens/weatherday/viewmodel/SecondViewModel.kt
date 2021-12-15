@@ -11,7 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: LoadWeatherDayUseCase) : ViewModel() {
+open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: LoadWeatherDayUseCase) :
+    ViewModel() {
     private val MIN_LATITUDE = -90.0
     private val MAX_LATITUDE = 90.0
     private val MIN_LONGITUDE = -180.0
@@ -26,7 +27,7 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
     private val _errorBus = MutableLiveData<String>()
     val errorBus: LiveData<String> = _errorBus
 
-    var date : String? = null
+    var date: String? = null
 
     fun loadData() {
         val lat = _location.first.toString()
@@ -34,7 +35,6 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
         if (lat.toDouble() in MIN_LATITUDE..MAX_LATITUDE && lon.toDouble() in MIN_LONGITUDE..MAX_LONGITUDE) {
             loadWeatherDay(lat, lon)
             checkError()
-
         }
     }
 
@@ -50,14 +50,16 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
         ioScope.launch {
             try {
                 _weatherDay.postValue(
-                    loadWeatherUseCase.loadWeatherDay(lat,lon)?.filter { it.time.contains(date.toString()) })
+                    loadWeatherUseCase.loadWeatherDay(lat, lon)
+                        ?.filter { it.time.contains(date.toString()) })
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }
         }
     }
 
-    private  fun checkError() {
-        if (_errorBus.value==R.string.error_network_text.toString()) _errorBus.value = R.string.error.toString()
+    private fun checkError() {
+        if (_errorBus.value == R.string.error_network_text.toString()) _errorBus.value =
+            R.string.error.toString()
     }
 }

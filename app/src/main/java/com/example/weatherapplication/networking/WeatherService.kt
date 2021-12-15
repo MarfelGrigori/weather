@@ -18,7 +18,7 @@ interface WeatherService {
         @Query("units")
         units: String,
         @Query("lang")
-        language : String,
+        language: String,
         @Query("appid")
         appid: String
     ): Response<WeatherTodayResponse>
@@ -32,7 +32,7 @@ interface WeatherService {
         @Query("units")
         units: String,
         @Query("lang")
-        language : String,
+        language: String,
         @Query("appid")
         appid: String
     ): Response<WeatherDayResponse>
@@ -48,7 +48,7 @@ interface WeatherService {
         @Query("units")
         units: String,
         @Query("lang")
-        language : String,
+        language: String,
         @Query("appid")
         appid: String
     ): Response<WeatherWeekResponse>

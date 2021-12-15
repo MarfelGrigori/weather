@@ -10,7 +10,7 @@ enum class Picture(val main: String, val imageResource: Int) {
     CLOUDS_S("небольшая облачность", R.drawable.cloud),
     RAIN("дождь", R.drawable.union),
     SMALL_RAIN("небольшой дождь", R.drawable.union),
-    RAIN_SNOW("снег с дождём",R.drawable.union),
+    RAIN_SNOW("снег с дождём", R.drawable.union),
     CLEAR("ясно", R.drawable.sun),
     SNOW("снег", R.drawable.snow),
     SNOW_S("небольшой снег", R.drawable.snow),

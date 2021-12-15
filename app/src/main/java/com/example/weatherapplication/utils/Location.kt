@@ -7,11 +7,9 @@ import android.os.Looper
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
 import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
 import com.google.android.gms.location.*
-import javax.inject.Inject
 
 class Location {
     fun getLocation(
@@ -20,9 +18,9 @@ class Location {
         viewModel1: SecondViewModel
     ) {
 
-       val  setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double ->
+        val setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double ->
             viewModel.setLocation(lat, lon)
-            viewModel1.setLocation(lat,lon)
+            viewModel1.setLocation(lat, lon)
         }
 
         val fusedLocationProvider: FusedLocationProviderClient =

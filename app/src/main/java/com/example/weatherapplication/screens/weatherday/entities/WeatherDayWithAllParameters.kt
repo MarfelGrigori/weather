@@ -9,7 +9,8 @@ class WeatherDayWithAllParameters(
     val temp: Double?,
     val pressure: Int?,
     val wind: Int,
-    val picture: Picture)
+    val picture: Picture
+)
 
 
 

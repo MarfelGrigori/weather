@@ -12,14 +12,14 @@ open class WeatherRepository @Inject constructor(private val api: WeatherApi) {
 
     private val KEY = "a5000964c71443402a055b2152004987"
     suspend fun loadWeatherToday(lat: String, lon: String): Response<WeatherTodayResponse> {
-        return api.provideRetrofit().loadWeatherToday(lat, lon, "metric", "ru",KEY)
+        return api.provideRetrofit().loadWeatherToday(lat, lon, "metric", "ru", KEY)
     }
 
     suspend fun loadWeatherTo5Days(lat: String, lon: String): Response<WeatherDayResponse> {
-        return api.provideRetrofit().loadWeatherDay(lat, lon, "metric","ru", KEY)
+        return api.provideRetrofit().loadWeatherDay(lat, lon, "metric", "ru", KEY)
     }
 
     suspend fun loadWeatherWeek(lat: String, lon: String): Response<WeatherWeekResponse> {
-        return api.provideRetrofit().loadWeatherWeek(lat, lon, "currently", "metric","ru", KEY)
+        return api.provideRetrofit().loadWeatherWeek(lat, lon, "currently", "metric", "ru", KEY)
     }
 }
