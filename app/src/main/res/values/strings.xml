@@ -24,4 +24,5 @@
     <string name="kPa">кПа</string>
     <string name="_25">25</string>
     <string name="c">°C</string>
+    <string name="forecast_is_unavailable">forecast is unavailable</string>
 </resources>

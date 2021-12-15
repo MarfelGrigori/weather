@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
-import com.example.weatherapplication.utils.Converter.getDate
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -36,9 +36,13 @@ class WeatherDayFragment(private val date: String) : BaseFragment() {
         binding?.recyclerView?.itemAnimator = null
         viewModel.loadData()
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
-            FastAdapterDiffUtil[itemAdapter] = it
+            if (it.isEmpty()) {
+                MaterialAlertDialogBuilder(requireContext()).setTitle("")
+                    .setMessage(getString(R.string.forecast_is_unavailable)).show()
+            } else
+                FastAdapterDiffUtil[itemAdapter] = it
         }
-        viewModel.errorBus.observe(viewLifecycleOwner){
+        viewModel.errorBus.observe(viewLifecycleOwner) {
             MaterialAlertDialogBuilder(requireContext()).setTitle(it)
                 .setMessage(it).show()
         }
