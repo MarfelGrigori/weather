@@ -24,8 +24,8 @@ class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
 
-    val viewModel: MainViewModel by activityViewModels { viewModelFactory }
-    val viewModel1: SecondViewModel by activityViewModels { viewModelFactory }
+    private val viewModel: MainViewModel by activityViewModels { viewModelFactory }
+    private val viewModel1: SecondViewModel by activityViewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,15 +60,15 @@ class HomeFragment : BaseFragment() {
         viewModel.currentCity.observe(viewLifecycleOwner, binding.city::setText)
         viewModel.currentCountry.observe(viewLifecycleOwner, binding.country::setText)
         viewModel.mainToday.observe(viewLifecycleOwner, binding.main::setText)
-        viewModel.mainToday.observe(viewLifecycleOwner) {
-            (it.toPicture()).setPicture(binding.image)
+        viewModel.picture.observe(viewLifecycleOwner){
+            it.setPicture(binding.image)
         }
     }
 
     private fun changeFragment(item: WeatherWeek) {
         val date = item.data.date
         viewModel1.date = date
-        val secondFragment = WeatherDayFragment(date)
+        val secondFragment = WeatherDayFragment()
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view_tag, secondFragment)
             .addToBackStack(null)

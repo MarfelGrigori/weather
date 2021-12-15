@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.utils.setPicture
-import com.example.weatherapplication.utils.toPicture
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 data class WeatherWeek(
@@ -32,7 +31,7 @@ data class WeatherWeek(
         binding.wind.text = data.wind
         binding.pressure.text = data.pressure
         binding.temperature.text = data.temp
-        data.text.toPicture().setPicture(binding.image)
+        data.picture.setPicture(binding.image)
     }
 }
 

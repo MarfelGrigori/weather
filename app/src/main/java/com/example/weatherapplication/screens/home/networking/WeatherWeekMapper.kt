@@ -4,6 +4,7 @@ import com.example.weatherapplication.screens.home.entities.WeatherWeek
 import com.example.weatherapplication.screens.home.entities.WeatherWeekWithAllParameters
 import com.example.weatherapplication.utils.Converter.getDate
 import com.example.weatherapplication.utils.Converter.getDay
+import com.example.weatherapplication.utils.toPicture
 
 fun WeatherWeekResponse.toWeatherWeek(): List<WeatherWeek> {
     val list = ArrayList<WeatherWeek>()
@@ -13,10 +14,11 @@ fun WeatherWeekResponse.toWeatherWeek(): List<WeatherWeek> {
                 data = WeatherWeekWithAllParameters(
                     it.dt.times(1000).getDate("dd/MM/yyyy "),
                     text = it.weather[0].main,
-                    temp = it.temp.day.toInt(),
-                    pressure = it.pressure,
-                    wind = it.wind_speed.toInt(),
-                    day = it.dt.times(1000).getDay()
+                    temp = it.temp.day.toInt().toString(),
+                    pressure = it.pressure.toString(),
+                    wind = it.wind_speed.toInt().toString(),
+                    day = it.dt.times(1000).getDay(),
+                    picture = it.weather[0].main.toPicture()
                 )
             )
         )

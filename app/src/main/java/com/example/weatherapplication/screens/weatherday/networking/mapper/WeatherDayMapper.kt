@@ -4,6 +4,7 @@ import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDayWithAllParameters
 import com.example.weatherapplication.screens.weatherday.networking.response.WeatherDayResponse
 import com.example.weatherapplication.utils.Converter.getDate
+import com.example.weatherapplication.utils.toPicture
 
 fun WeatherDayResponse.toWeatherDay(): List<WeatherDay> {
     val list = ArrayList<WeatherDay>()
@@ -16,7 +17,8 @@ fun WeatherDayResponse.toWeatherDay(): List<WeatherDay> {
                     temp = it.main?.temp,
                     newDay = it.dt.toString(),
                     pressure = it.main?.pressure,
-                    wind = it.wind.speed.toInt()
+                    wind = it.wind.speed.toInt(),
+                    picture = it.weather?.get(0)?.main.toString().toPicture()
                 )
             )
         )

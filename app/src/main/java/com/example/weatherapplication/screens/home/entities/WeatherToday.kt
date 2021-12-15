@@ -1,5 +1,7 @@
 package com.example.weatherapplication.screens.home.entities
 
+import com.example.weatherapplication.utils.Picture
+
 data class WeatherToday(
     val city: String,
     val country: String,
@@ -10,6 +12,7 @@ data class WeatherToday(
     val snow: Double,
     val pressure: Int,
     val speed: Double,
-    val deg: String
+    val deg: String,
+    val picture: Picture?
 )
 

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
@@ -15,7 +14,7 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 
-class WeatherDayFragment(private val date: String) : BaseFragment() {
+class WeatherDayFragment : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding
     val viewModel: SecondViewModel by activityViewModels { viewModelFactory }
@@ -36,7 +35,7 @@ class WeatherDayFragment(private val date: String) : BaseFragment() {
         binding?.recyclerView?.itemAnimator = null
         viewModel.loadData()
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
-                FastAdapterDiffUtil[itemAdapter] = it
+            FastAdapterDiffUtil[itemAdapter] = it
         }
         viewModel.errorBus.observe(viewLifecycleOwner) {
             MaterialAlertDialogBuilder(requireContext()).setTitle(it)

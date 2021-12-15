@@ -10,6 +10,7 @@ import com.example.weatherapplication.screens.home.entities.WeatherWeek
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
+import com.example.weatherapplication.utils.Picture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,6 +51,9 @@ open class MainViewModel @Inject constructor(
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _picture =MutableLiveData<Picture>()
+     val picture :LiveData<Picture> = _picture
 
     fun loadAll() {
         _isLoading.value = true
