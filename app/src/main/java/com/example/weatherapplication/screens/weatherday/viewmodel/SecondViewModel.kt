@@ -50,7 +50,7 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
         ioScope.launch {
             try {
                 _weatherDay.postValue(
-                    loadWeatherUseCase.loadWeatherDay(lat,lon)?.filter { it.time.contains(date.toString()) })
+                    loadWeatherUseCase.loadWeatherDay(lat,lon)?.filter { it.data.time.contains(date.toString()) })
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }

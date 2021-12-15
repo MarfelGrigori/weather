@@ -45,7 +45,7 @@ class HomeFragment : BaseFragment() {
         viewModel.weatherWeek.observe(viewLifecycleOwner) {
             val items = mutableListOf<WeatherWeek>()
             repeat(it.size) { index->
-                items.add(it[index].withIdentifier())
+                items.add(it[index])
                 Log.e("TAG", it[index].identifier.toString())
             }
             FastAdapterDiffUtil[itemAdapter] = items
@@ -72,7 +72,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun changeFragment (item : WeatherWeek){
-        val date =item.date
+        val date =item.data.date
         viewModel1.date = date
         val secondFragment = WeatherDayFragment(date)
         parentFragmentManager.beginTransaction()
