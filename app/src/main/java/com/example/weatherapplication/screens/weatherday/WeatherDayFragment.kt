@@ -35,7 +35,11 @@ class WeatherDayFragment : BaseFragment() {
         binding?.recyclerView?.itemAnimator = null
         viewModel.loadData()
         viewModel.weatherToDay.observe(viewLifecycleOwner) {
-            FastAdapterDiffUtil[itemAdapter] = it
+            val items = mutableListOf<WeatherDay>()
+            it.forEach { it1->
+                items.add(WeatherDay(it1))
+            }
+            FastAdapterDiffUtil[itemAdapter] = items
         }
         viewModel.errorBus.observe(viewLifecycleOwner) {
             MaterialAlertDialogBuilder(requireContext()).setTitle(it)

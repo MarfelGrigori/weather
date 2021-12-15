@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.R
-import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
+import com.example.weatherapplication.screens.weatherday.entities.WeatherDayWithAllParameters
 import com.example.weatherapplication.useCases.LoadWeatherDayUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +20,8 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
-    private val _weatherDay = MutableLiveData<List<WeatherDay>>()
-    val weatherToDay: LiveData<List<WeatherDay>> = _weatherDay
+    private val _weatherDay = MutableLiveData<List<WeatherDayWithAllParameters>>()
+    val weatherToDay: LiveData<List<WeatherDayWithAllParameters>> = _weatherDay
 
     private val _errorBus = MutableLiveData<String>()
     val errorBus: LiveData<String> = _errorBus
@@ -50,7 +50,7 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
         ioScope.launch {
             try {
                 _weatherDay.postValue(
-                    loadWeatherUseCase.loadWeatherDay(lat,lon)?.filter { it.data.time.contains(date.toString()) })
+                    loadWeatherUseCase.loadWeatherDay(lat,lon)?.filter { it.time.contains(date.toString()) })
             } catch (e: Exception) {
                 _errorBus.postValue(e.message)
             }
