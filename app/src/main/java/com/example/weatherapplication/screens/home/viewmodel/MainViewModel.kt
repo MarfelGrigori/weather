@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.R
 import com.example.weatherapplication.screens.home.entities.WeatherWeek
+import com.example.weatherapplication.screens.home.entities.WeatherWeekWithAllParameters
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
@@ -46,8 +47,8 @@ open class MainViewModel @Inject constructor(
     private val _errorBus = MutableLiveData<String>()
     val errorBus: LiveData<String> = _errorBus
 
-    private val _weatherWeek = MutableLiveData<List<WeatherWeek>>()
-    val weatherWeek: LiveData<List<WeatherWeek>> = _weatherWeek
+    private val _weatherWeek = MutableLiveData<List<WeatherWeekWithAllParameters>>()
+    val weatherWeek: LiveData<List<WeatherWeekWithAllParameters>> = _weatherWeek
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading

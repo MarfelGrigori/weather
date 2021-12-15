@@ -42,7 +42,11 @@ class HomeFragment : BaseFragment() {
         binding.recyclerView.adapter = fastAdapter
         binding.recyclerView.itemAnimator = null
         viewModel.weatherWeek.observe(viewLifecycleOwner) {
-            FastAdapterDiffUtil[itemAdapter] = it
+           val items = mutableListOf<WeatherWeek>()
+            it.forEach { it1->
+               items.add(WeatherWeek(it1))
+           }
+            FastAdapterDiffUtil[itemAdapter] = items
         }
 
         fastAdapter.onClickListener = { _, _, item, _ ->
