@@ -17,7 +17,6 @@ class Location {
         viewModel: MainViewModel,
         viewModel1: SecondViewModel
     ) {
-
         val setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double ->
             viewModel.setLocation(lat, lon)
             viewModel1.setLocation(lat, lon)

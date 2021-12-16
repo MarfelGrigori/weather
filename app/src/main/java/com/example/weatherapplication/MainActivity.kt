@@ -33,7 +33,6 @@ class MainActivity : DaggerAppCompatActivity() {
         location.getLocation(this, viewModel, viewModel1)
         viewModel.loadAll()
         viewModel1.loadData()
-
     }
 }
 

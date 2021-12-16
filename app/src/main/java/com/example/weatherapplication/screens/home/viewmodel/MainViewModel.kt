@@ -13,6 +13,8 @@ import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
 import com.example.weatherapplication.utils.Picture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,32 +30,32 @@ open class MainViewModel @Inject constructor(
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
-    private val _temperatureToday = MutableLiveData<String>()
-    val temperatureToday: LiveData<String> = _temperatureToday
+    private val _temperatureToday = MutableStateFlow<String?>(null)
+    val temperatureToday: StateFlow<String?> = _temperatureToday
 
-    private val _mainToday = MutableLiveData<String>()
-    val mainToday: LiveData<String> = _mainToday
+    private val _mainToday = MutableStateFlow<String?>(null)
+    val mainToday: StateFlow<String?> = _mainToday
 
-    private val _currentCity = MutableLiveData<String>()
-    val currentCity: LiveData<String> = _currentCity
+    private val _currentCity = MutableStateFlow<String?>(null)
+    val currentCity: StateFlow<String?> = _currentCity
 
-    private val _currentCountry = MutableLiveData<String>()
-    val currentCountry: LiveData<String> = _currentCountry
+    private val _currentCountry = MutableStateFlow<String?>(null)
+    val currentCountry: StateFlow<String?> = _currentCountry
 
-    private val _weatherDay = MutableLiveData<List<WeatherDay>>()
-    val weatherToDay: LiveData<List<WeatherDay>> = _weatherDay
+    private val _weatherDay = MutableStateFlow<List<WeatherDay>?>(null)
+    val weatherToDay: StateFlow<List<WeatherDay>?> = _weatherDay
 
-    private val _errorBus = MutableLiveData<String>()
-    val errorBus: LiveData<String> = _errorBus
+    private val _errorBus = MutableStateFlow<String?>(null)
+    val errorBus: StateFlow<String?> = _errorBus
 
-    private val _weatherWeek = MutableLiveData<List<WeatherWeekWithAllParameters>>()
-    val weatherWeek: LiveData<List<WeatherWeekWithAllParameters>> = _weatherWeek
+    private val _weatherWeek = MutableStateFlow<List<WeatherWeekWithAllParameters>?>(emptyList())
+    val weatherWeek: MutableStateFlow<List<WeatherWeekWithAllParameters>?> = _weatherWeek
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
+    private val _isLoading = MutableStateFlow<Boolean?>(null)
+    val isLoading: StateFlow<Boolean?> = _isLoading
 
-    private val _picture = MutableLiveData<Picture>()
-    val picture: LiveData<Picture> = _picture
+    private val _picture = MutableStateFlow<Picture?>(null)
+    val picture: StateFlow<Picture?> = _picture
 
     fun loadAll() {
         _isLoading.value = true
@@ -63,7 +65,7 @@ open class MainViewModel @Inject constructor(
             loadWeatherToday(lat, lon)
             loadWeatherWeek(lat, lon)
             checkError()
-            _isLoading.postValue(false)
+            _isLoading.value = false
         }
     }
 
@@ -80,12 +82,12 @@ open class MainViewModel @Inject constructor(
         ioScope.launch {
             try {
                 val weatherToday = loadWeatherTodayUseCase.loadWeatherToday(lat, lon)
-                _temperatureToday.postValue(weatherToday?.temp)
-                _mainToday.postValue(weatherToday?.main)
-                _currentCity.postValue(weatherToday?.city)
-                _currentCountry.postValue(weatherToday?.country)
+                _temperatureToday.value= weatherToday?.temp.toString()
+                _mainToday.value =weatherToday?.main
+                _currentCity.value=weatherToday?.city
+                _currentCountry.value=weatherToday?.country
             } catch (e: Exception) {
-                _errorBus.postValue(e.message)
+                _errorBus.value=e.message
             }
         }
     }
@@ -93,11 +95,11 @@ open class MainViewModel @Inject constructor(
     private fun loadWeatherWeek(lat: String, lon: String) {
         ioScope.launch {
             try {
-                _weatherWeek.postValue(
+                _weatherWeek.value =
                     loadWeatherWeekUseCase.loadWeatherWeek(lat, lon)?.subList(0, 6)
-                )
+
             } catch (e: Exception) {
-                _errorBus.postValue(e.message)
+                _errorBus.value =e.message
             }
         }
     }

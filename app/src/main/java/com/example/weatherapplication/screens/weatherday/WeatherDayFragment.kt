@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
@@ -13,6 +14,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class WeatherDayFragment : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
@@ -34,11 +37,12 @@ class WeatherDayFragment : BaseFragment() {
         binding?.recyclerView?.adapter = fastAdapter
         binding?.recyclerView?.itemAnimator = null
         viewModel.loadData()
-        viewModel.weatherToDay.observe(viewLifecycleOwner) {
-            val items = it.map { WeatherDay(it) } as MutableList<WeatherDay>
+        viewModel.weatherToDay.onEach {
+            val items = it?.map { WeatherDay(it) } as MutableList<WeatherDay>
             FastAdapterDiffUtil[itemAdapter] = items
         }
-        viewModel.errorBus.observe(viewLifecycleOwner) {
+            .launchIn(lifecycleScope)
+        viewModel.errorBus.onEach {
             MaterialAlertDialogBuilder(requireContext()).setTitle(it)
                 .setMessage(it).show()
         }

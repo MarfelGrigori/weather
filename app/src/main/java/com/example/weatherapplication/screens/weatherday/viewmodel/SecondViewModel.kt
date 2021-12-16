@@ -8,6 +8,8 @@ import com.example.weatherapplication.screens.weatherday.entities.WeatherDayWith
 import com.example.weatherapplication.useCases.LoadWeatherDayUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,11 +23,11 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
-    private val _weatherDay = MutableLiveData<List<WeatherDayWithAllParameters>>()
-    val weatherToDay: LiveData<List<WeatherDayWithAllParameters>> = _weatherDay
+    private val _weatherDay = MutableStateFlow<List<WeatherDayWithAllParameters>?>(null)
+    val weatherToDay: StateFlow<List<WeatherDayWithAllParameters>?> = _weatherDay
 
-    private val _errorBus = MutableLiveData<String>()
-    val errorBus: LiveData<String> = _errorBus
+    private val _errorBus = MutableStateFlow<String?>(null)
+    val errorBus: StateFlow<String?> = _errorBus
 
     var date: String? = null
 
@@ -49,11 +51,11 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
     private fun loadWeatherDay(lat: String, lon: String) {
         ioScope.launch {
             try {
-                _weatherDay.postValue(
+                _weatherDay.value=
                     loadWeatherUseCase.loadWeatherDay(lat, lon)
-                        ?.filter { it.time.contains(date.toString()) })
+                        ?.filter { it.time.contains(date.toString()) }
             } catch (e: Exception) {
-                _errorBus.postValue(e.message)
+                _errorBus.value = e.message
             }
         }
     }

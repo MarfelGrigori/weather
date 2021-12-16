@@ -6,7 +6,6 @@ data class WeatherDayResponse(
     @SerializedName("list")
     val list: List<Weathers>?,
 ) {
-
     data class Weathers(
         @SerializedName("dt")
         val dt: Long?,

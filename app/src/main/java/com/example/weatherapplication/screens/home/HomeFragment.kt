@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentFirstBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.home.entities.WeatherWeek
+import com.example.weatherapplication.screens.home.entities.WeatherWeekWithAllParameters
 import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
 import com.example.weatherapplication.screens.weatherday.WeatherDayFragment
 import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
@@ -18,6 +20,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
@@ -40,29 +44,37 @@ class HomeFragment : BaseFragment() {
         val fastAdapter = FastAdapter.with(itemAdapter)
         binding.recyclerView.adapter = fastAdapter
         binding.recyclerView.itemAnimator = null
-        viewModel.weatherWeek.observe(viewLifecycleOwner) {
-            val items = it.map { WeatherWeek(it) }
+        viewModel.weatherWeek.onEach {
+            val items = it?.map { WeatherWeek(it) } as MutableList<WeatherWeek>
             FastAdapterDiffUtil[itemAdapter] = items
         }
+            .launchIn(lifecycleScope)
 
         fastAdapter.onClickListener = { _, _, item, _ ->
             changeFragment(item)
             false
         }
-        viewModel.isLoading.observe(viewLifecycleOwner) {
+        viewModel.isLoading.onEach {
             binding.progressBar.changeVisibility(it)
         }
-        viewModel.errorBus.observe(viewLifecycleOwner) {
+            .launchIn(lifecycleScope)
+        viewModel.errorBus.onEach {
             MaterialAlertDialogBuilder(requireContext()).setTitle(it)
                 .setMessage(it).show()
         }
-        viewModel.temperatureToday.observe(viewLifecycleOwner, binding.temperature::setText)
-        viewModel.currentCity.observe(viewLifecycleOwner, binding.city::setText)
-        viewModel.currentCountry.observe(viewLifecycleOwner, binding.country::setText)
-        viewModel.mainToday.observe(viewLifecycleOwner, binding.main::setText)
-        viewModel.picture.observe(viewLifecycleOwner) {
-            it.setPicture(binding.image)
+            .launchIn(lifecycleScope)
+        viewModel.temperatureToday.onEach { temperature-> binding.temperature.text= temperature}
+            .launchIn(lifecycleScope)
+        viewModel.currentCity.onEach {city-> binding.city.text = city }
+            .launchIn(lifecycleScope)
+        viewModel.currentCountry.onEach { binding.country.text = it }
+            .launchIn(lifecycleScope)
+        viewModel.mainToday.onEach { main -> binding.main.text = main }
+            .launchIn(lifecycleScope)
+        viewModel.picture.onEach {
+            it?.setPicture(binding.image)
         }
+            .launchIn(lifecycleScope)
     }
 
     private fun changeFragment(item: WeatherWeek) {
@@ -80,3 +92,5 @@ class HomeFragment : BaseFragment() {
         _binding = null
     }
 }
+
+
