@@ -1,6 +1,7 @@
 package com.example.weatherapplication.screens.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,13 @@ class HomeFragment : BaseFragment() {
         binding?.recyclerView?.itemAnimator = null
         viewModel.weatherWeek.onEach {
             val items = it?.map { WeatherWeek(it) } as MutableList<WeatherWeek>
-            FastAdapterDiffUtil[itemAdapter] = items
+            binding?.head?.setOnClickListener { changeFragment(items[0]) }
+            try {
+                val list = items.subList(1,items.size-1)
+                FastAdapterDiffUtil[itemAdapter] = list
+            } catch (e: Exception){}
+
+
         }
             .launchIn(lifecycleScope)
 
