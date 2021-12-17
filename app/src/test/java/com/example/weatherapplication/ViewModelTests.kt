@@ -7,6 +7,7 @@ import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
 import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
 import junit.framework.Assert.assertNotNull
+import kotlinx.coroutines.flow.StateFlow
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,10 +22,7 @@ class ViewModelTests {
     private lateinit var viewModel: MainViewModel
 
     @Mock
-    private lateinit var isLoadingLiveData: LiveData<Boolean>
-
-    @Mock
-    private lateinit var observer: Observer<in Boolean>
+    private lateinit var isLoading: StateFlow<Boolean?>
 
     // 3
 
@@ -39,14 +37,13 @@ class ViewModelTests {
     fun setup() {
         MockitoAnnotations.initMocks(this)
         viewModel = spy(MainViewModel(second, first))
-        isLoadingLiveData = viewModel.isLoading
+        isLoading = viewModel.isLoading
     }
 
     @Test
     fun `Verify livedata values changes on event`() {
         assertNotNull(viewModel.loadAll())
-        viewModel.isLoading.observeForever(observer)
-        verify(observer).onChanged(true)
+        assertNotNull(isLoading)
         assertNotNull(viewModel.currentCity)
         assertNotNull(viewModel.currentCountry)
         assertNotNull(viewModel.weatherWeek)

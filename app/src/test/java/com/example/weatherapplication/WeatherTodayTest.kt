@@ -1,6 +1,7 @@
 package com.example.weatherapplication
 
 import com.example.weatherapplication.screens.home.entities.WeatherToday
+import com.example.weatherapplication.utils.Picture
 import org.junit.After
 import org.junit.Assert
 import org.junit.Test
@@ -9,7 +10,7 @@ import org.junit.Test
 class WeatherTodayTest {
 
     var weatherTodayEntity: WeatherToday? =
-        WeatherToday("Hrodna", "BY", "228", "Clear", 100, 0.01, 0.0, 1001, 1.1, "W")
+        WeatherToday("Hrodna", "BY", "228", "Clear", 100, 0.01, 0.0, 1001, 1.1, "W",Picture.SNOW)
 
     @Test
     fun testCity() {
@@ -23,7 +24,7 @@ class WeatherTodayTest {
 
     @Test
     fun testTemp() {
-        Assert.assertEquals(228, weatherTodayEntity?.temp)
+        Assert.assertEquals("228", weatherTodayEntity?.temp)
     }
 
     @Test
