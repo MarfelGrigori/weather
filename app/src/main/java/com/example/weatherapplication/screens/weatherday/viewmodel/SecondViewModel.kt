@@ -1,14 +1,15 @@
 package com.example.weatherapplication.screens.weatherday.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.R
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDayWithAllParameters
 import com.example.weatherapplication.useCases.LoadWeatherDayUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,11 +24,15 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
-    private val _weatherDay = MutableStateFlow<List<WeatherDayWithAllParameters>?>(null)
+    private val _weatherDay = MutableStateFlow<List<WeatherDayWithAllParameters>?>(emptyList())
     val weatherToDay: StateFlow<List<WeatherDayWithAllParameters>?> = _weatherDay
 
-    private val _errorBus = MutableStateFlow<String?>(null)
-    val errorBus: StateFlow<String?> = _errorBus
+    private val _errorBus = MutableSharedFlow<String?>(
+        replay = 1,
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.SUSPEND
+    )
+    val errorBus: SharedFlow<String?> = _errorBus
 
     var date: String? = null
 
@@ -51,17 +56,16 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
     private fun loadWeatherDay(lat: String, lon: String) {
         ioScope.launch {
             try {
-                _weatherDay.value=
+                _weatherDay.value =
                     loadWeatherUseCase.loadWeatherDay(lat, lon)
                         ?.filter { it.time.contains(date.toString()) }
             } catch (e: Exception) {
-                _errorBus.value = e.message
+                _errorBus.emit(e.message)
             }
         }
     }
 
     private fun checkError() {
-        if (_errorBus.value == R.string.error_network_text.toString()) _errorBus.value =
-            R.string.error.toString()
+        if (_errorBus.toString() == R.string.error_network_text.toString()) _errorBus.tryEmit(R.string.error.toString())
     }
 }

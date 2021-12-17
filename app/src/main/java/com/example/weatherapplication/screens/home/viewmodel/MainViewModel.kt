@@ -2,8 +2,6 @@ package com.example.weatherapplication.screens.home.viewmodel
 
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.R
 import com.example.weatherapplication.screens.home.entities.WeatherWeekWithAllParameters
@@ -13,7 +11,10 @@ import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
 import com.example.weatherapplication.utils.Picture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,31 +31,31 @@ open class MainViewModel @Inject constructor(
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
-    private val _temperatureToday = MutableStateFlow<String?>(null)
+    private val _temperatureToday = MutableStateFlow<String?>("")
     val temperatureToday: StateFlow<String?> = _temperatureToday
 
-    private val _mainToday = MutableStateFlow<String?>(null)
+    private val _mainToday = MutableStateFlow<String?>("")
     val mainToday: StateFlow<String?> = _mainToday
 
-    private val _currentCity = MutableStateFlow<String?>(null)
+    private val _currentCity = MutableStateFlow<String?>("")
     val currentCity: StateFlow<String?> = _currentCity
 
-    private val _currentCountry = MutableStateFlow<String?>(null)
+    private val _currentCountry = MutableStateFlow<String?>("")
     val currentCountry: StateFlow<String?> = _currentCountry
 
-    private val _weatherDay = MutableStateFlow<List<WeatherDay>?>(null)
+    private val _weatherDay = MutableStateFlow<List<WeatherDay>?>(emptyList())
     val weatherToDay: StateFlow<List<WeatherDay>?> = _weatherDay
 
-    private val _errorBus = MutableStateFlow<String?>(null)
-    val errorBus: StateFlow<String?> = _errorBus
+    private val _errorBus = MutableSharedFlow<String?>(replay = 1,extraBufferCapacity = 1,onBufferOverflow = BufferOverflow.SUSPEND)
+    val errorBus: SharedFlow<String?> = _errorBus
 
     private val _weatherWeek = MutableStateFlow<List<WeatherWeekWithAllParameters>?>(emptyList())
     val weatherWeek: MutableStateFlow<List<WeatherWeekWithAllParameters>?> = _weatherWeek
 
-    private val _isLoading = MutableStateFlow<Boolean?>(null)
+    private val _isLoading = MutableStateFlow<Boolean?>(true)
     val isLoading: StateFlow<Boolean?> = _isLoading
 
-    private val _picture = MutableStateFlow<Picture?>(null)
+    private val _picture = MutableStateFlow<Picture?>(Picture.CLOUDS)
     val picture: StateFlow<Picture?> = _picture
 
     fun loadAll() {
@@ -87,7 +88,7 @@ open class MainViewModel @Inject constructor(
                 _currentCity.value=weatherToday?.city
                 _currentCountry.value=weatherToday?.country
             } catch (e: Exception) {
-                _errorBus.value=e.message
+                _errorBus.emit(e.message)
             }
         }
     }
@@ -99,13 +100,13 @@ open class MainViewModel @Inject constructor(
                     loadWeatherWeekUseCase.loadWeatherWeek(lat, lon)?.subList(0, 6)
 
             } catch (e: Exception) {
-                _errorBus.value =e.message
+                _errorBus.emit(e.message)
             }
         }
     }
 
     private fun checkError() {
-        if (_errorBus.value == R.string.error_network_text.toString()) _errorBus.value =
-            R.string.error.toString()
+        if (_errorBus.toString() == R.string.error_network_text.toString()) _errorBus.tryEmit(R.string.error.toString())
+
     }
 }
