@@ -24,8 +24,6 @@ class ViewModelTests {
     @Mock
     private lateinit var isLoading: StateFlow<Boolean?>
 
-    // 3
-
     private val first = mock(LoadWeatherWeekUseCase::class.java)
     private val second = mock(LoadWeatherTodayUseCase::class.java)
 

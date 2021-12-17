@@ -46,7 +46,7 @@ open class MainViewModel @Inject constructor(
     private val _weatherDay = MutableStateFlow<List<WeatherDay>?>(emptyList())
     val weatherToDay: StateFlow<List<WeatherDay>?> = _weatherDay
 
-    private val _errorBus = MutableSharedFlow<String?>(replay = 1,extraBufferCapacity = 1,onBufferOverflow = BufferOverflow.SUSPEND)
+    private val _errorBus = MutableSharedFlow<String?>(replay = 1,extraBufferCapacity = 0,onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val errorBus: SharedFlow<String?> = _errorBus
 
     private val _weatherWeek = MutableStateFlow<List<WeatherWeekWithAllParameters>?>(emptyList())

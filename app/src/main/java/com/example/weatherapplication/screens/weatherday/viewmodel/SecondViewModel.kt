@@ -27,11 +27,7 @@ open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: L
     private val _weatherDay = MutableStateFlow<List<WeatherDayWithAllParameters>?>(emptyList())
     val weatherToDay: StateFlow<List<WeatherDayWithAllParameters>?> = _weatherDay
 
-    private val _errorBus = MutableSharedFlow<String?>(
-        replay = 1,
-        extraBufferCapacity = 1,
-        onBufferOverflow = BufferOverflow.SUSPEND
-    )
+    private val _errorBus = MutableSharedFlow<String?>(replay = 1, extraBufferCapacity = 0, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val errorBus: SharedFlow<String?> = _errorBus
 
     var date: String? = null
