@@ -1,7 +1,7 @@
 package com.example.weatherapplication
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
+import com.example.weatherapplication.screens.weatherday.viewmodel.WeatherDayViewModel
 import com.example.weatherapplication.useCases.LoadWeatherDayUseCase
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations
 class SecondViewModelTest {
 
     @Mock
-    private lateinit var viewModel: SecondViewModel
+    private lateinit var viewModel: WeatherDayViewModel
 
     private val first = Mockito.mock(LoadWeatherDayUseCase::class.java)
 
@@ -26,7 +26,7 @@ class SecondViewModelTest {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        viewModel = spy(SecondViewModel(first))
+        viewModel = spy(WeatherDayViewModel(first))
     }
 
     @Test

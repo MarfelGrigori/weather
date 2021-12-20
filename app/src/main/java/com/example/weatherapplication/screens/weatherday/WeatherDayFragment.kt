@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
-import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
+import com.example.weatherapplication.screens.weatherday.viewmodel.WeatherDayViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.onEach
 class WeatherDayFragment : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding
-    val viewModel: SecondViewModel by activityViewModels { viewModelFactory }
+    val viewModel: WeatherDayViewModel by activityViewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

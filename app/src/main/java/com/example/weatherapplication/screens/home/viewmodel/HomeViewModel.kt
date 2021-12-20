@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-open class MainViewModel @Inject constructor(
+open class HomeViewModel @Inject constructor(
     private val loadWeatherTodayUseCase: LoadWeatherTodayUseCase,
     private val loadWeatherWeekUseCase: LoadWeatherWeekUseCase
 ) : ViewModel() {

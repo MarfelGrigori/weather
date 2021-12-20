@@ -1,8 +1,8 @@
 package com.example.weatherapplication.di
 
 import androidx.lifecycle.ViewModel
-import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
-import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
+import com.example.weatherapplication.screens.home.viewmodel.HomeViewModel
+import com.example.weatherapplication.screens.weatherday.viewmodel.WeatherDayViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -13,11 +13,11 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindMainViewModel(mainViewModel: HomeViewModel): ViewModel
     @Binds
     @IntoMap
-    @ViewModelKey(SecondViewModel::class)
-    abstract fun bindSecondViewModel(mainViewModel: SecondViewModel): ViewModel
+    @ViewModelKey(WeatherDayViewModel::class)
+    abstract fun bindSecondViewModel(mainViewModel: WeatherDayViewModel): ViewModel
 
 }

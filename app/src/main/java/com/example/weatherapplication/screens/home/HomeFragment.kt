@@ -1,7 +1,6 @@
 package com.example.weatherapplication.screens.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,9 @@ import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentFirstBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.home.entities.WeatherWeek
-import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
+import com.example.weatherapplication.screens.home.viewmodel.HomeViewModel
 import com.example.weatherapplication.screens.weatherday.WeatherDayFragment
-import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
+import com.example.weatherapplication.screens.weatherday.viewmodel.WeatherDayViewModel
 import com.example.weatherapplication.utils.changeVisibility
 import com.example.weatherapplication.utils.setPicture
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -28,8 +27,8 @@ class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding
 
-    private val viewModel: MainViewModel by activityViewModels { viewModelFactory }
-    private val viewModel1: SecondViewModel by activityViewModels { viewModelFactory }
+    private val viewModel: HomeViewModel by activityViewModels { viewModelFactory }
+    private val viewModel1: WeatherDayViewModel by activityViewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

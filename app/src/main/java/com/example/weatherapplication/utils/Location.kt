@@ -7,15 +7,15 @@ import android.os.Looper
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
-import com.example.weatherapplication.screens.weatherday.viewmodel.SecondViewModel
+import com.example.weatherapplication.screens.home.viewmodel.HomeViewModel
+import com.example.weatherapplication.screens.weatherday.viewmodel.WeatherDayViewModel
 import com.google.android.gms.location.*
 
 class Location {
     fun getLocation(
         context: AppCompatActivity,
-        viewModel: MainViewModel,
-        viewModel1: SecondViewModel
+        viewModel: HomeViewModel,
+        viewModel1: WeatherDayViewModel
     ) {
         val setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double ->
             viewModel.setLocation(lat, lon)

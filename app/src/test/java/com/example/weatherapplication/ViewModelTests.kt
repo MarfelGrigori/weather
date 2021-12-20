@@ -1,9 +1,7 @@
 package com.example.weatherapplication
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import com.example.weatherapplication.screens.home.viewmodel.MainViewModel
+import com.example.weatherapplication.screens.home.viewmodel.HomeViewModel
 import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
 import junit.framework.Assert.assertNotNull
@@ -19,7 +17,7 @@ import org.mockito.MockitoAnnotations
 
 class ViewModelTests {
     @Mock
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: HomeViewModel
 
     @Mock
     private lateinit var isLoading: StateFlow<Boolean?>
@@ -34,7 +32,7 @@ class ViewModelTests {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        viewModel = spy(MainViewModel(second, first))
+        viewModel = spy(HomeViewModel(second, first))
         isLoading = viewModel.isLoading
     }
 

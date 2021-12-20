@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-open class SecondViewModel @Inject constructor(private val loadWeatherUseCase: LoadWeatherDayUseCase) :
+open class WeatherDayViewModel @Inject constructor(private val loadWeatherUseCase: LoadWeatherDayUseCase) :
     ViewModel() {
     private val MIN_LATITUDE = -90.0
     private val MAX_LATITUDE = 90.0
