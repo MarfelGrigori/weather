@@ -2,9 +2,9 @@ package com.example.weatherapplication.networking.weather
 
 import com.example.weatherapplication.BuildConfig
 import com.example.weatherapplication.networking.WeatherService
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -25,7 +25,8 @@ class WeatherApi @Inject constructor() {
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
         val retrofit = Retrofit.Builder().baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke()).client(client).build()
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .build()
         return retrofit.create()
     }
 }

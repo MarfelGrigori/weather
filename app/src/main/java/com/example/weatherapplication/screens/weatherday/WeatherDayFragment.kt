@@ -1,6 +1,7 @@
 package com.example.weatherapplication.screens.weatherday
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,15 +38,22 @@ class WeatherDayFragment : BaseFragment() {
         binding?.recyclerView?.adapter = fastAdapter
         binding?.recyclerView?.itemAnimator = null
         viewModel.loadData()
-        viewModel.weatherToDay.onEach {
-            val items = it?.map { WeatherDay(it) } as MutableList<WeatherDay>
-            FastAdapterDiffUtil[itemAdapter] = items
+        val items = ArrayList<WeatherDay>()
+        viewModel.list.forEach {
+            if (viewModel.date?.let { it1 -> it.time.contains(it1) } == true)
+                items.add(WeatherDay(it))
         }
+        viewModel.weatherToDay.onEach { FastAdapterDiffUtil[itemAdapter] = items }
             .launchIn(lifecycleScope)
+        Log.e("TAG", viewModel.date.toString())
+        viewModel.list.forEach { Log.e("TAG", it.toString()) }
+
+
         viewModel.errorBus.onEach {
             MaterialAlertDialogBuilder(requireContext()).setTitle(it)
                 .setMessage(it).show()
         }
+            .launchIn(lifecycleScope)
     }
 
     override fun onDestroyView() {
