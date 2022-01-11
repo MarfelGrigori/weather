@@ -34,6 +34,7 @@ class MainActivity : DaggerAppCompatActivity() {
         viewModel.loadAll()
         viewModel1.loadData()
     }
+
 }
 
 

@@ -10,6 +10,7 @@ enum class Picture(val main: String, val imageResource: Int) {
     CLOUDS_S("небольшая облачность", R.drawable.cloud),
     RAIN("дождь", R.drawable.union),
     SMALL_RAIN("небольшой дождь", R.drawable.union),
+    HEAVY_RAIN("сильный дождь",R.drawable.union),
     RAIN_SNOW("снег с дождём", R.drawable.union),
     CLEAR("ясно", R.drawable.sun),
     SNOW("снег", R.drawable.snow),
@@ -38,6 +39,9 @@ fun String.toPicture(): Picture {
             Picture.RAIN
         }
         (Picture.SMALL_RAIN.main) -> {
+            Picture.RAIN
+        }
+        (Picture.HEAVY_RAIN.main) -> {
             Picture.RAIN
         }
         (Picture.CLEAR.main) -> {

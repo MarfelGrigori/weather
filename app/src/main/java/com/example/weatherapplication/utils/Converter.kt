@@ -34,4 +34,5 @@ object Converter {
         val day: Int = ((TimeUnit.MILLISECONDS.toDays(this) % 7).toInt())
         return daysArray[day]
     }
+
 }

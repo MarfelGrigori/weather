@@ -4,6 +4,7 @@ import com.example.weatherapplication.screens.home.networking.WeatherTodayRespon
 import com.example.weatherapplication.screens.home.networking.WeatherWeekResponse
 import com.example.weatherapplication.screens.weatherday.networking.response.WeatherDayResponse
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -21,7 +22,7 @@ interface WeatherService {
         language: String,
         @Query("appid")
         appid: String
-    ): Observable<WeatherTodayResponse>
+    ): Single<WeatherTodayResponse>
 
     @GET("data/2.5/forecast")
      fun loadWeatherDay(
@@ -35,7 +36,7 @@ interface WeatherService {
         language: String,
         @Query("appid")
         appid: String
-    ): Observable<WeatherDayResponse>
+    ): Single<WeatherDayResponse>
 
     @GET("data/2.5/onecall")
      fun loadWeatherWeek(
@@ -51,5 +52,5 @@ interface WeatherService {
         language: String,
         @Query("appid")
         appid: String
-    ): Observable<WeatherWeekResponse>
+    ): Single<WeatherWeekResponse>
 }
