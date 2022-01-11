@@ -1,9 +1,13 @@
 package com.example.weatherapplication
 
+import android.util.Log
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.weatherapplication.networking.weather.WeatherApi
+import com.example.weatherapplication.repository.WeatherRepository
 import com.example.weatherapplication.screens.home.viewmodel.HomeViewModel
 import com.example.weatherapplication.useCases.LoadWeatherTodayUseCase
 import com.example.weatherapplication.useCases.LoadWeatherWeekUseCase
+import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import kotlinx.coroutines.flow.StateFlow
 import org.junit.Before
@@ -22,8 +26,8 @@ class ViewModelTests {
     @Mock
     private lateinit var isLoading: StateFlow<Boolean?>
 
-    private val first = mock(LoadWeatherWeekUseCase::class.java)
-    private val second = mock(LoadWeatherTodayUseCase::class.java)
+    private val api = WeatherApi()
+    private val repository = WeatherRepository(api)
 
     // 4
     @get:Rule
@@ -32,7 +36,7 @@ class ViewModelTests {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        viewModel = spy(HomeViewModel(second, first))
+        viewModel = spy(HomeViewModel(LoadWeatherTodayUseCase(repository), LoadWeatherWeekUseCase(repository)))
         isLoading = viewModel.isLoading
     }
 
@@ -51,6 +55,6 @@ class ViewModelTests {
 
     @Test
     fun `set location test`() {
-        assertNotNull(viewModel.setLocation(0.0, 0.0))
+assertNotNull(viewModel.setLocation(0.0,0.0))
     }
 }

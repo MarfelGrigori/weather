@@ -28,7 +28,7 @@ open class HomeViewModel @Inject constructor(
     private val MAX_LATITUDE = 90.0
     private val MIN_LONGITUDE = -180.0
     private val MAX_LONGITUDE = 180.0
-    private var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)
+     var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)
 
     private val _temperatureToday = MutableStateFlow<String?>("")
     val temperatureToday: StateFlow<String?> = _temperatureToday
@@ -48,8 +48,7 @@ open class HomeViewModel @Inject constructor(
     private val _errorBus = MutableSharedFlow<String?>(
         replay = 1,
         extraBufferCapacity = 0,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST
-    )
+        onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val errorBus: SharedFlow<String?> = _errorBus
 
     private val _weatherWeek = MutableStateFlow<List<WeatherWeekWithAllParameters>?>(emptyList())

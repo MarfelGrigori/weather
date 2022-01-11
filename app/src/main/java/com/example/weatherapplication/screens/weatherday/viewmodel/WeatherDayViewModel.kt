@@ -21,7 +21,7 @@ open class WeatherDayViewModel @Inject constructor(private val loadWeatherUseCas
     private val MAX_LATITUDE = 90.0
     private val MIN_LONGITUDE = -180.0
     private val MAX_LONGITUDE = 180.0
-    private var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)
+    var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)
 
     private val compositeDisposable = CompositeDisposable()
 

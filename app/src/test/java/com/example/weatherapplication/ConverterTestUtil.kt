@@ -23,7 +23,7 @@ class ConverterUtilTest {
     @Test
     fun testGetDay() {
         val actual: String = 1638511677L.getDay()
-        val expected = "Monday"
+        val expected = "Понедельник"
         assertEquals("get day", expected, actual)
     }
 
