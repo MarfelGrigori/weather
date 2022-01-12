@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -119,4 +120,6 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation "io.reactivex.rxjava3:rxjava:3.0.13"
     implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.31"
 }

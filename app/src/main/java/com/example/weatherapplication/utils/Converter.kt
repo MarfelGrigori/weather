@@ -1,8 +1,14 @@
 package com.example.weatherapplication.utils
 
 import android.annotation.SuppressLint
+import androidx.lifecycle.LifecycleCoroutineScope
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Flow
 import java.util.concurrent.TimeUnit
 
 object Converter {
@@ -34,5 +40,10 @@ object Converter {
         val day: Int = ((TimeUnit.MILLISECONDS.toDays(this) % 7).toInt())
         return daysArray[day]
     }
+    fun <T> kotlinx.coroutines.flow.Flow<T>.subscribe(
+        scope: LifecycleCoroutineScope,
+        action: suspend (T) -> Unit
+    ) = onEach(action).launchIn(scope)
 
+    fun<T>MutableSingleEventFlow() = MutableSharedFlow<T>(replay = 1,extraBufferCapacity = 0,onBufferOverflow = BufferOverflow.DROP_OLDEST)
 }

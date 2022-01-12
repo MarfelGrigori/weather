@@ -1,7 +1,6 @@
 package com.example.weatherapplication.screens.weatherday
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,49 +10,42 @@ import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.di.BaseFragment
 import com.example.weatherapplication.screens.weatherday.entities.WeatherDay
 import com.example.weatherapplication.screens.weatherday.viewmodel.WeatherDayViewModel
+import com.example.weatherapplication.utils.Converter.subscribe
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 class WeatherDayFragment : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
     val viewModel: WeatherDayViewModel by activityViewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val itemAdapter = ItemAdapter<WeatherDay>()
         val fastAdapter = FastAdapter.with(itemAdapter)
-        binding?.recyclerView?.adapter = fastAdapter
-        binding?.recyclerView?.itemAnimator = null
+        binding.recyclerView.adapter = fastAdapter
+        binding.recyclerView.itemAnimator = null
         viewModel.loadData()
         val items = ArrayList<WeatherDay>()
         viewModel.list.forEach {
             if (viewModel.date?.let { it1 -> it.time.contains(it1) } == true)
                 items.add(WeatherDay(it))
         }
-        viewModel.weatherToDay.onEach { FastAdapterDiffUtil[itemAdapter] = items }
-            .launchIn(lifecycleScope)
-        Log.e("TAG", viewModel.date.toString())
-        viewModel.list.forEach { Log.e("TAG", it.toString()) }
-
-
-        viewModel.errorBus.onEach {
+        viewModel.weatherToDay.subscribe(lifecycleScope) { FastAdapterDiffUtil[itemAdapter] = items }
+        viewModel.errorBus.subscribe(lifecycleScope) {
             MaterialAlertDialogBuilder(requireContext()).setTitle(it)
                 .setMessage(it).show()
         }
-            .launchIn(lifecycleScope)
     }
 
     override fun onDestroyView() {
