@@ -76,18 +76,14 @@ open class HomeViewModel @Inject constructor(
 
     private fun loadWeather(lat: String, lon: String) {
         _isLoading.value = true
-        loadWeatherTodayUseCase.loadWeather(lat, lon).first
+        loadWeatherTodayUseCase.loadWeather(lat, lon)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
-                 onTodayWeatherLoaded(response)
+                 onTodayWeatherLoaded(response.first)
+                _weatherWeek.value = response.second.toWeatherWeek().subList(1, response.second.toWeatherWeek().size - 1)
             }
             .also { compositeDisposable.add(it) }
-        compositeDisposable.add(loadWeatherTodayUseCase.loadWeather(lat, lon).second
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe { list ->
-                _weatherWeek.value = list.toWeatherWeek().subList(1, list.toWeatherWeek().size - 1)
-            })
         _isLoading.value = false
     }
 

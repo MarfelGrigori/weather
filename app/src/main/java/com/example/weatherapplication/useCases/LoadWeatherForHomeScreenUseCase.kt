@@ -12,10 +12,12 @@ open class LoadWeatherForHomeScreenUseCase @Inject constructor(private val weath
     fun loadWeather(
         lat: String,
         lon: String
-    ): Pair<Single<WeatherTodayResponse>, Single<WeatherWeekResponse>> {
-        return Pair(
-            weatherRepository.loadWeatherToday(lat, lon),
-            weatherRepository.loadWeatherWeek(lat, lon)
+    ): Single<Pair<WeatherTodayResponse, WeatherWeekResponse>> {
+        return weatherRepository.loadWeatherToday(lat, lon).zipWith(
+            weatherRepository.loadWeatherWeek(
+                lat,
+                lon
+            ), { first, second -> Pair(first, second) }
         )
     }
 }
