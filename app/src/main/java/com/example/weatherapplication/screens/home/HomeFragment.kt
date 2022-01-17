@@ -28,7 +28,6 @@ class HomeFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private val viewModel: HomeViewModel by activityViewModels { viewModelFactory }
-    private val viewModel1: WeatherDayViewModel by activityViewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +43,8 @@ class HomeFragment : BaseFragment() {
         val fastAdapter = FastAdapter.with(itemAdapter)
         binding.recyclerView.adapter = fastAdapter
         binding.recyclerView.itemAnimator = null
-        viewModel.weatherWeek.subscribe(lifecycleScope) {
-            val items = it?.map { WeatherWeek(it) } as MutableList<WeatherWeek>
+        viewModel.weatherWeek.subscribe(lifecycleScope) { it ->
+            val items = it.map { WeatherWeek(it) } as MutableList<WeatherWeek>
             binding.head.setOnClickListener { changeFragment(items[0]) }
             try {
                 FastAdapterDiffUtil[itemAdapter] = items
@@ -73,8 +72,10 @@ class HomeFragment : BaseFragment() {
 
     private fun changeFragment(item: WeatherWeek) {
         val date = item.data.date
-        viewModel1.date = date
+        val bundle = Bundle()
+        bundle.putString("message", date)
         val secondFragment = WeatherDayFragment()
+        secondFragment.arguments = bundle
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view_tag, secondFragment)
             .addToBackStack(null)

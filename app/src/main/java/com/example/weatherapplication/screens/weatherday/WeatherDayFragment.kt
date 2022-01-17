@@ -38,7 +38,7 @@ class WeatherDayFragment : BaseFragment() {
         viewModel.loadData()
         val items = ArrayList<WeatherDay>()
         viewModel.list.forEach {
-            if (viewModel.date?.let { it1 -> it.time.contains(it1) } == true)
+            if (arguments?.getString("message").let { it1 -> it1?.let { it2 -> it.time.contains(it2) } } == true)
                 items.add(WeatherDay(it))
         }
         viewModel.weatherToDay.subscribe(lifecycleScope) { FastAdapterDiffUtil[itemAdapter] = items }
