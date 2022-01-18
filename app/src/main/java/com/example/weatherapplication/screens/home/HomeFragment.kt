@@ -44,7 +44,7 @@ class HomeFragment : BaseFragment() {
         viewModel.weatherWeek.subscribe(lifecycleScope) { it ->
             val items = it.map { WeatherWeek(it) } as MutableList<WeatherWeek>
             try {
-                FastAdapterDiffUtil[itemAdapter] = items.subList(1,items.size)
+                FastAdapterDiffUtil[itemAdapter] = items.subList(1, items.size)
             } catch (e: Exception) {
                 Log.e("TAG", "error")
             }
@@ -66,7 +66,9 @@ class HomeFragment : BaseFragment() {
         viewModel.currentCity.subscribe(lifecycleScope, _binding!!.city::setText)
         viewModel.currentCountry.subscribe(lifecycleScope, _binding!!.country::setText)
         viewModel.mainToday.subscribe(lifecycleScope, _binding!!.main::setText)
-        viewModel.picture.subscribe(lifecycleScope) { it?.setPicture(_binding?.image) }
+        viewModel.picture.subscribe(lifecycleScope) {
+            it?.setPicture(_binding!!.image)
+        }
     }
 
     private fun changeFragment(item: WeatherWeek) {

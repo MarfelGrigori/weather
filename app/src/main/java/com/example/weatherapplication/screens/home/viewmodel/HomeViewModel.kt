@@ -25,7 +25,8 @@ private const val MIN_LONGITUDE = -180.0
 private const val MAX_LONGITUDE = 180.0
 
 open class HomeViewModel @Inject constructor(
-    private val loadWeatherTodayUseCase: LoadWeatherForHomeScreenUseCase) : ViewModel() {
+    private val loadWeatherTodayUseCase: LoadWeatherForHomeScreenUseCase
+) : ViewModel() {
 
     var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)
 
@@ -54,8 +55,8 @@ open class HomeViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean?> = _isLoading
 
-    private val _picture = MutableStateFlow<Picture?>(Picture.CLOUDS)
-    val picture: StateFlow<Picture?> = _picture
+    private var _picture = MutableStateFlow<Picture?>(null)
+    var picture: StateFlow<Picture?> = _picture
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -68,7 +69,7 @@ open class HomeViewModel @Inject constructor(
     }
 
     fun setLocation(latNew: Double, lonNew: Double) {
-        val (lat,lon) = _location
+        val (lat, lon) = _location
         if (lat !in latNew - 0.01..latNew + 0.01 || lon !in lonNew - 0.01..lonNew + 0.01)
             _location = (Pair(latNew, lonNew))
         loadAll()
@@ -80,8 +81,9 @@ open class HomeViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
-                 onTodayWeatherLoaded(response.first)
-                _weatherWeek.value = response.second.toWeatherWeek().subList(0,response.second.toWeatherWeek().size-3)
+                onTodayWeatherLoaded(response.first)
+                _weatherWeek.value = response.second.toWeatherWeek()
+                    .subList(0, response.second.toWeatherWeek().size - 3)
             }
             .also { compositeDisposable.add(it) }
         _isLoading.value = false
@@ -97,6 +99,7 @@ open class HomeViewModel @Inject constructor(
         _mainToday.value = weatherToday.main
         _currentCity.value = weatherToday.city
         _currentCountry.value = weatherToday.country
+        _picture.value = weatherToday.picture
     }
 
     override fun onCleared() {

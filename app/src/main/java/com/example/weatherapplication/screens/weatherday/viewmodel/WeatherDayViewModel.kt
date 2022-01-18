@@ -32,7 +32,6 @@ open class WeatherDayViewModel @Inject constructor(private val loadWeatherUseCas
     private val _errorBus = Converter.MutableSingleEventFlow<String>()
     val errorBus: SharedFlow<String?> = _errorBus
 
-    var date: String? = null
     var list = emptyList<WeatherDayWithAllParameters>()
     fun loadData() {
         val (lat, lon) = _location
