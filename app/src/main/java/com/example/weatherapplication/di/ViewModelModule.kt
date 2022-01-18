@@ -1,8 +1,8 @@
 package com.example.weatherapplication.di
 
 import androidx.lifecycle.ViewModel
-import com.example.weatherapplication.screens.home.viewmodel.HomeViewModel
-import com.example.weatherapplication.screens.weatherday.viewmodel.WeatherDayViewModel
+import com.example.weatherapplication.presentation.screens.home.viewModel.HomeViewModel
+import com.example.weatherapplication.presentation.screens.weatherDay.viewModel.WeatherDayViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

@@ -7,8 +7,8 @@ import android.os.Looper
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.weatherapplication.screens.home.viewmodel.HomeViewModel
-import com.example.weatherapplication.screens.weatherday.viewmodel.WeatherDayViewModel
+import com.example.weatherapplication.presentation.screens.home.viewModel.HomeViewModel
+import com.example.weatherapplication.presentation.screens.weatherDay.viewModel.WeatherDayViewModel
 import com.google.android.gms.location.*
 
 class Location {
