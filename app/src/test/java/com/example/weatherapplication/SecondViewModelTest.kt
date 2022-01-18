@@ -1,10 +1,10 @@
 package com.example.weatherapplication
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.weatherapplication.data.networking.weather.WeatherApi
-import com.example.weatherapplication.data.repository.WeatherRepository
-import com.example.weatherapplication.domain.screens.weatherday.useCase.LoadWeatherDayUseCase
-import com.example.weatherapplication.presentation.screens.weatherDay.viewModel.WeatherDayViewModel
+import com.example.weatherapplication.screens.common.networking.weather.WeatherApi
+import com.example.weatherapplication.screens.common.repository.WeatherRepository
+import com.example.weatherapplication.screens.weatherDay.useCase.LoadWeatherDayUseCase
+import com.example.weatherapplication.screens.weatherDay.viewModel.WeatherDayViewModel
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Before

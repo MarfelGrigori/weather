@@ -1,7 +1,7 @@
 package com.example.weatherapplication
 
-import com.example.weatherapplication.domain.screens.home.useCase.entities.WeatherToday
-import com.example.weatherapplication.utils.Picture
+import com.example.weatherapplication.screens.home.useCase.entities.WeatherToday
+import com.example.weatherapplication.screens.common.utils.Picture
 import org.junit.After
 import org.junit.Assert
 import org.junit.Test
