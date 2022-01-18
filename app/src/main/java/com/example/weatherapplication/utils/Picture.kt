@@ -57,6 +57,6 @@ fun String.toPicture(): Picture {
     }
 }
 
-fun Picture.setPicture(image: ImageView) = image.setImageResource(this.imageResource)
+fun Picture.setPicture(image: ImageView?) = image?.setImageResource(this.imageResource)
 
 

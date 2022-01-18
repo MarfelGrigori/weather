@@ -81,7 +81,7 @@ open class HomeViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
                  onTodayWeatherLoaded(response.first)
-                _weatherWeek.value = response.second.toWeatherWeek().subList(1, response.second.toWeatherWeek().size - 1)
+                _weatherWeek.value = response.second.toWeatherWeek().subList(0,response.second.toWeatherWeek().size-3)
             }
             .also { compositeDisposable.add(it) }
         _isLoading.value = false
