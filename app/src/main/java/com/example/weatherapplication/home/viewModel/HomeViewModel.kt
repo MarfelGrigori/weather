@@ -4,11 +4,11 @@ package com.example.weatherapplication.home.viewModel
 import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.R
 import com.example.weatherapplication.home.models.WeatherWeekWithAllParameters
-import com.example.weatherapplication.home.useCase.networking.WeatherTodayResponse
+import com.example.weatherapplication.home.useCase.loadWeather.networking.WeatherTodayResponse
 import com.example.weatherapplication.home.mappers.toWeatherToday
 import com.example.weatherapplication.home.mappers.toWeatherWeek
 import com.example.weatherapplication.weatherDay.models.WeatherDay
-import com.example.weatherapplication.home.useCase.LoadWeatherForHomeScreenUseCase
+import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherForHomeScreenUseCase
 import com.example.weatherapplication.common.utils.Converter.MutableSingleEventFlow
 import com.example.weatherapplication.common.utils.Picture
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

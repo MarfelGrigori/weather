@@ -4,7 +4,7 @@ import com.example.weatherapplication.home.models.WeatherWeekWithAllParameters
 import com.example.weatherapplication.common.utils.Converter.getDate
 import com.example.weatherapplication.common.utils.Converter.getDay
 import com.example.weatherapplication.common.utils.toPicture
-import com.example.weatherapplication.home.useCase.networking.WeatherWeekResponse
+import com.example.weatherapplication.home.useCase.loadWeather.networking.WeatherWeekResponse
 
 fun WeatherWeekResponse.toWeatherWeek(): List<WeatherWeekWithAllParameters> {
     val list = ArrayList<WeatherWeekWithAllParameters>()

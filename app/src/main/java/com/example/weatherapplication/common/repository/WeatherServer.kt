@@ -1,9 +1,9 @@
 package com.example.weatherapplication.common.repository
 
 import com.example.weatherapplication.common.networking.weather.WeatherApi
-import com.example.weatherapplication.home.useCase.networking.WeatherTodayResponse
-import com.example.weatherapplication.home.useCase.networking.WeatherWeekResponse
-import com.example.weatherapplication.weatherDay.useCase.networking.response.WeatherDayResponse
+import com.example.weatherapplication.home.useCase.loadWeather.networking.WeatherTodayResponse
+import com.example.weatherapplication.home.useCase.loadWeather.networking.WeatherWeekResponse
+import com.example.weatherapplication.weatherDay.useCase.loadWeather.networking.response.WeatherDayResponse
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 

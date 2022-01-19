@@ -3,7 +3,7 @@ package com.example.weatherapplication.home.mappers
 import com.example.weatherapplication.home.models.WeatherToday
 import com.example.weatherapplication.common.utils.Converter.degToWindRoze
 import com.example.weatherapplication.common.utils.toPicture
-import com.example.weatherapplication.home.useCase.networking.WeatherTodayResponse
+import com.example.weatherapplication.home.useCase.loadWeather.networking.WeatherTodayResponse
 
 
 fun WeatherTodayResponse.toWeatherToday(): WeatherToday = WeatherToday(
