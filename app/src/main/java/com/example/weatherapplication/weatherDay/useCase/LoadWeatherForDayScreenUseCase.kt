@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 
 open class LoadWeatherForDayScreenUseCase @Inject constructor(private val weatherServer: WeatherServer):LoadWeatherDay {
-    override fun loadWeatherDay(lat: String, lon: String): Single<WeatherDayResponse> =
+    operator fun invoke(lat: String, lon: String): Single<WeatherDayResponse> =
         weatherServer.loadWeatherTo5Days(lat, lon)
 }
