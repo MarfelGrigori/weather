@@ -2,7 +2,7 @@ package com.example.weatherapplication.weatherDay.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.R
-import com.example.weatherapplication.weatherDay.useCase.entities.WeatherDayWithAllParameters
+import com.example.weatherapplication.weatherDay.useCase.models.WeatherDayWithAllParameters
 import com.example.weatherapplication.weatherDay.useCase.networking.mapper.toWeatherDay
 import com.example.weatherapplication.weatherDay.useCase.LoadWeatherDayUseCase
 import com.example.weatherapplication.common.utils.Converter

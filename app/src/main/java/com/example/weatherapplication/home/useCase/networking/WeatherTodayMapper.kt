@@ -1,6 +1,6 @@
 package com.example.weatherapplication.home.useCase.networking
 
-import com.example.weatherapplication.home.useCase.entities.WeatherToday
+import com.example.weatherapplication.home.useCase.models.WeatherToday
 import com.example.weatherapplication.common.utils.Converter.degToWindRoze
 import com.example.weatherapplication.common.utils.toPicture
 

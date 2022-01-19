@@ -1,4 +1,4 @@
-package com.example.weatherapplication.home.useCase.entities
+package com.example.weatherapplication.home.useCase.models
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

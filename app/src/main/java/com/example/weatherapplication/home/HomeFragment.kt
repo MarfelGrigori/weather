@@ -13,7 +13,7 @@ import com.example.weatherapplication.databinding.FragmentFirstBinding
 import com.example.weatherapplication.common.di.BaseFragment
 import com.example.weatherapplication.home.viewModel.HomeViewModel
 import com.example.weatherapplication.weatherDay.WeatherDayFragment
-import com.example.weatherapplication.home.useCase.entities.WeatherWeek
+import com.example.weatherapplication.home.useCase.models.WeatherWeek
 import com.example.weatherapplication.common.utils.Converter.subscribe
 import com.example.weatherapplication.common.utils.changeVisibility
 import com.example.weatherapplication.common.utils.setPicture
