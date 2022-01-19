@@ -7,7 +7,7 @@ import com.example.weatherapplication.weatherDay.useCase.networking.response.Wea
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
-open class WeatherRepository @Inject constructor(private val api: WeatherApi) {
+open class WeatherServer @Inject constructor(private val api: WeatherApi) {
 
     private val KEY = "a5000964c71443402a055b2152004987"
     fun loadWeatherToday(lat: String, lon: String): Single<WeatherTodayResponse> {
