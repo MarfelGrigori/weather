@@ -1,6 +1,6 @@
 package com.example.weatherapplication.home.useCase.networking
 
-import com.example.weatherapplication.home.useCase.models.WeatherWeekWithAllParameters
+import com.example.weatherapplication.home.models.WeatherWeekWithAllParameters
 import com.example.weatherapplication.common.utils.Converter.getDate
 import com.example.weatherapplication.common.utils.Converter.getDay
 import com.example.weatherapplication.common.utils.toPicture

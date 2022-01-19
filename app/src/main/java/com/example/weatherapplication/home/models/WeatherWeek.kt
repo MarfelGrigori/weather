@@ -1,4 +1,4 @@
-package com.example.weatherapplication.weatherDay.useCase.models
+package com.example.weatherapplication.home.models
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,8 +8,9 @@ import com.example.weatherapplication.databinding.WeatherItemBinding
 import com.example.weatherapplication.common.utils.setPicture
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-data class WeatherDay(val data: WeatherDayWithAllParameters) :
-    AbstractBindingItem<WeatherItemBinding>() {
+data class WeatherWeek(
+    val data: WeatherWeekWithAllParameters
+) : AbstractBindingItem<WeatherItemBinding>() {
 
     override val type: Int
         get() = R.id.item_container
@@ -24,11 +25,13 @@ data class WeatherDay(val data: WeatherDayWithAllParameters) :
 
     @SuppressLint("SetTextI18n")
     override fun bindView(binding: WeatherItemBinding, payloads: List<Any>) {
-        binding.date.text = data.time
+        binding.date.text = data.date
+        binding.day.text = data.day
         binding.main.text = data.text
-        binding.wind.text = data.wind.toString()
-        binding.pressure.text = data.pressure.toString()
-        binding.temperature.text = data.temp?.toInt().toString()
+        binding.wind.text = data.wind
+        binding.pressure.text = data.pressure
+        binding.temperature.text = data.temp
         data.picture.setPicture(binding.image)
     }
 }
+

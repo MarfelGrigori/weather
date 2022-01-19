@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.common.di.BaseFragment
 import com.example.weatherapplication.weatherDay.viewModel.WeatherDayViewModel
-import com.example.weatherapplication.weatherDay.useCase.models.WeatherDay
+import com.example.weatherapplication.weatherDay.models.WeatherDay
 import com.example.weatherapplication.common.utils.Converter.subscribe
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter

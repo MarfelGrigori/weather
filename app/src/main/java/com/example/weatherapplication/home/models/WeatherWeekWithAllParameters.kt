@@ -1,4 +1,4 @@
-package com.example.weatherapplication.home.useCase.models
+package com.example.weatherapplication.home.models
 
 import com.example.weatherapplication.common.utils.Picture
 

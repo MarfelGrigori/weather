@@ -1,6 +1,6 @@
 package com.example.weatherapplication.home
 
-import com.example.weatherapplication.home.useCase.models.WeatherToday
+import com.example.weatherapplication.home.models.WeatherToday
 import com.example.weatherapplication.common.utils.Picture
 import org.junit.After
 import org.junit.Assert
