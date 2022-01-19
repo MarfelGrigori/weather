@@ -1,7 +1,7 @@
-package com.example.weatherapplication.weatherDay.useCase.loadWeather
+package com.example.weatherapplication.weatherDay.useCases.loadWeather
 
 import com.example.weatherapplication.common.repository.WeatherServer
-import com.example.weatherapplication.weatherDay.useCase.loadWeather.networking.response.WeatherDayResponse
+import com.example.weatherapplication.weatherDay.useCases.loadWeather.networking.response.WeatherDayResponse
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 

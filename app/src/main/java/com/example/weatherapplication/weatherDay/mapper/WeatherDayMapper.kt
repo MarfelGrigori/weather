@@ -1,7 +1,7 @@
 package com.example.weatherapplication.weatherDay.mapper
 
 import com.example.weatherapplication.weatherDay.models.WeatherDayWithAllParameters
-import com.example.weatherapplication.weatherDay.useCase.loadWeather.networking.response.WeatherDayResponse
+import com.example.weatherapplication.weatherDay.useCases.loadWeather.networking.response.WeatherDayResponse
 import com.example.weatherapplication.common.utils.Converter.getDate
 import com.example.weatherapplication.common.utils.toPicture
 

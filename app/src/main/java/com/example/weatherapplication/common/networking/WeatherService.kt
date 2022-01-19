@@ -2,7 +2,7 @@ package com.example.weatherapplication.common.networking
 
 import com.example.weatherapplication.home.useCase.loadWeather.networking.WeatherTodayResponse
 import com.example.weatherapplication.home.useCase.loadWeather.networking.WeatherWeekResponse
-import com.example.weatherapplication.weatherDay.useCase.loadWeather.networking.response.WeatherDayResponse
+import com.example.weatherapplication.weatherDay.useCases.loadWeather.networking.response.WeatherDayResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

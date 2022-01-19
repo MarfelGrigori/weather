@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.R
 import com.example.weatherapplication.weatherDay.models.WeatherDayWithAllParameters
 import com.example.weatherapplication.weatherDay.mapper.toWeatherDay
-import com.example.weatherapplication.weatherDay.useCase.loadWeather.LoadWeatherForDayScreenUseCase
+import com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherForDayScreenUseCase
 import com.example.weatherapplication.common.utils.Converter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable

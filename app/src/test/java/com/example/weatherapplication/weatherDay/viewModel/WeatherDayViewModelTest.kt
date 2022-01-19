@@ -3,7 +3,7 @@ package com.example.weatherapplication.weatherDay.viewModel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.weatherapplication.common.networking.weather.WeatherApi
 import com.example.weatherapplication.common.repository.WeatherServer
-import com.example.weatherapplication.weatherDay.useCase.loadWeather.LoadWeatherForDayScreenUseCase
+import com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherForDayScreenUseCase
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
