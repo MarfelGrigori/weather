@@ -1,4 +1,4 @@
-package com.example.weatherapplication.weatherDay.useCase.networking.mapper
+package com.example.weatherapplication.weatherDay.mapper
 
 import com.example.weatherapplication.weatherDay.useCase.models.WeatherDayWithAllParameters
 import com.example.weatherapplication.weatherDay.useCase.networking.response.WeatherDayResponse
