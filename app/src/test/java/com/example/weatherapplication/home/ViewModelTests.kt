@@ -1,4 +1,4 @@
-package com.example.weatherapplication
+package com.example.weatherapplication.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.weatherapplication.common.networking.weather.WeatherApi

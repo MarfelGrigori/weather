@@ -1,4 +1,4 @@
-package com.example.weatherapplication
+package com.example.weatherapplication.weatherDay
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.weatherapplication.common.networking.weather.WeatherApi
@@ -15,7 +15,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.spy
 import org.mockito.MockitoAnnotations
 
-class SecondViewModelTest {
+class WeatherDayViewModelTest {
 
     @Mock
     private lateinit var viewModel: WeatherDayViewModel

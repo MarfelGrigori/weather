@@ -1,4 +1,4 @@
-package com.example.weatherapplication
+package com.example.weatherapplication.common
 
 import org.junit.Test
 import java.io.BufferedReader
