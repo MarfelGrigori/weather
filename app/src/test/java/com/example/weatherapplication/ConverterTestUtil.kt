@@ -1,8 +1,8 @@
 package com.example.weatherapplication
 
-import com.example.weatherapplication.screens.common.utils.Converter.degToWindRoze
-import com.example.weatherapplication.screens.common.utils.Converter.getDate
-import com.example.weatherapplication.screens.common.utils.Converter.getDay
+import com.example.weatherapplication.common.utils.Converter.degToWindRoze
+import com.example.weatherapplication.common.utils.Converter.getDate
+import com.example.weatherapplication.common.utils.Converter.getDay
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 

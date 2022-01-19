@@ -1,10 +1,10 @@
 package com.example.weatherapplication
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.weatherapplication.screens.common.networking.weather.WeatherApi
-import com.example.weatherapplication.screens.common.repository.WeatherRepository
-import com.example.weatherapplication.screens.home.useCase.LoadWeatherForHomeScreenUseCase
-import com.example.weatherapplication.screens.home.viewModel.HomeViewModel
+import com.example.weatherapplication.common.networking.weather.WeatherApi
+import com.example.weatherapplication.common.repository.WeatherRepository
+import com.example.weatherapplication.home.useCase.LoadWeatherForHomeScreenUseCase
+import com.example.weatherapplication.home.viewModel.HomeViewModel
 import junit.framework.Assert.assertNotNull
 import kotlinx.coroutines.flow.StateFlow
 import org.junit.Before
