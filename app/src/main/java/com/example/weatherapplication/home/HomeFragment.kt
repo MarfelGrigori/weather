@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.weatherapplication.R
 import com.example.weatherapplication.databinding.FragmentFirstBinding
 import com.example.weatherapplication.common.di.BaseFragment
 import com.example.weatherapplication.home.viewModel.HomeViewModel
-import com.example.weatherapplication.weatherDay.WeatherDayFragment
 import com.example.weatherapplication.home.models.WeatherWeek
 import com.example.weatherapplication.common.utils.Converter.subscribe
 import com.example.weatherapplication.common.utils.changeVisibility
@@ -50,7 +50,9 @@ class HomeFragment : BaseFragment() {
             }
         }
 
-        _binding?.head?.setOnClickListener { changeFragment(WeatherWeek(viewModel.weatherWeek.value[0])) }
+        _binding?.head?.setOnClickListener {
+            changeFragment(WeatherWeek(viewModel.weatherWeek.value[0]))
+        }
 
         fastAdapter.onClickListener = { _, _, item, _ ->
             changeFragment(item)
@@ -75,12 +77,7 @@ class HomeFragment : BaseFragment() {
         val date = item.data.date
         val bundle = Bundle()
         bundle.putString("message", date)
-        val secondFragment = WeatherDayFragment()
-        secondFragment.arguments = bundle
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view_tag, secondFragment)
-            .addToBackStack(null)
-            .commit()
+        findNavController().navigate(R.id.action_homeFragment_to_weatherDayFragment,bundle)
     }
 
     override fun onDestroyView() {

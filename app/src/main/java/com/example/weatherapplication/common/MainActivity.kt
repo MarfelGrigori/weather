@@ -28,7 +28,7 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view_tag, firstFragment).commit()
+            .replace(R.id.nav_host_fragment, firstFragment).commit()
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val location = Location()
         location.getLocation(this, viewModel, viewModel1)
