@@ -5,7 +5,7 @@ import com.example.weatherapplication.R
 import com.example.weatherapplication.weatherDay.models.WeatherDayWithAllParameters
 import com.example.weatherapplication.weatherDay.mapper.toWeatherDay
 import com.example.weatherapplication.common.utils.Converter
-import com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherDay
+import com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCaseImpl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -19,7 +19,7 @@ private const val MAX_LATITUDE = 90.0
 private const val MIN_LONGITUDE = -180.0
 private const val MAX_LONGITUDE = 180.0
 
-open class WeatherDayViewModel @Inject constructor(private val loadWeatherUseCase: LoadWeatherDay) :
+open class WeatherDayViewModel @Inject constructor(private val loadWeatherUseCase: LoadWeatherUseCaseImpl) :
     ViewModel() {
 
     var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)

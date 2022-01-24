@@ -1,8 +1,7 @@
 package com.example.weatherapplication.weatherDay.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.weatherapplication.common.networking.weather.WeatherApi
-import com.example.weatherapplication.common.repository.WeatherServer
+import com.example.weatherapplication.common.repository.WeatherServerImpl
 import com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCaseImpl
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
@@ -19,8 +18,8 @@ class WeatherDayViewModelTest {
     @Mock
     private lateinit var viewModel: WeatherDayViewModel
 
-    private val api = WeatherApi()
-    private val repository = WeatherServer(api)
+    private val api = com.example.weatherapplication.common.networking.weather.WeatherApi()
+    private val repository = WeatherServerImpl(api)
     private val first = LoadWeatherUseCaseImpl(repository)
 
     @get:Rule

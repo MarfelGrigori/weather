@@ -10,7 +10,7 @@ import com.example.weatherapplication.home.mappers.toWeatherWeek
 import com.example.weatherapplication.weatherDay.models.WeatherDay
 import com.example.weatherapplication.common.utils.Converter.MutableSingleEventFlow
 import com.example.weatherapplication.common.utils.Picture
-import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherForHomeScreen
+import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCaseImpl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -25,8 +25,7 @@ private const val MIN_LONGITUDE = -180.0
 private const val MAX_LONGITUDE = 180.0
 
 open class HomeViewModel @Inject constructor(
-    private val loadWeatherTodayUseCase: LoadWeatherForHomeScreen
-) : ViewModel() {
+    private val loadWeatherTodayUseCase: LoadWeatherUseCaseImpl) : ViewModel() {
 
     var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)
 

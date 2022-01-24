@@ -1,8 +1,7 @@
 package com.example.weatherapplication.home.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.weatherapplication.common.networking.weather.WeatherApi
-import com.example.weatherapplication.common.repository.WeatherServer
+import com.example.weatherapplication.common.repository.WeatherServerImpl
 import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCaseImpl
 import junit.framework.Assert.assertNotNull
 import kotlinx.coroutines.flow.StateFlow
@@ -22,8 +21,8 @@ class ViewModelTests {
     @Mock
     private lateinit var isLoading: StateFlow<Boolean?>
 
-    private val api = WeatherApi()
-    private val repository = WeatherServer(api)
+    private val api = com.example.weatherapplication.common.networking.weather.WeatherApi()
+    private val repository = WeatherServerImpl(api)
 
     // 4
     @get:Rule
