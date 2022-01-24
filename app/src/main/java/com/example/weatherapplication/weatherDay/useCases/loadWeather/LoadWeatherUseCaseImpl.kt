@@ -6,8 +6,8 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 
-open class LoadWeatherForDayScreenUseCase @Inject constructor(private val weatherServer: WeatherServer):
+open class LoadWeatherUseCaseImpl @Inject constructor(private val weatherServer: WeatherServer):
     LoadWeatherDay {
-    operator fun invoke(lat: String, lon: String): Single<WeatherDayResponse> =
+    override operator fun invoke(lat: String, lon: String): Single<WeatherDayResponse> =
         weatherServer.loadWeatherTo5Days(lat, lon)
 }
