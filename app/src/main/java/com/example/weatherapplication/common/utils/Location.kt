@@ -10,13 +10,14 @@ import androidx.core.content.ContextCompat
 import com.example.weatherapplication.home.viewModel.HomeViewModel
 import com.example.weatherapplication.weatherDay.viewModel.WeatherDayViewModel
 import com.google.android.gms.location.*
+import io.reactivex.rxjava3.core.Single
 
-class Location {
+data class Location (var lat : Double, var lon: Double) {
     fun getLocation(
         context: AppCompatActivity,
         viewModel: HomeViewModel,
         viewModel1: WeatherDayViewModel
-    ) {
+    ): Single<Location> {
         val setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double ->
             viewModel.setLocation(lat, lon)
             viewModel1.setLocation(lat, lon)
@@ -50,6 +51,7 @@ class Location {
                 requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             }
         }
+        return Single.just(Location(lat, lon))
     }
 
     @SuppressLint("MissingPermission")
