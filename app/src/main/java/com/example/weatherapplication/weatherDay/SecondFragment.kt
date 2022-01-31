@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.weatherapplication.common.di.BaseFragment
 import com.example.weatherapplication.common.utils.Converter.subscribe
 import com.example.weatherapplication.databinding.FragmentSecondBinding
-import com.example.weatherapplication.home.key
+import com.example.weatherapplication.home.TAG
 import com.example.weatherapplication.weatherDay.models.WeatherDay
 import com.example.weatherapplication.weatherDay.viewModel.WeatherDayViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -39,7 +39,7 @@ class SecondFragment : BaseFragment() {
         viewModel.loadData()
         val items = ArrayList<WeatherDay>()
         viewModel.list.forEach {
-            if (arguments?.getString(key)
+            if (arguments?.getString(TAG)
                     .let { it1 -> it1?.let { it2 -> it.time.contains(it2) } } == true
             )
                 items.add(WeatherDay(it))
