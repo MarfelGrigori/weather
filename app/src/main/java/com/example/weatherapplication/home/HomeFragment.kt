@@ -21,6 +21,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+
+const val  TAG = "message"
 
 class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
@@ -51,7 +55,7 @@ class HomeFragment : BaseFragment() {
         }
 
         _binding?.head?.setOnClickListener {
-            changeFragment(WeatherWeek(viewModel.weatherWeek.value[0]))
+            viewModel.weatherToday.onEach {  changeFragment(WeatherWeek(it[0])) }.launchIn(lifecycleScope)
         }
 
         fastAdapter.onClickListener = { _, _, item, _ ->
@@ -76,7 +80,7 @@ class HomeFragment : BaseFragment() {
     private fun changeFragment(item: WeatherWeek) {
         val date = item.data.date
         val bundle = Bundle()
-        bundle.putString("message", date)
+        bundle.putString(TAG, date)
         findNavController().navigate(R.id.action_homeFragment_to_weatherDayFragment,bundle)
     }
 

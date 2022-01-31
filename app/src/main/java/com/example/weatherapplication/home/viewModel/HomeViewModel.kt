@@ -51,6 +51,9 @@ open class HomeViewModel @Inject constructor(
     private val _weatherWeek = MutableStateFlow<List<WeatherWeekWithAllParameters>>(emptyList())
     val weatherWeek: MutableStateFlow<List<WeatherWeekWithAllParameters>> = _weatherWeek
 
+    private val _weatherToday = MutableStateFlow<List<WeatherWeekWithAllParameters>>(emptyList())
+    val weatherToday: MutableStateFlow<List<WeatherWeekWithAllParameters>> = _weatherToday
+
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean?> = _isLoading
 
@@ -83,6 +86,7 @@ open class HomeViewModel @Inject constructor(
                 onTodayWeatherLoaded(response.first)
                 _weatherWeek.value = response.second.toWeatherWeek()
                     .subList(0, response.second.toWeatherWeek().size - 3)
+                _weatherToday.value = listOf(response.second.toWeatherWeek()[0])
             }
             .also { compositeDisposable.add(it) }
         _isLoading.value = false
