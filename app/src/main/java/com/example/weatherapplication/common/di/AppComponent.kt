@@ -1,6 +1,8 @@
 package com.example.weatherapplication.common.di
 
 import android.app.Application
+import com.example.weatherapplication.common.repository.WeatherServer
+import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCase
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -13,7 +15,8 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ActivityBuilderModule::class,
         ViewModelModule::class,
-        AppModule::class
+        AppModule::class,
+        DependenciesModule::class
     ]
 )
 
@@ -25,5 +28,7 @@ interface AppComponent : AndroidInjector<App> {
         fun build(): AppComponent
 
     }
-
+    fun getNetworkServer(): WeatherServer
+    fun getLoadWeatherUseCase() : LoadWeatherUseCase
+    fun getLoadWeatherDayUseCase() : com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase
 }
