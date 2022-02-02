@@ -28,7 +28,8 @@ interface AppComponent : AndroidInjector<App> {
         fun build(): AppComponent
 
     }
+
     fun getNetworkServer(): WeatherServer
-    fun getLoadWeatherUseCase() : LoadWeatherUseCase
-    fun getLoadWeatherDayUseCase() : com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase
+    fun getLoadWeatherUseCase(): LoadWeatherUseCase
+    fun getLoadWeatherDayUseCase(): com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase
 }

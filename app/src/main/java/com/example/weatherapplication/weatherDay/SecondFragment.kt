@@ -9,13 +9,14 @@ import androidx.lifecycle.lifecycleScope
 import com.example.weatherapplication.common.di.BaseFragment
 import com.example.weatherapplication.common.utils.Converter.subscribe
 import com.example.weatherapplication.databinding.FragmentSecondBinding
-import com.example.weatherapplication.home.TAG
 import com.example.weatherapplication.weatherDay.models.WeatherDay
 import com.example.weatherapplication.weatherDay.viewModel.WeatherDayViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+
+const val TAG = "message"
 
 class SecondFragment : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
@@ -39,7 +40,7 @@ class SecondFragment : BaseFragment() {
         viewModel.loadData()
         val items = ArrayList<WeatherDay>()
         viewModel.list.forEach {
-            if (arguments?.getString(TAG)
+            if (arguments?.getString(com.example.weatherapplication.weatherDay.TAG)
                     .let { it1 -> it1?.let { it2 -> it.time.contains(it2) } } == true
             )
                 items.add(WeatherDay(it))

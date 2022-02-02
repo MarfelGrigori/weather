@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface WeatherService {
 
     @GET("data/2.5/weather")
-     fun loadWeatherToday(
+    fun loadWeatherToday(
         @Query("lat")
         lat: String,
         @Query("lon")
@@ -24,7 +24,7 @@ interface WeatherService {
     ): Single<WeatherTodayResponse>
 
     @GET("data/2.5/forecast")
-     fun loadWeatherDay(
+    fun loadWeatherDay(
         @Query("lat")
         lat: String,
         @Query("lon")
@@ -38,7 +38,7 @@ interface WeatherService {
     ): Single<WeatherDayResponse>
 
     @GET("data/2.5/onecall")
-     fun loadWeatherWeek(
+    fun loadWeatherWeek(
         @Query("lat")
         lat: String,
         @Query("lon")

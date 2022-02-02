@@ -42,14 +42,14 @@ open class WeatherDayViewModel @Inject constructor(private val loadWeatherUseCas
     }
 
     fun setLocation(latNew: Double, lonNew: Double) {
-        val (lat,lon) = _location
+        val (lat, lon) = _location
         if (lat !in latNew - 0.01..latNew + 0.01 || lon !in lonNew - 0.01..lonNew + 0.01)
             _location = (Pair(latNew, lonNew))
         loadData()
     }
 
     private fun loadWeatherDay(lat: String, lon: String) {
-        loadWeatherUseCase.invoke(lat, lon)
+        loadWeatherUseCase.downloadData(lat, lon)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { weatherDayResponse ->

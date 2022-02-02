@@ -14,6 +14,8 @@ import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCas
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,7 +26,8 @@ private const val MAX_LATITUDE = 90.0
 private const val MIN_LONGITUDE = -180.0
 private const val MAX_LONGITUDE = 180.0
 
-open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase: LoadWeatherUseCase) : ViewModel() {
+open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase: LoadWeatherUseCase) :
+    ViewModel() {
 
     var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)
 
@@ -50,8 +53,8 @@ open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase
     private val _weatherWeek = MutableStateFlow<List<WeatherWeekWithAllParameters>>(emptyList())
     val weatherWeek: MutableStateFlow<List<WeatherWeekWithAllParameters>> = _weatherWeek
 
-    private val _weatherToday = MutableStateFlow<List<WeatherWeekWithAllParameters>>(emptyList())
-    val weatherToday: MutableStateFlow<List<WeatherWeekWithAllParameters>> = _weatherToday
+    private val _weatherToday = MutableSharedFlow<List<WeatherWeekWithAllParameters>>(replay = 1,extraBufferCapacity = 0,onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    val weatherToday: MutableSharedFlow<List<WeatherWeekWithAllParameters>> = _weatherToday
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean?> = _isLoading
@@ -78,14 +81,14 @@ open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase
 
     private fun loadWeather(lat: String, lon: String) {
         _isLoading.value = true
-        loadWeatherTodayUseCase.invoke(lat, lon)
+        loadWeatherTodayUseCase.downloadData(lat, lon)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
                 onTodayWeatherLoaded(response.first)
                 _weatherWeek.value = response.second.toWeatherWeek()
                     .subList(0, response.second.toWeatherWeek().size - 3)
-                _weatherToday.value = listOf(response.second.toWeatherWeek()[0])
+                _weatherToday.tryEmit(listOf(response.second.toWeatherWeek()[0]))
             }
             .also { compositeDisposable.add(it) }
         _isLoading.value = false
