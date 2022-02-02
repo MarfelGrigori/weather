@@ -17,6 +17,7 @@ import com.example.weatherapplication.home.models.WeatherWeek
 import com.example.weatherapplication.common.utils.Converter.subscribe
 import com.example.weatherapplication.common.utils.changeVisibility
 import com.example.weatherapplication.common.utils.setPicture
+import com.example.weatherapplication.home.models.WeatherWeekWithAllParameters
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -24,12 +25,14 @@ import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-const val  TAG = "message"
+const val TAG = "message"
 
 class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
 
     private val viewModel: HomeViewModel by activityViewModels { viewModelFactory }
+
+    lateinit var list : List<WeatherWeekWithAllParameters>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,9 +56,9 @@ class HomeFragment : BaseFragment() {
                 Log.e("TAG", "error")
             }
         }
-
+        viewModel.weatherToday.onEach { list = it }.launchIn(lifecycleScope)
         _binding?.head?.setOnClickListener {
-            viewModel.weatherToday.onEach {  changeFragment(WeatherWeek(it[0])) }.launchIn(lifecycleScope)
+            changeFragment(WeatherWeek(list[0]))
         }
 
         fastAdapter.onClickListener = { _, _, item, _ ->
