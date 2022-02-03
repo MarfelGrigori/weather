@@ -4,6 +4,6 @@ import com.example.weatherapplication.weatherDay.useCases.loadWeather.networking
 import io.reactivex.rxjava3.core.Single
 
 interface LoadWeatherUseCase {
-    fun downloadData(lat: String, lon: String): Single<WeatherDayResponse>
+    operator fun invoke(lat: String, lon: String): Single<WeatherDayResponse>
 }
 
