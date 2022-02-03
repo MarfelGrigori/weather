@@ -15,6 +15,7 @@ import javax.inject.Singleton
 class WeatherApi @Inject constructor() {
     @Singleton
     @Provides
+    @Inject
     fun provideRetrofit(): WeatherService {
         val retrofit = Retrofit.Builder().baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create())
