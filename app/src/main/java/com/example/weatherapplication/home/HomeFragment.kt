@@ -56,9 +56,9 @@ class HomeFragment : BaseFragment() {
                 Log.e("TAG", "error")
             }
         }
-        viewModel.weatherToday.onEach { list = it }.launchIn(lifecycleScope)
+        viewModel.weatherToday.onEach { changeFragment(WeatherWeek(it[0])) }.launchIn(lifecycleScope)
         _binding?.head?.setOnClickListener {
-            changeFragment(WeatherWeek(list[0]))
+           viewModel.gotoWeatherDay()
         }
 
         fastAdapter.onClickListener = { _, _, item, _ ->

@@ -85,11 +85,12 @@ open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase
                 onTodayWeatherLoaded(response.first)
                 _weatherWeek.value = response.second.toWeatherWeek()
                     .subList(0, response.second.toWeatherWeek().size - 3)
-                _weatherToday.tryEmit(listOf(response.second.toWeatherWeek()[0]))
             }
             .also { compositeDisposable.add(it) }
         _isLoading.value = false
     }
+
+    fun gotoWeatherDay() {_weatherToday.tryEmit(listOf(_weatherWeek.value[0]))}
 
     private fun checkError() {
         if (_errorBus.toString() == R.string.error_network_text.toString()) _errorBus.tryEmit(R.string.error.toString())
