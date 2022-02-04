@@ -15,10 +15,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 private const val MIN_LATITUDE = -90.0
@@ -54,7 +51,7 @@ open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase
     val weatherWeek: MutableStateFlow<List<WeatherWeekWithAllParameters>> = _weatherWeek
 
     private val _weatherToday = MutableSharedFlow<List<WeatherWeekWithAllParameters>>(replay = 1,extraBufferCapacity = 0,onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val weatherToday: SharedFlow<List<WeatherWeekWithAllParameters>> = _weatherToday
+    val weatherToday = _weatherToday.asSharedFlow()
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean?> = _isLoading
