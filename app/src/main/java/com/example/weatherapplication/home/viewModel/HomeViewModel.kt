@@ -54,7 +54,7 @@ open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase
     val weatherWeek: MutableStateFlow<List<WeatherWeekWithAllParameters>> = _weatherWeek
 
     private val _weatherToday = MutableSharedFlow<List<WeatherWeekWithAllParameters>>(replay = 1,extraBufferCapacity = 0,onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val weatherToday: MutableSharedFlow<List<WeatherWeekWithAllParameters>> = _weatherToday
+    val weatherToday: SharedFlow<List<WeatherWeekWithAllParameters>> = _weatherToday
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean?> = _isLoading

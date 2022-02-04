@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 private const val KEY = "a5000964c71443402a055b2152004987"
 
-open class WeatherServerImpl @Inject constructor(private val api:WeatherApi): WeatherServer {
+open class WeatherServerImpl @Inject constructor(private var api:WeatherApi): WeatherServer {
 
     private val providedRetrofit= api.provideRetrofit()
 
