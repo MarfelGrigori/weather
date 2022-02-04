@@ -12,10 +12,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
-class WeatherApi @Inject constructor() {
+class WeatherApi  {
     @Singleton
     @Provides
-    @Inject
     fun provideRetrofit(): WeatherService {
         val retrofit = Retrofit.Builder().baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create())
