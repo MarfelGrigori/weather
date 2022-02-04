@@ -2,6 +2,7 @@ package com.example.weatherapplication.common.di
 
 import android.app.Application
 import com.example.weatherapplication.common.networking.WeatherService
+import com.example.weatherapplication.common.networking.weather.WeatherApi
 import com.example.weatherapplication.common.repository.WeatherServer
 import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCase
 import dagger.BindsInstance
@@ -17,7 +18,8 @@ import javax.inject.Singleton
         ActivityBuilderModule::class,
         ViewModelModule::class,
         AppModule::class,
-        DependenciesModule::class
+        DependenciesModule::class,
+    WeatherApi::class
     ]
 )
 
