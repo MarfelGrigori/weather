@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 open class LoadWeatherUseCaseImpl @Inject constructor(private val weatherServer: WeatherServer) :
     LoadWeatherUseCase {
-    override fun downloadData(
+    override fun invoke(
         lat: String,
         lon: String
     ): Single<Pair<WeatherTodayResponse, WeatherWeekResponse>> =
