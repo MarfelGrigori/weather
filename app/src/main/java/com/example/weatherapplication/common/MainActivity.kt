@@ -11,9 +11,9 @@ import com.example.weatherapplication.common.utils.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import javax.inject.Inject
 
 
 class MainActivity : DaggerAppCompatActivity() {
