@@ -16,7 +16,9 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 
-class SecondFragment : BaseFragment() {
+const val TAG = "message"
+
+class WeatherDayFragment : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
     val viewModel: WeatherDayViewModel by activityViewModels { viewModelFactory }
@@ -38,7 +40,7 @@ class SecondFragment : BaseFragment() {
         viewModel.loadData()
         val items = ArrayList<WeatherDay>()
         viewModel.list.forEach {
-            if (arguments?.getString("message")
+            if (arguments?.getString(TAG)
                     .let { it1 -> it1?.let { it2 -> it.time.contains(it2) } } == true
             )
                 items.add(WeatherDay(it))
