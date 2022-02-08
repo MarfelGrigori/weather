@@ -51,7 +51,7 @@ data class Location (var lat : Double, var lon: Double) {
                 requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             }
         }
-        return Single.just(Location(lat, lon))
+        return Single.create { (Location(lat, lon)) }
     }
 
     @SuppressLint("MissingPermission")
