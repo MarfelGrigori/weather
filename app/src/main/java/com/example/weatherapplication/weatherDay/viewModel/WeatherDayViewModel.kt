@@ -49,7 +49,7 @@ open class WeatherDayViewModel @Inject constructor(private val loadWeatherUseCas
     }
 
     private fun loadWeatherDay(lat: String, lon: String) {
-        loadWeatherUseCase.invoke(lat, lon)
+        loadWeatherUseCase(lat, lon)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { weatherDayResponse ->

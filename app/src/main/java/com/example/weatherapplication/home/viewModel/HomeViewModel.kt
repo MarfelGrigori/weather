@@ -82,7 +82,7 @@ open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase
 
     private fun loadWeather(lat: String, lon: String) {
         _isLoading.value = true
-        loadWeatherTodayUseCase.downloadData(lat, lon)
+        loadWeatherTodayUseCase(lat, lon)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
