@@ -22,7 +22,7 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 
-class HostFragment : BaseFragment() {
+class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
 
     private val viewModel: HomeViewModel by activityViewModels { viewModelFactory }

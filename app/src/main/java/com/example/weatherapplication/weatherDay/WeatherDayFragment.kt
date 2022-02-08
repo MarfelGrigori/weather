@@ -40,7 +40,7 @@ class WeatherDayFragment : BaseFragment() {
         viewModel.loadData()
         val items = ArrayList<WeatherDay>()
         viewModel.list.forEach {
-            if (arguments?.getString(TAG)
+            if (arguments?.getString(com.example.weatherapplication.weatherDay.TAG)
                     .let { it1 -> it1?.let { it2 -> it.time.contains(it2) } } == true
             )
                 items.add(WeatherDay(it))
