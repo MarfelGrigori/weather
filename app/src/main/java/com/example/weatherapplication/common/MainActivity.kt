@@ -2,7 +2,6 @@ package com.example.weatherapplication.common
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.R
