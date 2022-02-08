@@ -50,7 +50,11 @@ open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase
     private val _weatherWeek = MutableStateFlow<List<WeatherWeekWithAllParameters>>(emptyList())
     val weatherWeek: MutableStateFlow<List<WeatherWeekWithAllParameters>> = _weatherWeek
 
-    private val _weatherToday = MutableSharedFlow<List<WeatherWeekWithAllParameters>>(replay = 1,extraBufferCapacity = 0,onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private val _weatherToday = MutableSharedFlow<List<WeatherWeekWithAllParameters>>(
+        replay = 1,
+        extraBufferCapacity = 0,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
     val weatherToday = _weatherToday.asSharedFlow()
 
     private val _isLoading = MutableStateFlow(true)
@@ -90,7 +94,9 @@ open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase
         _isLoading.value = false
     }
 
-    fun gotoWeatherDay() {_weatherToday.tryEmit(listOf(_weatherWeek.value[0]))}
+    fun gotoWeatherDay() {
+        _weatherToday.tryEmit(listOf(_weatherWeek.value[0]))
+    }
 
     private fun checkError() {
         if (_errorBus.toString() == R.string.error_network_text.toString()) _errorBus.tryEmit(R.string.error.toString())

@@ -11,11 +11,13 @@ import dagger.Module
 
 
 @Module
-    abstract class DependenciesModule {
-        @Binds
-        abstract fun weatherService(impl: WeatherServerImpl?): WeatherServer?
-        @Binds
-        abstract fun loadWeatherUseCase(impl: LoadWeatherUseCaseImpl?): LoadWeatherUseCase?
-        @Binds
-        abstract fun loadWeatherDayUseCase(impl: com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCaseImpl?): com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase?
-    }
+abstract class DependenciesModule {
+    @Binds
+    abstract fun weatherService(impl: WeatherServerImpl?): WeatherServer?
+
+    @Binds
+    abstract fun loadWeatherUseCase(impl: LoadWeatherUseCaseImpl?): LoadWeatherUseCase?
+
+    @Binds
+    abstract fun loadWeatherDayUseCase(impl: com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCaseImpl?): com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase?
+}
