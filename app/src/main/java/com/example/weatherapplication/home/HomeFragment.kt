@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.onEach
 
 const val TAG = "message"
 
-class HostFragment : BaseFragment() {
+class HomeFragment : BaseFragment() {
     private var _binding: FragmentFirstBinding? = null
 
     private val viewModel: HomeViewModel by activityViewModels { viewModelFactory }
