@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
-class WeatherApi  {
+class WeatherApi {
     @Singleton
     @Provides
     fun provideRetrofit(): WeatherService {

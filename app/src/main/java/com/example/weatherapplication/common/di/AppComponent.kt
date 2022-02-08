@@ -19,7 +19,7 @@ import javax.inject.Singleton
         ViewModelModule::class,
         AppModule::class,
         DependenciesModule::class,
-    WeatherApi::class
+        WeatherApi::class
     ]
 )
 
@@ -31,7 +31,8 @@ interface AppComponent : AndroidInjector<App> {
         fun build(): AppComponent
 
     }
+
     fun getNetworkServer(): WeatherServer
-    fun getLoadWeatherUseCase() : LoadWeatherUseCase
-    fun getLoadWeatherDayUseCase() : com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase
+    fun getLoadWeatherUseCase(): LoadWeatherUseCase
+    fun getLoadWeatherDayUseCase(): com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase
 }

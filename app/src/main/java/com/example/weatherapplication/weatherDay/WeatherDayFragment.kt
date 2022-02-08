@@ -18,7 +18,7 @@ import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 
 const val TAG = "message"
 
-class SecondFragment : BaseFragment() {
+class WeatherDayFragment : BaseFragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
     val viewModel: WeatherDayViewModel by activityViewModels { viewModelFactory }

@@ -32,7 +32,7 @@ class HomeFragment : BaseFragment() {
 
     private val viewModel: HomeViewModel by activityViewModels { viewModelFactory }
 
-    lateinit var list : List<WeatherWeekWithAllParameters>
+    lateinit var list: List<WeatherWeekWithAllParameters>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,9 +56,10 @@ class HomeFragment : BaseFragment() {
                 Log.e("TAG", "error")
             }
         }
-        viewModel.weatherToday.onEach { changeFragment(WeatherWeek(it[0])) }.launchIn(lifecycleScope)
+        viewModel.weatherToday.onEach { changeFragment(WeatherWeek(it[0])) }
+            .launchIn(lifecycleScope)
         _binding?.head?.setOnClickListener {
-           viewModel.gotoWeatherDay()
+            viewModel.gotoWeatherDay()
         }
 
         fastAdapter.onClickListener = { _, _, item, _ ->
@@ -84,7 +85,7 @@ class HomeFragment : BaseFragment() {
         val date = item.data.date
         val bundle = Bundle()
         bundle.putString(TAG, date)
-        findNavController().navigate(R.id.action_homeFragment_to_weatherDayFragment,bundle)
+        findNavController().navigate(R.id.action_homeFragment_to_weatherDayFragment, bundle)
     }
 
     override fun onDestroyView() {

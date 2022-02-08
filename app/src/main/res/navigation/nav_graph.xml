@@ -7,17 +7,16 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.weatherapplication.home.HostFragment"
+        android:name="com.example.weatherapplication.home.HomeFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" >
+        tools:layout="@layout/fragment_first">
         <action
             android:id="@+id/action_homeFragment_to_weatherDayFragment"
             app:destination="@id/weatherDayFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherDayFragment"
-        android:name="com.example.weatherapplication.weatherDay.SecondFragment"
+        android:name="com.example.weatherapplication.weatherDay.WeatherDayFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" >
-    </fragment>
+        tools:layout="@layout/fragment_second" />
 </navigation>
