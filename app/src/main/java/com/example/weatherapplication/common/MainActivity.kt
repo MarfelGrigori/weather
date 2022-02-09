@@ -2,12 +2,14 @@ package com.example.weatherapplication.common
 
 
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.R
+import com.example.weatherapplication.common.utils.Location
 import com.example.weatherapplication.home.viewModel.HomeViewModel
 import com.example.weatherapplication.weatherDay.viewModel.WeatherDayViewModel
-import com.example.weatherapplication.common.utils.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.android.support.DaggerAppCompatActivity
@@ -30,12 +32,11 @@ class MainActivity : DaggerAppCompatActivity() {
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val location = Location(viewModel._location.first,viewModel._location.second)
         location.getLocation(this, viewModel, viewModel1)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response ->
-              location.lat = response.lat
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribe ({ response ->
+                location.lat = response.lat
                 location.lon = response.lon
-            }
+            },{error->Log.e("TAG",error.stackTraceToString())} )
         viewModel.loadAll()
         viewModel1.loadData()
     }
