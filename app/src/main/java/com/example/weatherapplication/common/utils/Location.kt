@@ -8,7 +8,9 @@ import com.google.android.gms.tasks.OnCompleteListener
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.core.SingleEmitter
 
-data class Location(var lat: Double, var lon: Double) {
+data class Location(var lat: Double, var lon: Double)
+class LocationService(){
+    companion object{
     fun getLocation(
         context: AppCompatActivity
     ): Single<Location> = Single.create { emitter ->
@@ -54,4 +56,6 @@ data class Location(var lat: Double, var lon: Double) {
         fastestInterval = 20000
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
+    }
 }
+

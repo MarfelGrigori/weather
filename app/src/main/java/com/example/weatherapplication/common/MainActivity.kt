@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.R
 import com.example.weatherapplication.common.utils.Location
+import com.example.weatherapplication.common.utils.LocationService
 import com.example.weatherapplication.home.viewModel.HomeViewModel
 import com.example.weatherapplication.weatherDay.viewModel.WeatherDayViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -33,7 +34,8 @@ class MainActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_main)
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val location = Location(viewModel._location.first, viewModel._location.second)
-        location.getLocation(this)
+
+        LocationService.getLocation(this)
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 viewModel.setLocation(response.lat, response.lon)
@@ -48,7 +50,7 @@ class MainActivity : DaggerAppCompatActivity() {
         val requestPermissionLauncher =
             this.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
                 if (it)
-                    location.getLocation(this)
+                    LocationService.getLocation(this)
             }
 
         when (PackageManager.PERMISSION_GRANTED) {
@@ -56,7 +58,7 @@ class MainActivity : DaggerAppCompatActivity() {
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) -> {
-                location.getLocation(this)
+                LocationService.getLocation(this)
             }
             else -> {
                 requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
