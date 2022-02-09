@@ -3,8 +3,6 @@ package com.example.weatherapplication.common.utils
 import android.annotation.SuppressLint
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.example.weatherapplication.home.viewModel.HomeViewModel
-import com.example.weatherapplication.weatherDay.viewModel.WeatherDayViewModel
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.OnCompleteListener
 import io.reactivex.rxjava3.core.Single
@@ -12,14 +10,8 @@ import io.reactivex.rxjava3.core.SingleEmitter
 
 data class Location(var lat: Double, var lon: Double) {
     fun getLocation(
-        context: AppCompatActivity,
-        viewModel: HomeViewModel,
-        viewModel1: WeatherDayViewModel
+        context: AppCompatActivity
     ): Single<Location> = Single.create { emitter ->
-        val setLocation: (Double, Double) -> Unit = { lat: Double, lon: Double ->
-            viewModel.setLocation(lat, lon)
-            viewModel1.setLocation(lat, lon)
-        }
         val fusedLocationProvider: FusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(context)
         val locationCallBack = object : LocationCallback() {
@@ -27,8 +19,7 @@ data class Location(var lat: Double, var lon: Double) {
                 locationResult ?: return
                 for (location in locationResult.locations) {
                     if (!emitter.isDisposed)
-                        setLocation(location.latitude, location.longitude)
-                    emitter.onSuccess(Location(location.latitude, location.longitude))
+                        emitter.onSuccess(Location(location.latitude, location.longitude))
                 }
             }
         }

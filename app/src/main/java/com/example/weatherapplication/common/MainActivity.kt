@@ -33,11 +33,11 @@ class MainActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_main)
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         val location = Location(viewModel._location.first, viewModel._location.second)
-        location.getLocation(this, viewModel, viewModel1)
+        location.getLocation(this)
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
-                location.lat = response.lat
-                location.lon = response.lon
+                viewModel.setLocation(response.lat, response.lon)
+                viewModel1.setLocation(response.lat, response.lon)
             }, { error -> Log.e("TAG", error.stackTraceToString()) })
         getPermission(location)
         viewModel.loadAll()
@@ -48,7 +48,7 @@ class MainActivity : DaggerAppCompatActivity() {
         val requestPermissionLauncher =
             this.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
                 if (it)
-                    location.getLocation(this, viewModel, viewModel1)
+                    location.getLocation(this)
             }
 
         when (PackageManager.PERMISSION_GRANTED) {
@@ -56,7 +56,7 @@ class MainActivity : DaggerAppCompatActivity() {
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) -> {
-                location.getLocation(this, viewModel, viewModel1)
+                location.getLocation(this)
             }
             else -> {
                 requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
