@@ -1,6 +1,7 @@
 package com.example.weatherapplication.common.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.*
@@ -9,9 +10,8 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.core.SingleEmitter
 
 data class Location(var lat: Double, var lon: Double)
-class LocationService{
+class LocationService(private val context: Context){
     fun getLocation(
-        context: AppCompatActivity
     ): Single<Location> = Single.create { emitter ->
         val fusedLocationProvider: FusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(context)

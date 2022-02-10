@@ -27,7 +27,7 @@ class MainActivity : DaggerAppCompatActivity() {
     private val viewModel by viewModels<HomeViewModel> { viewModelFactory }
     private val viewModel1 by viewModels<WeatherDayViewModel> { viewModelFactory }
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
-    private val locationService = LocationService()
+    private val locationService = LocationService(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -57,7 +57,7 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     private fun defineLocation() {
-        locationService.getLocation(this)
+        locationService.getLocation()
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 viewModel.setLocation(response.lat, response.lon)
