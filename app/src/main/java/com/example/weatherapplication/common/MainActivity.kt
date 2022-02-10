@@ -13,8 +13,6 @@ import com.example.weatherapplication.R
 import com.example.weatherapplication.common.utils.LocationService
 import com.example.weatherapplication.home.viewModel.HomeViewModel
 import com.example.weatherapplication.weatherDay.viewModel.WeatherDayViewModel
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -27,13 +25,11 @@ class MainActivity : DaggerAppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<HomeViewModel> { viewModelFactory }
     private val viewModel1 by viewModels<WeatherDayViewModel> { viewModelFactory }
-    private lateinit var fusedLocationProvider: FusedLocationProviderClient
     private val locationService = LocationService(this)
     private val compositeDisposable = CompositeDisposable()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         getPermission()
         viewModel.loadAll()
         viewModel1.loadData()
