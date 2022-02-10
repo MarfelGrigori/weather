@@ -33,7 +33,6 @@ class MainActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_main)
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
         getPermission()
-        defineLocation()
         viewModel.loadAll()
         viewModel1.loadData()
     }
@@ -50,7 +49,6 @@ class MainActivity : DaggerAppCompatActivity() {
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) -> {
-                locationService.getLocation(this)
                 defineLocation()
             }
             else -> {
