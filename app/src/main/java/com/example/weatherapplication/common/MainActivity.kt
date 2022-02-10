@@ -41,7 +41,6 @@ class MainActivity : DaggerAppCompatActivity() {
         val requestPermissionLauncher =
             this.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
                 if (it)
-                    locationService.getLocation(this)
                 defineLocation()
             }
         when (PackageManager.PERMISSION_GRANTED) {
