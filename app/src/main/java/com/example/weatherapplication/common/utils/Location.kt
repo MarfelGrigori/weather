@@ -9,8 +9,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.core.SingleEmitter
 
 data class Location(var lat: Double, var lon: Double)
-class LocationService(){
-    companion object{
+class LocationService{
     fun getLocation(
         context: AppCompatActivity
     ): Single<Location> = Single.create { emitter ->
@@ -55,7 +54,6 @@ class LocationService(){
         interval = 10000
         fastestInterval = 20000
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-    }
     }
 }
 

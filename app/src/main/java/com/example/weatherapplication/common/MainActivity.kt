@@ -10,7 +10,6 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.R
-import com.example.weatherapplication.common.utils.Location
 import com.example.weatherapplication.common.utils.LocationService
 import com.example.weatherapplication.home.viewModel.HomeViewModel
 import com.example.weatherapplication.weatherDay.viewModel.WeatherDayViewModel
@@ -28,11 +27,12 @@ class MainActivity : DaggerAppCompatActivity() {
     private val viewModel by viewModels<HomeViewModel> { viewModelFactory }
     private val viewModel1 by viewModels<WeatherDayViewModel> { viewModelFactory }
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
-
+    private val locationService = LocationService()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
+        getPermission()
         defineLocation()
         viewModel.loadAll()
         viewModel1.loadData()
@@ -42,28 +42,30 @@ class MainActivity : DaggerAppCompatActivity() {
         val requestPermissionLauncher =
             this.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
                 if (it)
-                    LocationService.getLocation(this)
+                    locationService.getLocation(this)
+                defineLocation()
             }
         when (PackageManager.PERMISSION_GRANTED) {
             ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) -> {
-                LocationService.getLocation(this)
+                locationService.getLocation(this)
+                defineLocation()
             }
             else -> {
                 requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             }
         }
     }
-    private fun defineLocation(){
-        LocationService.getLocation(this)
+
+    private fun defineLocation() {
+        locationService.getLocation(this)
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 viewModel.setLocation(response.lat, response.lon)
                 viewModel1.setLocation(response.lat, response.lon)
             }, { error -> Log.e("TAG", error.stackTraceToString()) })
-        getPermission()
     }
 }
 
