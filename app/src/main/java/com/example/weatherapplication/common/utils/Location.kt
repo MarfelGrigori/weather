@@ -10,12 +10,12 @@ import com.google.android.gms.tasks.Task
 import io.reactivex.rxjava3.core.Single
 
 data class Location(var lat: Double, var lon: Double)
-class LocationService(private val context: Context) {
+class LocationService(context: Context) {
+    private val fusedLocationProvider: FusedLocationProviderClient =
+        LocationServices.getFusedLocationProviderClient(context)
+
     @SuppressLint("MissingPermission")
-    fun getLocation(
-    ): Single<Location> = Single.create { emitter ->
-        val fusedLocationProvider: FusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(context)
+    fun getLocation(): Single<Location> = Single.create { emitter ->
         val cancellationTokenSource = CancellationTokenSource()
         val currentLocationTask: Task<android.location.Location> =
             fusedLocationProvider.getCurrentLocation(
