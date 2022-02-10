@@ -2,10 +2,7 @@ package com.example.weatherapplication.common.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Looper
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
@@ -34,17 +31,6 @@ class LocationService(private val context: Context) {
     }
 }
 
-@SuppressLint("MissingPermission")
-private fun startLocationUpdates(
-    locationCallBack: LocationCallback,
-    fusedLocationProvider: FusedLocationProviderClient
-) {
-    fusedLocationProvider.requestLocationUpdates(
-        getRequest(), locationCallBack,
-        Looper.getMainLooper()
-    )
-}
-
 private fun getOnCompleteListener(emitter: SingleEmitter<Location>): OnCompleteListener<Void> {
     return OnCompleteListener { task ->
         if (!task.isSuccessful) {
@@ -56,10 +42,5 @@ private fun getOnCompleteListener(emitter: SingleEmitter<Location>): OnCompleteL
     }
 }
 
-private fun getRequest() = LocationRequest.create().apply {
-    interval = 10000
-    fastestInterval = 20000
-    priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-}
 
 
