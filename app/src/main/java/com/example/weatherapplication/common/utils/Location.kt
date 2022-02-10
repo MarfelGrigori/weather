@@ -25,6 +25,7 @@ class LocationService(private val context: Context) {
         currentLocationTask.addOnCompleteListener { task: Task<android.location.Location> ->
             emitter.onSuccess(Location(task.result.latitude, task.result.longitude))
         }
+        currentLocationTask.addOnFailureListener { emitter.onError(it) }
         emitter.setCancellable {
             cancellationTokenSource.cancel()
         }
