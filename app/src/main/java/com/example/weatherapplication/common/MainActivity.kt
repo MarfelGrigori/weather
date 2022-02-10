@@ -17,6 +17,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 
@@ -28,6 +29,7 @@ class MainActivity : DaggerAppCompatActivity() {
     private val viewModel1 by viewModels<WeatherDayViewModel> { viewModelFactory }
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
     private val locationService = LocationService(this)
+    private val compositeDisposable = CompositeDisposable()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,7 +43,7 @@ class MainActivity : DaggerAppCompatActivity() {
         val requestPermissionLauncher =
             this.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
                 if (it)
-                defineLocation()
+                    defineLocation()
             }
         when (PackageManager.PERMISSION_GRANTED) {
             ContextCompat.checkSelfPermission(
@@ -63,6 +65,12 @@ class MainActivity : DaggerAppCompatActivity() {
                 viewModel.setLocation(response.lat, response.lon)
                 viewModel1.setLocation(response.lat, response.lon)
             }, { error -> Log.e("TAG", error.stackTraceToString()) })
+            .also { compositeDisposable.add(it) }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.dispose()
     }
 }
 
