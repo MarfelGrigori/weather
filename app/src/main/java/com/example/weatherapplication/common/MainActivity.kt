@@ -5,6 +5,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -25,8 +26,12 @@ class MainActivity : DaggerAppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<HomeViewModel> { viewModelFactory }
     private val viewModel1 by viewModels<WeatherDayViewModel> { viewModelFactory }
-    private val locationService = LocationService(this)
+
+    @Inject
+    lateinit var locationService: LocationService
     private val compositeDisposable = CompositeDisposable()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,20 +43,9 @@ class MainActivity : DaggerAppCompatActivity() {
     private fun getPermission() {
         val requestPermissionLauncher =
             this.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                if (it)
-                    defineLocation()
+                if (it) defineLocation()
             }
-        when (PackageManager.PERMISSION_GRANTED) {
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) -> {
-                defineLocation()
-            }
-            else -> {
-                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            }
-        }
+        definePermission(requestPermissionLauncher)
     }
 
     private fun defineLocation() {
@@ -62,6 +56,18 @@ class MainActivity : DaggerAppCompatActivity() {
                 viewModel1.setLocation(response.lat, response.lon)
             }, { error -> Log.e("TAG", error.stackTraceToString()) })
             .also { compositeDisposable.add(it) }
+    }
+
+    private fun definePermission(requestPermissionLauncher: ActivityResultLauncher<String>) {
+        if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        ) {
+            defineLocation()
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
     }
 
     override fun onDestroy() {

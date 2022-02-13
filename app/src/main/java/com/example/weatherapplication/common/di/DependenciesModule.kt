@@ -1,7 +1,5 @@
 package com.example.weatherapplication.common.di
 
-import com.example.weatherapplication.common.networking.WeatherService
-import com.example.weatherapplication.common.networking.weather.WeatherApi
 import com.example.weatherapplication.common.repository.WeatherServer
 import com.example.weatherapplication.common.repository.WeatherServerImpl
 import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCase
@@ -20,4 +18,5 @@ abstract class DependenciesModule {
 
     @Binds
     abstract fun loadWeatherDayUseCase(impl: com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCaseImpl?): com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase?
+
 }
