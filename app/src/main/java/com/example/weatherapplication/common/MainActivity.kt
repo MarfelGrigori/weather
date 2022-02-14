@@ -5,6 +5,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -40,10 +41,10 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     private fun getPermission() {
-            this.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            val requestPermissionLauncher = this.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
                 if (it) defineLocation()
             }
-        checkPermission()
+        definePermission(requestPermissionLauncher)
     }
 
     private fun defineLocation() {
@@ -56,11 +57,17 @@ class MainActivity : DaggerAppCompatActivity() {
             .also { compositeDisposable.add(it) }
     }
 
-    private fun checkPermission() =
-        ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
+    private fun definePermission(requestPermissionLauncher: ActivityResultLauncher<String>) {
+        if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        ) {
+            defineLocation()
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
