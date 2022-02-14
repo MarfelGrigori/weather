@@ -5,18 +5,14 @@ import android.content.Context
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
-import dagger.Module
-import dagger.Provides
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 data class Location(var lat: Double, var lon: Double)
 
-@Module
-class LocationService@Inject constructor(context: Context) : LocationServiceInterface {
+class LocationService @Inject constructor (context: Context) : LocationServiceInterface {
 
     private val fusedLocationProvider= LocationServices.getFusedLocationProviderClient(context)
-    @Provides
     @SuppressLint("MissingPermission")
    override fun getLocation(): Single<Location> = Single.create { emitter ->
         val cancellation = CancellationTokenSource()
