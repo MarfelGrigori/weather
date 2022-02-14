@@ -10,16 +10,18 @@ import javax.inject.Inject
 
 data class Location(var lat: Double, var lon: Double)
 
-class LocationServiceImpl @Inject constructor (context: Context) : LocationService {
+class LocationServiceImpl @Inject constructor(context: Context) : LocationService {
 
-    private val fusedLocationProvider= LocationServices.getFusedLocationProviderClient(context)
+    private val fusedLocationProvider = LocationServices.getFusedLocationProviderClient(context)
+
     @SuppressLint("MissingPermission")
-   override fun getLocation(): Single<Location> = Single.create { emitter ->
+    override fun getLocation(): Single<Location> = Single.create { emitter ->
         val cancellation = CancellationTokenSource()
-            fusedLocationProvider.getCurrentLocation(PRIORITY_HIGH_ACCURACY, cancellation.token)
-        .addOnCompleteListener {
-            emitter.onSuccess(it.result.toLocation()) }
-        .addOnFailureListener { emitter.onError(it) }
+        fusedLocationProvider.getCurrentLocation(PRIORITY_HIGH_ACCURACY, cancellation.token)
+            .addOnCompleteListener {
+                emitter.onSuccess(it.result.toLocation())
+            }
+            .addOnFailureListener { emitter.onError(it) }
         emitter.setCancellable { cancellation.cancel() }
     }
 
