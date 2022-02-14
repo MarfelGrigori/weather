@@ -11,7 +11,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.R
-import com.example.weatherapplication.common.utils.LocationServiceImpl
+import com.example.weatherapplication.common.utils.LocationService
 import com.example.weatherapplication.home.viewModel.HomeViewModel
 import com.example.weatherapplication.weatherDay.viewModel.WeatherDayViewModel
 import dagger.android.support.DaggerAppCompatActivity
@@ -28,7 +28,7 @@ class MainActivity : DaggerAppCompatActivity() {
     private val viewModel1 by viewModels<WeatherDayViewModel> { viewModelFactory }
 
     @Inject
-    lateinit var locationService: LocationServiceImpl
+    lateinit var locationService: LocationService
     private val compositeDisposable = CompositeDisposable()
 
 
