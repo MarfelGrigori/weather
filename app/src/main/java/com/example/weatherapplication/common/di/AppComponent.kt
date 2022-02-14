@@ -1,9 +1,9 @@
 package com.example.weatherapplication.common.di
 
 import android.app.Application
-import com.example.weatherapplication.common.networking.WeatherService
 import com.example.weatherapplication.common.networking.weather.WeatherApi
 import com.example.weatherapplication.common.repository.WeatherServer
+import com.example.weatherapplication.common.utils.LocationService
 import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCase
 import dagger.BindsInstance
 import dagger.Component
@@ -19,7 +19,7 @@ import javax.inject.Singleton
         ViewModelModule::class,
         AppModule::class,
         DependenciesModule::class,
-        WeatherApi::class
+        WeatherApi::class,
     ]
 )
 
@@ -29,10 +29,10 @@ interface AppComponent : AndroidInjector<App> {
         @BindsInstance
         fun provideApplication(app: Application): Builder
         fun build(): AppComponent
-
     }
 
     fun getNetworkServer(): WeatherServer
     fun getLoadWeatherUseCase(): LoadWeatherUseCase
     fun getLoadWeatherDayUseCase(): com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase
+    fun getLocationServiceInterface() : LocationService
 }
