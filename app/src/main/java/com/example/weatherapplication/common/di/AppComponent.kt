@@ -3,7 +3,7 @@ package com.example.weatherapplication.common.di
 import android.app.Application
 import com.example.weatherapplication.common.networking.weather.WeatherApi
 import com.example.weatherapplication.common.repository.WeatherServer
-import com.example.weatherapplication.common.utils.LocationServiceInterface
+import com.example.weatherapplication.common.utils.LocationService
 import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCase
 import dagger.BindsInstance
 import dagger.Component
@@ -34,5 +34,5 @@ interface AppComponent : AndroidInjector<App> {
     fun getNetworkServer(): WeatherServer
     fun getLoadWeatherUseCase(): LoadWeatherUseCase
     fun getLoadWeatherDayUseCase(): com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase
-    fun getLocationServiceInterface() : LocationServiceInterface
+    fun getLocationServiceInterface() : LocationService
 }

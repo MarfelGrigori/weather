@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 data class Location(var lat: Double, var lon: Double)
 
-class LocationService @Inject constructor (context: Context) : LocationServiceInterface {
+class LocationServiceImpl @Inject constructor (context: Context) : LocationService {
 
     private val fusedLocationProvider= LocationServices.getFusedLocationProviderClient(context)
     @SuppressLint("MissingPermission")
