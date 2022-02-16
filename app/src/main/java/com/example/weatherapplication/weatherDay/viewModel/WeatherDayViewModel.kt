@@ -12,14 +12,13 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import javax.inject.Inject
 
 private const val MIN_LATITUDE = -90.0
 private const val MAX_LATITUDE = 90.0
 private const val MIN_LONGITUDE = -180.0
 private const val MAX_LONGITUDE = 180.0
 
-open class WeatherDayViewModel @Inject constructor(private val loadWeatherUseCase: LoadWeatherUseCase) :
+open class WeatherDayViewModel constructor(private val loadWeatherUseCase: LoadWeatherUseCase) :
     ViewModel() {
 
     var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)

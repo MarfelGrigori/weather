@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 
-open class LoadWeatherUseCaseImpl @Inject constructor(private val weatherServer: WeatherServer) :
+open class LoadWeatherUseCaseImpl  constructor(private val weatherServer: WeatherServer) :
     LoadWeatherUseCase {
     override fun invoke(
         lat: String,

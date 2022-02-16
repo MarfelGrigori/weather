@@ -1,5 +1,7 @@
 package com.example.weatherapplication.common.di
 
+import android.content.Context
+import com.example.weatherapplication.common.networking.WeatherService
 import com.example.weatherapplication.common.repository.WeatherServer
 import com.example.weatherapplication.common.repository.WeatherServerImpl
 import com.example.weatherapplication.common.utils.LocationServiceImpl
@@ -8,19 +10,20 @@ import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCas
 import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCaseImpl
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 
 
 @Module
-abstract class DependenciesModule {
-    @Binds
-    abstract fun weatherService(impl: WeatherServerImpl?): WeatherServer?
+ class DependenciesModule {
+    @Provides
+     fun weatherService(api:WeatherService): WeatherServer = WeatherServerImpl(api)
 
-    @Binds
-    abstract fun loadWeatherUseCase(impl: LoadWeatherUseCaseImpl?): LoadWeatherUseCase?
+    @Provides
+     fun loadWeatherUseCase(repository: WeatherServer):LoadWeatherUseCase = LoadWeatherUseCaseImpl(repository)
 
-    @Binds
-    abstract fun loadWeatherDayUseCase(impl: com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCaseImpl?): com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase?
+    @Provides
+     fun loadWeatherDayUseCase(repository: WeatherServer):com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCase = com.example.weatherapplication.weatherDay.useCases.loadWeather.LoadWeatherUseCaseImpl(repository)
 
-    @Binds
-    abstract fun locationService(impl : LocationServiceImpl?) : LocationService
+    @Provides
+     fun locationService(context:Context) : LocationService = LocationServiceImpl(context)
 }
