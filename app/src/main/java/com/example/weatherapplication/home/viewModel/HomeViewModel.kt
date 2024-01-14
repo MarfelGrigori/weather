@@ -3,27 +3,26 @@ package com.example.weatherapplication.home.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.example.weatherapplication.R
-import com.example.weatherapplication.home.models.WeatherWeekWithAllParameters
-import com.example.weatherapplication.home.useCase.loadWeather.networking.WeatherTodayResponse
-import com.example.weatherapplication.home.mappers.toWeatherToday
-import com.example.weatherapplication.home.mappers.toWeatherWeek
-import com.example.weatherapplication.weatherDay.models.WeatherDay
 import com.example.weatherapplication.common.utils.Converter.MutableSingleEventFlow
 import com.example.weatherapplication.common.utils.Picture
+import com.example.weatherapplication.home.mappers.toWeatherToday
+import com.example.weatherapplication.home.mappers.toWeatherWeek
+import com.example.weatherapplication.home.models.WeatherWeekWithAllParameters
 import com.example.weatherapplication.home.useCase.loadWeather.LoadWeatherUseCase
+import com.example.weatherapplication.home.useCase.loadWeather.networking.WeatherTodayResponse
+import com.example.weatherapplication.weatherDay.models.WeatherDay
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
-import javax.inject.Inject
 
 private const val MIN_LATITUDE = -90.0
 private const val MAX_LATITUDE = 90.0
 private const val MIN_LONGITUDE = -180.0
 private const val MAX_LONGITUDE = 180.0
 
-open class HomeViewModel @Inject constructor(private val loadWeatherTodayUseCase: LoadWeatherUseCase) :
+open class HomeViewModel constructor(private val loadWeatherTodayUseCase: LoadWeatherUseCase) :
     ViewModel() {
 
     var _location: Pair<Double, Double> = Pair(1000.0, 1000.0)
